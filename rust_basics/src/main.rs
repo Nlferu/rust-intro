@@ -112,6 +112,7 @@ fn main() {
     loop_fn();
     counter();
     while_lo();
+    for_loop();
 }
 
 fn some_fn(x: i32) -> i32 {
@@ -177,4 +178,12 @@ fn while_lo() {
     }
 
     println!("LIFTOFF!!!");
+}
+
+fn for_loop() {
+    let a: [u8; 5] = [10, 20, 30, 40, 50];
+
+    for element in a {
+        println!("the value is: {element}");
+    }
 }
