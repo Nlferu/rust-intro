@@ -1,3 +1,1 @@
-# Rust Language Intro
-
-Niferu is in progress of learning Rust...
+# Some Rust Basics
