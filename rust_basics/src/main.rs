@@ -184,6 +184,10 @@ fn for_loop() {
     let a: [u8; 5] = [10, 20, 30, 40, 50];
 
     for element in a {
-        println!("the value is: {element}");
+        println!("The value is: {element}");
+    }
+
+    for number in (1..4).rev() {
+        println!("The reversed loop in range 1-4 is: {number}");
     }
 }
