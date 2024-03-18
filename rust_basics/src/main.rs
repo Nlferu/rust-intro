@@ -21,6 +21,9 @@ fn main() {
     // Binary	        0b1111_0000
     // Byte (u8 only)	b'A'
 
+    // We can add _ sign on start to ignore unused warning for variables and functions
+    let _unused_variable: i32;
+
     // Unsigned integers can be only positive
     let unsigned: u8 = 255;
     // Signed integer can be negative
@@ -49,11 +52,11 @@ fn main() {
     // Tuple -> those are fixed size (immutable array) can have multi types
     let tup: (i32, f64, u8) = (500, 6.4, 1);
     // We can get each value from tuple as below:
-    // let (x, y, z) = tup;
+    let (_x, _y, _z) = tup;
     // or (we can use index)
-    // let getY = tup.1
+    let _get_y = tup.1;
     // Array
-    // let a: [i32; 5] = [1, 2, 3, 4, 5];
+    let _a: [i32; 5] = [1, 2, 3, 4, 5];
 
     println!(
         "unsigned: {unsigned}, signed: {}, float: {}, letter: {}, emoji: {}, boolean: {}, mod: {}, truncated: {truncated}, power: {powered}, char: {z}, tuple: {:?}",
@@ -126,9 +129,9 @@ fn some_fn(x: i32) -> i32 {
 }
 
 // We can do the same as above like this as Rust do not require `return` keyword:
-// fn some_function(x: i32) -> i32 {
-//     x + 5
-// }
+fn _some_function(x: i32) -> i32 {
+    x + 5
+}
 
 fn loop_fn() {
     let mut counter: u8 = 0;
