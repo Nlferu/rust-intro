@@ -1,7 +1,13 @@
+use rand::Rng;
 use std::io;
 
 fn main() {
     println!("Guess The Number!");
+
+    // (1..=100) `=` means that we include 100 in our scope too
+    let secret_number: i32 = rand::thread_rng().gen_range(1..=100);
+
+    println!("The secret number is: {secret_number}");
 
     println!("Please input your guess: ");
 
