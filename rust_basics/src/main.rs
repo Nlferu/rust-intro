@@ -116,6 +116,13 @@ fn main() {
     counter();
     while_lo();
     for_loop();
+
+    // Vectors
+    let words: Vec<&str> = vec!["hello", "world"];
+    println!("Words that are often combined: {:?}", words);
+
+    // Debug
+    dbg!("hello world".split(' ').collect::<Vec<_>>()).join("-");
 }
 
 fn some_fn(x: i32) -> i32 {
@@ -193,4 +200,10 @@ fn for_loop() {
     for number in (1..4).rev() {
         println!("The reversed loop in range 1-4 is: {number}");
     }
+}
+
+fn _to_do() {
+    let smth: &str = "Something to do";
+
+    todo!("Write a function to reverse {smth}");
 }
