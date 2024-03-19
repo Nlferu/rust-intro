@@ -20,20 +20,26 @@ fn main() {
             .read_line(&mut difficulty_choice)
             .expect("Failed to read line");
 
+        // Trim removes all whitespaces
+        // as_str() converts data into `String Slice`` in this case from String
         let difficulty: Difficulty = match difficulty_choice.trim().to_lowercase().as_str() {
-            "easy" => Difficulty::Easy,
-            "medium" => Difficulty::Medium,
-            "hard" => Difficulty::Hard,
+            // => is match arm operator indicating what action to take if the pattern is matched.
+            "easy" => {
+                println!("Easy difficulty chosen");
+                Difficulty::Easy
+            }
+            "medium" => {
+                println!("Medium difficulty chosen");
+                Difficulty::Medium
+            }
+            "hard" => {
+                println!("Hard difficulty chosen");
+                Difficulty::Hard
+            }
             _ => {
                 println!("Please pick one of the following difficulties: easy, medium, hard");
                 continue;
             }
-        };
-
-        match difficulty {
-            Difficulty::Easy => println!("Easy difficulty chosen"),
-            Difficulty::Medium => println!("Medium difficulty chosen"),
-            Difficulty::Hard => println!("Hard difficulty chosen"),
         };
 
         break difficulty;
@@ -89,6 +95,7 @@ fn main() {
     }
 }
 
+// We are only reading data, so passing by reference is better and more efficient here
 fn difficulty_checker(difficulty: &Difficulty) -> u8 {
     match difficulty {
         Difficulty::Easy => 20,
