@@ -288,7 +288,7 @@ pub fn takes_and_gives_back(a_string: String) -> String {
 
 // --------------------------------------------------------------------------------------------------------------- \\
 
-// If we want to avoid losing ownership of our variable we can use references `&`
+// If we want to avoid losing ownership of our variable we can use references `&` dereference `*`
 fn _stack_and_heap_three() {
     let s1: String = String::from("hello");
 
@@ -316,3 +316,29 @@ pub fn change(some_string: &mut String) {
 }
 
 // Mutable references have one big restriction: if you have a mutable reference to a value, you can have no other references to that value.
+fn _mutme() {
+    let mut s: String = String::from("hello");
+
+    let r1: &mut String = &mut s;
+
+    // cannot borrow `s` as mutable more than once at a time \\
+    // let r2: &mut String = &mut s; -> THIS WILL FAIL
+
+    println!("{}", r1);
+
+    let r1: &String = &s; // no problem
+    let r2: &String = &s; // no problem
+
+    // cannot borrow `s` as mutable because it is also borrowed as immutable \\
+    // let r3 = &mut s; -> BIG PROBLEM
+
+    println!("{}, {}", r1, r2);
+
+    let r1: &String = &s; // no problem
+    let r2: &String = &s; // no problem
+    println!("{} and {}", r1, r2);
+    // variables r1 and r2 will not be used after this point
+
+    let r3: &mut String = &mut s; // no problem
+    println!("{}", r3);
+}
