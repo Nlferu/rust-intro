@@ -149,8 +149,14 @@ fn main() {
     slices();
 
     let slice_string: String = String::from("hell word is a demon");
+    let slice_string_two: &str = "hell word is a demon";
     println!("{}", first_word(&slice_string));
+    // println!("{}", first_word(slice_string_two)); -> ERROR
+    // println!("{}", first_word(&slice_string_two)); -> ERROR
+    // As we can see everything works for corrected fn
     println!("{}", first_word_corrected(&slice_string));
+    println!("{}", first_word_corrected(slice_string_two));
+    println!("{}", first_word_corrected(&slice_string_two));
 }
 
 fn some_fn(x: i32) -> i32 {
@@ -376,7 +382,8 @@ fn first_word(s: &String) -> usize {
 }
 
 // `first_word()` function corrected with slice type
-fn first_word_corrected(s: &String) -> &str {
+// Using `s: &str` instead of `s: &String` is much more flexible and allows more inputs
+fn first_word_corrected(s: &str) -> &str {
     let bytes: &[u8] = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
