@@ -14,6 +14,7 @@ fn main() {
     println!("Please pick difficulty from following: easy, medium, hard");
 
     let difficulty: Difficulty = loop {
+        // Below is `String` type and unknown size, which means we store it on heap instead of stack
         let mut difficulty_choice: String = String::new();
 
         io::stdin()
