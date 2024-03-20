@@ -123,6 +123,20 @@ fn main() {
 
     // Debug
     dbg!("hello world".split(' ').collect::<Vec<_>>()).join("-");
+
+    // Stack memory example:
+    let _l: i32 = 10;
+    // Heap memory example:
+    let _k: String = String::from("hello");
+
+    // Below does not apply to Stack memory...
+    // Heap clean memory example:
+    let s1 = String::from("hello");
+    // If we just type: let s2 = s1; -> s1 will become invalid (to avoid double same memory clean)
+    // So if we still want to clone it we can use below function
+    let s2 = s1.clone();
+
+    println!("s1 = {}, s2 = {}", s1, s2);
 }
 
 fn some_fn(x: i32) -> i32 {
