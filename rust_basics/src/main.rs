@@ -346,3 +346,27 @@ fn _mutme() {
     // At any given time, you can have either one mutable reference or any number of immutable references
     // References must always be valid
 }
+
+// --------------------------------------------------------------------------------------------------------------- \\
+
+// The Slice Type
+fn _first_word(s: &String) -> usize {
+    // Converting String into bytes to check if value is space or not
+    let bytes: &[u8] = s.as_bytes();
+
+    // In each iteration, `i` represents the index of the element in the collection, and `item` represents the element itself
+    // bytes.iter(): This returns an iterator over the elements of the bytes collection
+    // enumerate(): This wraps the iterator returned by iter() and pairs each element with its index.
+    // Because we get a reference to the element from .iter().enumerate(), we use & in the pattern.
+    for (i, &item) in bytes.iter().enumerate() {
+        // Searching for spaces -> if found return it's position (index)
+        // Otherwise we return the length of the string by s.len()
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+
+// String Slices
