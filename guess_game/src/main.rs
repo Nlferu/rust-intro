@@ -76,7 +76,7 @@ fn main() {
         // Instead of below:
         // let guess: u32 = guess.trim().parse().expect("Please type a number!");
 
-        println!("You guessed: {guess}");
+        println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
@@ -88,7 +88,7 @@ fn main() {
         }
 
         guesses_left -= 1;
-        println!("You have {guesses_left} guesses left...");
+        println!("You have {} guesses left...", guesses_left);
 
         if guesses_left == 0 {
             println!("Out of guesses! The secret number was {}.", secret_number);
