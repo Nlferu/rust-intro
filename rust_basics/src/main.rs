@@ -232,11 +232,12 @@ fn _to_do() {
 }
 
 // Below shows an example of ownership of variables for stack and heap memory
+// --------------------------------------------------------------------------------------------------------------- \\
 fn _stack_and_heap() {
     let s = String::from("hello"); // s comes into scope
 
     takes_ownership(s); // s's value moves into the function...
-                        //println!("{}, s"); // ... and so is no longer valid here and we cannot print it
+                        // println!("{}, s"); -> ... and so is no longer valid here and we cannot print it
 
     let x = 5; // x comes into scope
 
@@ -255,3 +256,36 @@ pub fn makes_copy(some_integer: i32) {
     // some_integer comes into scope
     println!("{}", some_integer);
 }
+
+fn _stack_and_heap_two() {
+    let s1 = gives_ownership(); // gives_ownership moves its return
+                                // value into s1
+
+    let s2 = String::from("hello"); // s2 comes into scope
+    println!("{}", s2);
+
+    let s3 = takes_and_gives_back(s2); // s2 is moved into
+    println!("{}", s1);
+    // println!("{}", s2); -> s2 is no longer valid
+    println!("{}", s3); // takes_and_gives_back, which also
+                        // moves its return value into s3
+} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing happens. s1 goes out of scope and is dropped.
+
+pub fn gives_ownership() -> String {
+    // gives_ownership will move its return value into the function that calls it
+
+    let some_string = String::from("yours"); // some_string comes into scope
+
+    some_string // some_string is returned and moves out to the calling function
+}
+
+// This function takes a String and returns one
+pub fn takes_and_gives_back(a_string: String) -> String {
+    // a_string comes into scope
+
+    a_string // a_string is returned and moves out to the calling function
+}
+
+// --------------------------------------------------------------------------------------------------------------- \\
+
+// If we want to avoid losing ownership of our variable we can use references
