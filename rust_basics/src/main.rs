@@ -139,12 +139,18 @@ fn main() {
 
     // Below does not apply to Stack memory...
     // Heap clean memory example:
-    let s1 = String::from("hello");
+    let s1: String = String::from("hello");
     // If we just type: let s2 = s1; -> s1 will become invalid (to avoid double same memory clean)
     // So if we still want to clone it we can use below function
-    let s2 = s1.clone();
+    let s2: String = s1.clone();
 
     println!("s1 = {}, s2 = {}", s1, s2);
+
+    slices();
+
+    let slice_string: String = String::from("hell word is a demon");
+    println!("{}", first_word(&slice_string));
+    println!("{}", first_word_corrected(&slice_string));
 }
 
 fn some_fn(x: i32) -> i32 {
@@ -350,7 +356,7 @@ fn _mutme() {
 // --------------------------------------------------------------------------------------------------------------- \\
 
 // The Slice Type
-fn _first_word(s: &String) -> usize {
+fn first_word(s: &String) -> usize {
     // Converting String into bytes to check if value is space or not
     let bytes: &[u8] = s.as_bytes();
 
@@ -369,4 +375,41 @@ fn _first_word(s: &String) -> usize {
     s.len()
 }
 
+// `first_word()` function corrected with slice type
+fn first_word_corrected(s: &String) -> &str {
+    let bytes: &[u8] = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+
 // String Slices
+fn slices() {
+    let s: String = String::from("hello world");
+
+    let hello: &str = &s[0..5];
+    let world: &str = &s[6..11];
+
+    println!("{} {}", hello, world,);
+
+    // Below are equal
+    let _slice: &str = &s[0..2];
+    // ==
+    let _slice: &str = &s[..2];
+
+    // Below are equal
+    let len: usize = s.len();
+    let _slice: &str = &s[3..len];
+    // ==
+    let _slice: &str = &s[3..];
+
+    // Below are equal (Entire String)
+    let _slice: &str = &s[0..len];
+    // ==
+    let _slice: &str = &s[..];
+}
