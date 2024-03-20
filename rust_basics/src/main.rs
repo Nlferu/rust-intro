@@ -288,4 +288,31 @@ pub fn takes_and_gives_back(a_string: String) -> String {
 
 // --------------------------------------------------------------------------------------------------------------- \\
 
-// If we want to avoid losing ownership of our variable we can use references
+// If we want to avoid losing ownership of our variable we can use references `&`
+fn _stack_and_heap_three() {
+    let s1: String = String::from("hello");
+
+    let len: usize = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+pub fn calculate_length(s: &String) -> usize {
+    // s is a reference to a String
+    s.len()
+} // Here, s goes out of scope. But because it does not have ownership of what
+  // it refers to, it is not dropped.
+
+// Just as variables are immutable by default, so are references. We’re not allowed to modify something we have a reference to
+// To modify we have to edit `&` into `&mut`
+fn _stack_and_heap_four() {
+    let mut s: String = String::from("hello");
+
+    change(&mut s);
+}
+
+pub fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+
+// Mutable references have one big restriction: if you have a mutable reference to a value, you can have no other references to that value.
