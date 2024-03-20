@@ -124,9 +124,9 @@ fn main() {
     // Debug
     dbg!("hello world".split(' ').collect::<Vec<_>>()).join("-");
 
-    // Stack memory example:
+    // Stack memory example (size of variable known):
     let _l: i32 = 10;
-    // Heap memory example:
+    // Heap memory example (size of variable unknown):
     let _k: String = String::from("hello");
 
     // Below does not apply to Stack memory...
