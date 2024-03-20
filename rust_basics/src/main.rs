@@ -126,6 +126,14 @@ fn main() {
 
     // Stack memory example (size of variable known):
     let _l: i32 = 10;
+    // Stack memory types examples:
+
+    // All the integer types, such as u32.
+    // The Boolean type, bool, with values true and false.
+    // All the floating-point types, such as f64.
+    // The character type, char.
+    // Tuples, if they only contain types that also implement Copy. For example, (i32, i32) implements Copy, but (i32, String) does not.
+
     // Heap memory example (size of variable unknown):
     let _k: String = String::from("hello");
 
@@ -219,5 +227,31 @@ fn for_loop() {
 fn _to_do() {
     let smth: &str = "Something to do";
 
+    // It will always panic as todo = panic()
     todo!("Write a function to reverse {smth}");
+}
+
+// Below shows an example of ownership of variables for stack and heap memory
+fn _stack_and_heap() {
+    let s = String::from("hello"); // s comes into scope
+
+    takes_ownership(s); // s's value moves into the function...
+                        //println!("{}, s"); // ... and so is no longer valid here and we cannot print it
+
+    let x = 5; // x comes into scope
+
+    makes_copy(x); // x would move into the function,
+    println!("{x}"); // but i32 is Copy, so it's okay to still
+                     // use x afterward
+}
+
+pub fn takes_ownership(some_string: String) {
+    // some_string comes into scope
+    println!("{}", some_string);
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+pub fn makes_copy(some_integer: i32) {
+    // some_integer comes into scope
+    println!("{}", some_integer);
 }
