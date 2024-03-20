@@ -234,12 +234,12 @@ fn _to_do() {
 // Below shows an example of ownership of variables for stack and heap memory
 // --------------------------------------------------------------------------------------------------------------- \\
 fn _stack_and_heap() {
-    let s = String::from("hello"); // s comes into scope
+    let s: String = String::from("hello"); // s comes into scope
 
     takes_ownership(s); // s's value moves into the function...
                         // println!("{}, s"); -> ... and so is no longer valid here and we cannot print it
 
-    let x = 5; // x comes into scope
+    let x: i32 = 5; // x comes into scope
 
     makes_copy(x); // x would move into the function,
     println!("{x}"); // but i32 is Copy, so it's okay to still
@@ -258,13 +258,13 @@ pub fn makes_copy(some_integer: i32) {
 }
 
 fn _stack_and_heap_two() {
-    let s1 = gives_ownership(); // gives_ownership moves its return
-                                // value into s1
+    let s1: String = gives_ownership(); // gives_ownership moves its return
+                                        // value into s1
 
-    let s2 = String::from("hello"); // s2 comes into scope
+    let s2: String = String::from("hello"); // s2 comes into scope
     println!("{}", s2);
 
-    let s3 = takes_and_gives_back(s2); // s2 is moved into
+    let s3: String = takes_and_gives_back(s2); // s2 is moved into
     println!("{}", s1);
     // println!("{}", s2); -> s2 is no longer valid
     println!("{}", s3); // takes_and_gives_back, which also
@@ -274,7 +274,7 @@ fn _stack_and_heap_two() {
 pub fn gives_ownership() -> String {
     // gives_ownership will move its return value into the function that calls it
 
-    let some_string = String::from("yours"); // some_string comes into scope
+    let some_string: String = String::from("yours"); // some_string comes into scope
 
     some_string // some_string is returned and moves out to the calling function
 }
