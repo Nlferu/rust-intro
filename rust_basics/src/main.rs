@@ -402,7 +402,7 @@ fn slices() {
     let hello: &str = &s[0..5];
     let world: &str = &s[6..11];
 
-    println!("{} {}", hello, world,);
+    println!("{} {}", hello, world);
 
     // Below are equal
     let _slice: &str = &s[0..2];
