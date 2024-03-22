@@ -9,8 +9,9 @@ enum Difficulty {
 }
 
 fn main() {
-    println!("Welcome In Guess The Number Game!");
-    println!("Type 'quit' at any time to exit game");
+    println!();
+    println!("Welcome In Guess The Number Game!\n");
+    println!("Type 'quit' at any time to exit game\n");
 
     println!("Please pick difficulty from following: easy, medium, hard");
 
@@ -37,6 +38,10 @@ fn main() {
             "hard" => {
                 println!("Hard difficulty chosen");
                 Difficulty::Hard
+            }
+            "quit" => {
+                println!("You have quit the game");
+                return;
             }
             _ => {
                 println!("Please pick one of the following difficulties: easy, medium, hard");
@@ -67,8 +72,13 @@ fn main() {
             // It checks if input was `Ok` -> returns value or `Err` -> returns error message
             .expect("Failed to read line");
 
-        // Modified error handling
+        // Adding quit option
+        if guess.trim().to_lowercase() == "quit" {
+            println!("You have quit the game");
+            return;
+        }
 
+        // Modified error handling
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
