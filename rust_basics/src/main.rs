@@ -205,12 +205,19 @@ fn main() {
 
     // Tuple Structs
     #[derive(Debug)] // Deriving the Debug trait for Color to be able to print it
-    struct Color(i32, i32, i32);
+    struct Color(i32, i32, String);
     struct Point(i32, i32, i32);
 
-    let _black: Color = Color(0, 0, 0);
+    let _black: Color = Color(0, 0, String::from("another@example.com"));
     let _origin: Point = Point(0, 0, 0);
     println!("{:?}", _black);
+    // Calling exact tuple element
+    println!("{}", _black.2);
+
+    // Unit-Like Struct
+    struct AlwaysEqual;
+
+    let _subject: AlwaysEqual = AlwaysEqual;
 }
 
 fn some_fn(x: i32) -> i32 {
