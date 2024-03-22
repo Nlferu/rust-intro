@@ -9,6 +9,7 @@ enum Difficulty {
 }
 
 fn main() {
+    // Making some spaces in console logs
     println!();
     println!("Welcome In Guess The Number Game!\n");
     println!("Type 'quit' at any time to exit game\n");
