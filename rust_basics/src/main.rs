@@ -157,6 +157,27 @@ fn main() {
     println!("{}", first_word_corrected(&slice_string));
     println!("{}", first_word_corrected(slice_string_two));
     println!("{}", first_word_corrected(&slice_string_two));
+
+    // --------------------------------------------------------------------------------------------------------------- \\
+    // Structs
+    // Example
+    struct User {
+        active: bool,
+        username: String,
+        _email: String,
+        _sign_in_count: u64,
+    }
+
+    let mut user_one: User = User {
+        active: true,
+        username: String::from("Hastur"),
+        _email: String::from("somemail@example.com"),
+        _sign_in_count: 1,
+    };
+
+    println!("User One Username: {}", user_one.username);
+
+    user_one.active = false;
 }
 
 fn some_fn(x: i32) -> i32 {
