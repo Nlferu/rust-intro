@@ -160,7 +160,7 @@ fn main() {
 
     // --------------------------------------------------------------------------------------------------------------- \\
 
-    // Structs
+    // Structs (Order of data in struct doesnt matter)
     // Example
     struct User {
         active: bool,
@@ -190,12 +190,27 @@ fn main() {
     }
 
     // We can also create new user using data from existing user
-    let _user2: User = User {
+    let _user_two: User = User {
         active: user_one.active,
         username: user_one.username,
         _email: String::from("another@example.com"),
         _sign_in_count: user_one._sign_in_count,
     };
+
+    // We can also fill data as below
+    let _user_three: User = User {
+        _email: String::from("another@example.com"),
+        .._user_two // We cannot use `user_one` here as it is `mut`
+    };
+
+    // Tuple Structs
+    #[derive(Debug)] // Deriving the Debug trait for Color to be able to print it
+    struct Color(i32, i32, i32);
+    struct Point(i32, i32, i32);
+
+    let _black: Color = Color(0, 0, 0);
+    let _origin: Point = Point(0, 0, 0);
+    println!("{:?}", _black);
 }
 
 fn some_fn(x: i32) -> i32 {
