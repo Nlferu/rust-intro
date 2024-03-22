@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
     height: u32,
@@ -27,11 +28,17 @@ fn main() {
         height: 50,
     };
 
+    // Printing Whole Rectangle Struct
+    println!("Rectangle Struct: {:?}", rectangle);
+
     // We are using reference here to keep `main()` as owner of this struct
     println!(
         "Structs: Area of recktangle is {} square pixels",
         area_structs(&rectangle)
     );
+
+    // Printing with `dbg!` macro
+    dbg!(&rectangle);
 }
 
 // Basic version
