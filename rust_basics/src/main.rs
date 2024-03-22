@@ -159,6 +159,7 @@ fn main() {
     println!("{}", first_word_corrected(&slice_string_two));
 
     // --------------------------------------------------------------------------------------------------------------- \\
+
     // Structs
     // Example
     struct User {
@@ -178,6 +179,23 @@ fn main() {
     println!("User One Username: {}", user_one.username);
 
     user_one.active = false;
+
+    fn _build_user(email: String, username: String) -> User {
+        User {
+            active: true,
+            username, // shorthand instead of `username: username`
+            _email: email,
+            _sign_in_count: 1,
+        }
+    }
+
+    // We can also create new user using data from existing user
+    let _user2: User = User {
+        active: user_one.active,
+        username: user_one.username,
+        _email: String::from("another@example.com"),
+        _sign_in_count: user_one._sign_in_count,
+    };
 }
 
 fn some_fn(x: i32) -> i32 {
