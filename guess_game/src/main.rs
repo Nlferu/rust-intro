@@ -10,6 +10,7 @@ enum Difficulty {
 
 fn main() {
     println!("Welcome In Guess The Number Game!");
+    println!("Type 'quit' at any time to exit game");
 
     println!("Please pick difficulty from following: easy, medium, hard");
 
@@ -70,7 +71,10 @@ fn main() {
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => {
+                println!("Only numbers allowed!");
+                continue;
+            }
         };
 
         // Instead of below:
