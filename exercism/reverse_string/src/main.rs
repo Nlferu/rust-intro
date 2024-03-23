@@ -1,12 +1,12 @@
 use unicode_segmentation::UnicodeSegmentation;
 
 fn main() {
-    let input = "Hello, world!";
-    let reversed = reverse_string(input);
+    let input: &str = "Hello, world!";
+    let reversed: String = reverse_string(input);
 
-    let input_two = "uüu";
-    let reversed_two = reverse(input_two);
-    let rev_three = reverse(input);
+    let input_two: &str = "uüu";
+    let reversed_two: String = reverse(input_two);
+    let rev_three: String = reverse(input);
 
     println!("Original: {}", input);
     println!("Reversed with reverse_string(): {}", reversed);
