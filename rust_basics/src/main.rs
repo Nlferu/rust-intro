@@ -299,6 +299,18 @@ fn main() {
 
     let m: Message = Message::Write(String::from("hello"));
     m.call();
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+    // Below is using our Option enum
+    let _some_number: Option<i32> = Option::Some(5);
+    // Below is using Option enum from standard library included in prelude
+    let _some_char: std::prelude::v1::Option<char> = Some('e');
+
+    let _absent_number: Option<i32> = Option::None;
 }
 
 fn some_fn(x: i32) -> i32 {
