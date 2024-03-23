@@ -218,6 +218,87 @@ fn main() {
     struct AlwaysEqual;
 
     let _subject: AlwaysEqual = AlwaysEqual;
+
+    // Enums
+    #[derive(Debug)]
+    enum IpAddrKind {
+        V4,
+        V6,
+    }
+
+    let _four: IpAddrKind = IpAddrKind::V4;
+    let _six: IpAddrKind = IpAddrKind::V6;
+
+    fn route(ip_kind: IpAddrKind) {
+        println!("IP: {:?}", ip_kind);
+    }
+
+    route(IpAddrKind::V4);
+
+    struct IpAddr {
+        _kind: IpAddrKind,
+        _address: String,
+    }
+
+    let _home: IpAddr = IpAddr {
+        _kind: IpAddrKind::V4,
+        _address: String::from("127.0.0.1"),
+    };
+
+    let _loopback: IpAddr = IpAddr {
+        _kind: IpAddrKind::V6,
+        _address: String::from("::1"),
+    };
+
+    #[derive(Debug)]
+    enum IpAddress {
+        V4(String),
+        V6(String),
+    }
+
+    let home: IpAddress = IpAddress::V4(String::from("127.0.0.1"));
+    let _loopback: IpAddress = IpAddress::V6(String::from("::1"));
+
+    println!("Home IP Address: {:?}", home);
+
+    enum IpAddrExample {
+        V4(u8, u8, u8, u8),
+        V6(String),
+    }
+
+    let _home: IpAddrExample = IpAddrExample::V4(127, 0, 0, 1);
+
+    let _loopback: IpAddrExample = IpAddrExample::V6(String::from("::1"));
+
+    struct _Ipv4Addr {
+        // --snip--
+    }
+
+    struct _Ipv6Addr {
+        // --snip--
+    }
+
+    enum _IpAddressStruct {
+        V4(_Ipv4Addr),
+        V6(_Ipv6Addr),
+    }
+
+    #[derive(Debug)]
+    enum Message {
+        _Quit,
+        _Move { x: i32, y: i32 },
+        Write(String),
+        _ChangeColor(i32, i32, i32),
+    }
+
+    impl Message {
+        fn call(&self) {
+            println!("Message: {:?}", self);
+        }
+    }
+
+    let m: Message = Message::Write(String::from("hello"));
+    m.call();
 }
 
 fn some_fn(x: i32) -> i32 {
