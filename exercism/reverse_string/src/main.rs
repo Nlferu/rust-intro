@@ -27,9 +27,11 @@ fn reverse_string(input: &str) -> String {
 
     // Convert the vector of characters back to a string
     chars.into_iter().collect()
+}
 
-    // MUCH SIMPLER SOLUTION
-    // input.chars().rev().collect()
+// Simpler solution
+fn reverse_string_alt(input: &str) -> String {
+    input.chars().rev().collect()
 }
 
 // Below function is working for `chars` and `String``
