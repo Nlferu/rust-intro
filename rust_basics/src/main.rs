@@ -302,16 +302,16 @@ fn main() {
     let m: Message = Message::Write(String::from("hello"));
     m.call();
 
-    enum Option<T> {
-        None,
-        Some(T),
-    }
+    // Below is buit in Rust, so we do not have to code it here
+    // enum Option<T> {
+    //     None,
+    //     Some(T),
+    // }
 
-    // Below is using our Option enum
+    // Below would use our Option enum from above
     let _some_number: Option<i32> = Option::Some(5);
     // Below is using Option enum from standard library included in prelude
     let _some_char: std::prelude::v1::Option<char> = Some('e');
-
     let _absent_number: Option<i32> = Option::None;
 
     // --------------------------------------------------------------------------- \\
@@ -351,7 +351,7 @@ fn main() {
         value_in_cents(Coin::Quarter(UsState::Alaska))
     );
 
-    fn plus_one(x: std::option::Option<i32>) -> std::option::Option<i32> {
+    fn plus_one(x: Option<i32>) -> Option<i32> {
         match x {
             None => None,
             Some(i) => Some(i + 1),
@@ -363,6 +363,26 @@ fn main() {
     let none = plus_one(None);
 
     println!("None Value: {:?}", none);
+
+    // Match have to be EXHAUSTIVE!
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        // Below pattern ensures we do following for any other inputs
+        // We are also assigning value to `other`, so we can use it later
+        other => move_player(other),
+        // If we do not want to use value from other outcomes we can do below
+        // --------------------------------------
+        // _ => println!("All other outcomes"),
+        // --------------------------------------
+        // We can also do below to do nothing
+        // _ => (),
+    }
+
+    fn add_fancy_hat() {}
+    fn remove_fancy_hat() {}
+    fn move_player(_num_spaces: u8) {}
 }
 
 fn some_fn(x: i32) -> i32 {
