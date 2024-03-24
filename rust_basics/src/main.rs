@@ -311,6 +311,25 @@ fn main() {
     let _some_char: std::prelude::v1::Option<char> = Some('e');
 
     let _absent_number: Option<i32> = Option::None;
+
+    // Match Pattern
+    enum Coin {
+        _Penny,
+        _Nickel,
+        Dime,
+        _Quarter,
+    }
+
+    fn value_in_cents(coin: Coin) -> u8 {
+        match coin {
+            Coin::_Penny => 1,
+            Coin::_Nickel => 5,
+            Coin::Dime => 10,
+            Coin::_Quarter => 25,
+        }
+    }
+
+    println!("Value in cents: {}", value_in_cents(Coin::Dime));
 }
 
 fn some_fn(x: i32) -> i32 {
