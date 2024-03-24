@@ -2,19 +2,47 @@ use unicode_segmentation::UnicodeSegmentation;
 
 fn main() {
     let input: &str = "Hello, world!";
-    let reversed: String = reverse_string(input);
-
-    let input_two: &str = "uüu";
-    let reversed_two: String = reverse(input_two);
-    let rev_three: String = reverse(input);
+    let reversed_string: String = reverse_string(input);
+    let reversed_string_alt: String = reverse_string_alt(input);
+    let reversed: String = reverse(input);
 
     println!("Original: {}", input);
-    println!("Reversed with reverse_string(): {}", reversed);
+    println!("Reversed with reverse_string(): {}", reversed_string);
+    println!(
+        "Reversed with reverse_string_alt(): {}",
+        reversed_string_alt
+    );
+    println!("Reversed with reverse(): {}", reversed);
 
-    println!("Original: {}", input_two);
-    println!("Reversed with reverse(): {}", reversed_two);
+    println!("------------------------------------------------------------");
 
-    println!("Reversed with reverse(): {}", rev_three);
+    let input: &str = "uüu";
+    let reversed_string: String = reverse_string(input);
+    let reversed_string_alt: String = reverse_string_alt(input);
+    let reversed: String = reverse(input);
+
+    println!("Original: {}", input);
+    println!("Reversed with reverse_string(): {}", reversed_string);
+    println!(
+        "Reversed with reverse_string_alt(): {}",
+        reversed_string_alt
+    );
+    println!("Reversed with reverse(): {}", reversed);
+
+    println!("------------------------------------------------------------");
+
+    let input: &str = "畫惡魔";
+    let reversed_string: String = reverse_string(input);
+    let reversed_string_alt: String = reverse_string_alt(input);
+    let reversed: String = reverse(input);
+
+    println!("Original: {}", input);
+    println!("Reversed with reverse_string(): {}", reversed_string);
+    println!(
+        "Reversed with reverse_string_alt(): {}",
+        reversed_string_alt
+    );
+    println!("Reversed with reverse(): {}", reversed);
 }
 
 // Below is working only for pure strings
