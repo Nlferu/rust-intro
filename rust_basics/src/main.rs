@@ -312,12 +312,18 @@ fn main() {
 
     let _absent_number: Option<i32> = Option::None;
 
-    // Match Pattern
+    // ------------------------------ Match Pattern ------------------------------
+    #[derive(Debug)]
+    enum UsState {
+        _Alabama,
+        Alaska,
+    }
+
     enum Coin {
         _Penny,
         _Nickel,
         Dime,
-        _Quarter,
+        Quarter(UsState),
     }
 
     fn value_in_cents(coin: Coin) -> u8 {
@@ -328,11 +334,31 @@ fn main() {
             }
             Coin::_Nickel => 5,
             Coin::Dime => 10,
-            Coin::_Quarter => 25,
+            Coin::Quarter(state) => {
+                println!("State quarter from {:?}", state);
+                25
+            }
         }
     }
 
     println!("Value in cents: {}", value_in_cents(Coin::Dime));
+    println!(
+        "Value in cents with state: {}",
+        value_in_cents(Coin::Quarter(UsState::Alaska))
+    );
+
+    fn plus_one(x: std::option::Option<i32>) -> std::option::Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
+        }
+    }
+
+    let five = Some(5);
+    let _six = plus_one(five);
+    let none = plus_one(None);
+
+    println!("None Value: {:?}", none);
 }
 
 fn some_fn(x: i32) -> i32 {
