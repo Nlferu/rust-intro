@@ -322,7 +322,10 @@ fn main() {
 
     fn value_in_cents(coin: Coin) -> u8 {
         match coin {
-            Coin::_Penny => 1,
+            Coin::_Penny => {
+                println!("Lucky Penny!");
+                1
+            }
             Coin::_Nickel => 5,
             Coin::Dime => 10,
             Coin::_Quarter => 25,
