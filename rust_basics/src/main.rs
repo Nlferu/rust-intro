@@ -383,6 +383,12 @@ fn main() {
     fn add_fancy_hat() {}
     fn remove_fancy_hat() {}
     fn move_player(_num_spaces: u8) {}
+
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {}", max),
+        _ => (),
+    }
 }
 
 // ---------------------------------------------------------------------------------- \\
