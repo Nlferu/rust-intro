@@ -46,6 +46,8 @@ mod back_of_house {
 
 fn _deliver_order() {}
 
+use crate::front_of_house::hosting;
+
 pub fn eat_at_restaurant() {
     // ---------------------- Path ----------------------
     // `crate` means root
@@ -55,6 +57,9 @@ pub fn eat_at_restaurant() {
 
     // Relative path
     front_of_house::hosting::add_to_waitlist();
+
+    // If we will do `use` above this function then we can go with below
+    hosting::add_to_waitlist();
 
     // ---------------------- Struct ----------------------
     // Order a breakfast in the summer with Rye toast
