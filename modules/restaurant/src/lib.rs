@@ -98,3 +98,10 @@ pub fn eat_at_restaurant() {
 // In case we would call Result like below we would fail
 // use std::fmt::Result;
 // use std::io::Result;
+
+// We can also avoid that by providing new names with `as` keyword
+// use std::fmt::Result;
+// use std::io::Result as IoResult;
+
+// fn function1() -> Result {}
+// fn function2() -> IoResult<()> {}
