@@ -39,5 +39,20 @@ fn main() {
     let does_not_exist = v.get(100);
     println!("Does Not Exist: {:?}", does_not_exist);
 
-    // ------------------------------ Reading Vector ------------------------------ \\
+    // ------------------------------ Iterating Over Vector ------------------------------ \\
+    let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{i}");
+    }
+
+    let mut v = vec![100, 32, 57];
+    for i in &mut v {
+        // Without `*` we would be updating borrowed value, so &v
+        *i += 50;
+        println!("{i}");
+    }
+
+    println!("Updated Vector: {v:?}")
+
+    // ------------------------------ Using an Enum to Store Multiple Types ------------------------------ \\
 }
