@@ -17,7 +17,6 @@ fn main() {
     println!("Vector Data: {:?}", v);
 
     // ------------------------------ Reading Vector ------------------------------ \\
-
     // Indexing
     let third: &i32 = &v[2];
     println!("The third element is: {third}");
@@ -52,7 +51,22 @@ fn main() {
         println!("{i}");
     }
 
-    println!("Updated Vector: {v:?}")
+    println!("Updated Vector: {v:?}");
 
     // ------------------------------ Using an Enum to Store Multiple Types ------------------------------ \\
+    #[derive(Debug)]
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+        SpreadsheetCell::Int(666),
+    ];
+
+    println!("Enum Type Vactor: {row:?}");
 }
