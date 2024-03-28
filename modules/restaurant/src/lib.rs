@@ -49,6 +49,8 @@ fn _deliver_order() {}
 use crate::front_of_house::hosting;
 use crate::front_of_house::hosting::add_to_waitlist;
 
+use std::collections::HashMap;
+
 pub fn eat_at_restaurant() {
     // ---------------------- Path ----------------------
     // `crate` means root
@@ -67,6 +69,10 @@ pub fn eat_at_restaurant() {
     // If we specify whole path to the add_to_waitlist we can call directly
     add_to_waitlist();
 
+    // HashMap
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+
     // ---------------------- Struct ----------------------
     // Order a breakfast in the summer with Rye toast
     let mut meal = back_of_house::Breakfast::summer("Rye");
@@ -81,3 +87,14 @@ pub fn eat_at_restaurant() {
     let _order1 = back_of_house::Appetizer::Soup;
     let _order2 = back_of_house::Appetizer::Salad;
 }
+
+// In below case not calling directly Result makes us able to explain to Rust which is from where
+// use std::fmt;
+// use std::io;
+
+// fn function_one() -> fmt::Result {}
+// fn function_two() -> io::Result<()> {}
+
+// In case we would call Result like below we would fail
+// use std::fmt::Result;
+// use std::io::Result;
