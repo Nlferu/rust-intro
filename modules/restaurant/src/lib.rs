@@ -114,3 +114,21 @@ pub fn eat_at_restaurant() {
 
 // After `pub use`
 // restaurant::hosting::add_to_waitlist()
+
+// We can call multiple libs from same crate as below
+// use std::cmp::Ordering;
+// use std::io;
+
+// Instead of that we can do below
+// use std::{cmp::Ordering, io};
+
+// Below are the same too
+// use std::io;
+// use std::io::Write;
+
+// &
+
+// use std::io::{self, Write};
+
+// Importing all items
+// use std::collections::*;
