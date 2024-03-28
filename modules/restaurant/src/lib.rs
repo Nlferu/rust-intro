@@ -47,6 +47,7 @@ mod back_of_house {
 fn _deliver_order() {}
 
 use crate::front_of_house::hosting;
+use crate::front_of_house::hosting::add_to_waitlist;
 
 pub fn eat_at_restaurant() {
     // ---------------------- Path ----------------------
@@ -62,6 +63,9 @@ pub fn eat_at_restaurant() {
     hosting::add_to_waitlist();
     // or if use is out of scope
     // super::hosting::add_to_waitlist();
+
+    // If we specify whole path to the add_to_waitlist we can call directly
+    add_to_waitlist();
 
     // ---------------------- Struct ----------------------
     // Order a breakfast in the summer with Rye toast
