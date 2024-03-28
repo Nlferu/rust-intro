@@ -1,4 +1,4 @@
-workspace = { members = ["restaurant"] }
+workspace = { members = [ "rest","restaurant"] }
 [package]
 name = "modules"
 version = "0.1.0"
