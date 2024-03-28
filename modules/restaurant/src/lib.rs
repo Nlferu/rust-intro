@@ -105,3 +105,12 @@ pub fn eat_at_restaurant() {
 
 // fn function1() -> Result {}
 // fn function2() -> IoResult<()> {}
+
+// We can also make use `pub` -> this will do below for external users
+// pub use crate::front_of_house::hosting;
+
+// Before `pub use`
+// restaurant::front_of_house::hosting::add_to_waitlist()
+
+// After `pub use`
+// restaurant::hosting::add_to_waitlist()
