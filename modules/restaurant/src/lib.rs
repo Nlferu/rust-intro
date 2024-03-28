@@ -60,6 +60,8 @@ pub fn eat_at_restaurant() {
 
     // If we will do `use` above this function then we can go with below
     hosting::add_to_waitlist();
+    // or if use is out of scope
+    // super::hosting::add_to_waitlist();
 
     // ---------------------- Struct ----------------------
     // Order a breakfast in the summer with Rye toast
