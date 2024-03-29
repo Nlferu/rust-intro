@@ -74,6 +74,7 @@ fn main() {
     println!("Enum Type Vactor: {row:?}");
 
     // ------------------------------ Strings ------------------------------ \\
+
     // Creating empty string
     let mut _s = String::new();
 
@@ -87,7 +88,58 @@ fn main() {
     let s = String::from("initial contents");
 
     // ------------------------------ Modifying Strings ------------------------------ \\
+
+    // Using `format!()` macro
     let modified = format!("{} and {}", s, "additional");
 
     println!("Modified String: {}", modified);
+
+    // Using `push_str()`
+    let mut s = String::from("foo");
+    let s2 = "bar";
+    s.push_str(s2);
+
+    println!("Pushed String: {}", s);
+
+    // We can also use `push()` to add one character at the end of string
+    let mut s = String::from("lo");
+    s.push('l');
+
+    // Adding two strings
+    // We are using s1 and &s2 here as adding strings is using following fn `fn add(self, s: &str) -> String {}`
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("World!");
+    let s3 = s1 + &s2;
+
+    println!("Sum Of Strings: {}", s3);
+
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
+
+    let _s = s1 + "-" + &s2 + "-" + &s3;
+    // Same with format
+    // Redefining s1 as we lost it in above _s
+    let s1 = String::from("tic");
+    // Format macro does not take ownership of any of parameters
+    let s = format!("{s1}-{s2}-{s3}");
+
+    println!("Sum Of Strings: {}", s);
+
+    let hell = String::from("Hola");
+    let hello = String::from("Здравствуйте");
+
+    let leng_one = hell.len();
+    let leng_two = hello.len();
+
+    println!(
+        "Unicode Scalar takes 2 bytes instead of 1 as usual string: {} and {}",
+        leng_one, leng_two
+    );
+
+    let _hello = "Здравствуйте";
+    // Indexing string in Rust is not allowed as unicode chars would throw unafmiliar numbers
+    // let answer = &hello[0];
+
+    // ------------------------------ Slicing Strings ------------------------------ \\
 }
