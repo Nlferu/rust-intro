@@ -17,6 +17,7 @@ fn main() {
     println!("Vector Data: {:?}", v);
 
     // ------------------------------ Reading Vector ------------------------------ \\
+
     // Indexing
     let third: &i32 = &v[2];
     println!("The third element is: {third}");
@@ -39,6 +40,7 @@ fn main() {
     println!("Does Not Exist: {:?}", does_not_exist);
 
     // ------------------------------ Iterating Over Vector ------------------------------ \\
+
     let v = vec![100, 32, 57];
     for i in &v {
         println!("{i}");
@@ -54,6 +56,7 @@ fn main() {
     println!("Updated Vector: {v:?}");
 
     // ------------------------------ Using an Enum to Store Multiple Types ------------------------------ \\
+
     #[derive(Debug)]
     enum SpreadsheetCell {
         Int(i32),
@@ -69,4 +72,22 @@ fn main() {
     ];
 
     println!("Enum Type Vactor: {row:?}");
+
+    // ------------------------------ Strings ------------------------------ \\
+    // Creating empty string
+    let mut _s = String::new();
+
+    // Creating string with initial value
+    let data = "initial contents";
+    let _s = data.to_string();
+    // This method also works on a literal directly:
+    let _s = "initial contents".to_string();
+
+    // Creating string from literal value. It is the same as `to_string()`
+    let s = String::from("initial contents");
+
+    // ------------------------------ Modifying Strings ------------------------------ \\
+    let modified = format!("{} and {}", s, "additional");
+
+    println!("Modified String: {}", modified);
 }
