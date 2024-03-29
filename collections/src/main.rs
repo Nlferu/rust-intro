@@ -142,4 +142,25 @@ fn main() {
     // let answer = &hello[0];
 
     // ------------------------------ Slicing Strings ------------------------------ \\
+    let hello = "Здравствуйте";
+    let s = &hello[0..4];
+
+    println!("Sliced String: {}", s);
+
+    let hello = "rusti";
+    let s = &hello[0..4];
+
+    println!("Sliced String: {}", s);
+
+    // ------------------------------ Iterating Strings ------------------------------ \\
+
+    // For individual Unicode scalar values
+    for c in "Зд".chars() {
+        println!("{c}");
+    }
+
+    // For bytes method
+    for b in "Зд".bytes() {
+        println!("{b}");
+    }
 }
