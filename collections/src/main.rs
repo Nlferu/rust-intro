@@ -173,6 +173,7 @@ fn main() {
 
     let mut scores = HashMap::new();
 
+    // Adding data to Hash Map
     scores.insert(String::from("Blue"), 10);
     scores.insert(String::from("Yellow"), 50);
 
@@ -188,4 +189,14 @@ fn main() {
     for (key, value) in &scores {
         println!("{key}: {value}");
     }
+
+    // ------------------------------ Updating Hash Maps ------------------------------ \\
+
+    // Overwriting Value
+    scores.insert(String::from("Blue"), 17);
+    scores.insert(String::from("Blue"), 25);
+
+    println!("{:?}", scores);
+
+    // Adding a Key and Value Only If a Key Isn’t Present
 }
