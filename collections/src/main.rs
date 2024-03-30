@@ -163,4 +163,29 @@ fn main() {
     for b in "Зд".bytes() {
         println!("{b}");
     }
+
+    // ------------------------------ Hash Map ------------------------------ \\
+
+    // Hash Maps Data is stored on HEAP
+
+    // Creating new hash map
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    // ------------------------------ Accessing Values in Hash Maps ------------------------------ \\
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name).copied().unwrap_or(0);
+
+    println!("Blue Team Score: {}", score);
+
+    // ------------------------------ Iterating Hash Maps ------------------------------ \\
+
+    for (key, value) in &scores {
+        println!("{key}: {value}");
+    }
 }
