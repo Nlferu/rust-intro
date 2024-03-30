@@ -199,4 +199,34 @@ fn main() {
     println!("{:?}", scores);
 
     // Adding a Key and Value Only If a Key Isn’t Present
+
+    // Checking if key exist
+    let maka = scores.entry(String::from("Yellow"));
+    println!("Does Key Yellow exist: {:?}", maka);
+
+    // Checking and adding data if key is free
+    scores.entry(String::from("Yellow")).or_insert(66);
+    scores.entry(String::from("Red")).or_insert(66);
+
+    let modfified_data = scores.get(&String::from("Yellow")).copied().unwrap_or(0);
+    let modfified_data_red = scores.get(&String::from("Red")).copied().unwrap_or(0);
+
+    println!("Value for Yellow key: {}", modfified_data);
+    println!("Value for Red key: {}", modfified_data_red);
+    println!("{scores:?}");
+
+    // Updating a Value Based on the Old Value
+
+    // Program below is counting how many times each word is present in whole text, if there is new word we will add it to map
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        // Without `*` we would be updating borrowed value, so &v
+        *count += 1;
+    }
+
+    println!("{:?}", map);
 }
