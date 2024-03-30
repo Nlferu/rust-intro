@@ -2,18 +2,19 @@
 // and mode (the value that occurs most often; a hash map will be helpful here) of the list.
 
 pub fn median() {
-    let mut data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
+    let mut even_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
 
-    data.sort();
+    even_data.sort();
     // Return median & mode
 
-    println!("Sorted Data: {:?}", data);
+    println!("Sorted Data: {:?}", even_data);
 
     let even_median_index: usize;
-    even_median_index = data.len() / 2;
+    even_median_index = even_data.len() / 2;
 
-    //let
+    let odd_median_index: usize;
+    odd_median_index = even_data.len() / 2 - 1;
 
-    let fin = data[even_median_index];
+    let fin = even_data[even_median_index];
     println!("Result: {}", fin);
 }
