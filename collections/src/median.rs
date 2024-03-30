@@ -21,9 +21,18 @@ pub fn median() {
     println!("Even: {}", fin);
 
     let calculated = even_data.len() % 2;
+    let median: i32;
 
     match calculated {
-        0 => println!("even"),
-        _ => println!("odd"),
+        0 => {
+            println!("Even Dataset Received");
+            median = (even_data[even_median_index] + even_data[odd_median_index]) / 2;
+            println!("Median Value Is: {}", median);
+        }
+        _ => {
+            println!("Odd Dataset Received");
+            median = odd_data[even_median_index];
+            println!("Median Value Is: {}", median);
+        }
     }
 }
