@@ -8,4 +8,12 @@ pub fn median() {
     // Return median & mode
 
     println!("Sorted Data: {:?}", data);
+
+    let even_median_index: usize;
+    even_median_index = data.len() / 2;
+
+    //let
+
+    let fin = data[even_median_index];
+    println!("Result: {}", fin);
 }
