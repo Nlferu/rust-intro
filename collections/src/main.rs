@@ -1,3 +1,5 @@
+use crate::median::median;
+
 pub mod converter;
 pub mod interface;
 pub mod median;
@@ -233,4 +235,7 @@ fn main() {
     }
 
     println!("{:?}", map);
+
+    // Median Exercise
+    median();
 }
