@@ -3,7 +3,8 @@
 
 pub fn median() {
     let mut data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
-    data.sort_by(|a, b| a.partial_cmp(b).unwrap());
+
+    data.sort();
     // Return median & mode
 
     println!("Sorted Data: {:?}", data);
