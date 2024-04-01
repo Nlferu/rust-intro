@@ -238,8 +238,9 @@ fn main() {
 
     // Median Exercise
 
-    let _even_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
+    let even_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
     let odd_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11, 99];
 
+    median(even_data);
     median(odd_data);
 }
