@@ -10,9 +10,9 @@ pub fn median(mut data: Vec<i32>) {
     println!("Sorted Data: {:?}", data);
 
     let median_index: usize = data.len() / 2;
-    let calculated: usize = data.len() % 2;
+    let even_odd_checker: usize = data.len() % 2;
 
-    match calculated {
+    match even_odd_checker {
         0 => {
             println!("Even Dataset Received");
             median = (data[median_index] as f32 + data[median_index - 1] as f32) / 2.0;
