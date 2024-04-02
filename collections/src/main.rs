@@ -246,5 +246,13 @@ fn main() {
     let (median, mode) = median_and_mode(odd_data);
     println!("Median Value Is: {:?} Mode Value Is: {}", median, mode);
 
+    let data = vec![3, 1, 7, 3, 3, 5, 6, 4];
+
+    let median = median_and_mode::median(data.clone());
+    println!("Median: {:?}", median);
+
+    let mode = median_and_mode::mode(&data);
+    println!("Mode: {:?}", mode);
+
     //
 }
