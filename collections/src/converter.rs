@@ -10,13 +10,13 @@ pub fn converter(data: &[&str]) -> Vec<String> {
     for word in data {
         let mut chars = word.chars();
 
-        let converted_word = match &chars.next() {
+        let converted_word = match chars.next() {
             Some(char) => {
-                let lowercase_char = &char.to_ascii_lowercase();
+                let lowercase_char = char.to_ascii_lowercase();
                 let rest_of_word: String = chars.collect();
 
                 if vowels.contains(&lowercase_char) {
-                    format!("{}-hay", &word)
+                    format!("{}-hay", word)
                 } else {
                     format!("{}-{}ay", rest_of_word, char)
                 }
