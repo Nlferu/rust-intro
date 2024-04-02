@@ -1,3 +1,4 @@
+use crate::converter::converter;
 use crate::median_and_mode::median_and_mode;
 
 pub mod converter;
@@ -237,7 +238,6 @@ fn main() {
     println!("{:?}", map);
 
     // Median And Mode Exercise
-
     let even_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11];
     let odd_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11, 99];
 
@@ -254,5 +254,10 @@ fn main() {
     let mode = median_and_mode::mode(&data);
     println!("Mode: {:?}", mode);
 
-    //
+    // Converter
+    let words = [
+        "lord", "Alephium", "house", "umbra", "fast", "Morbius", "Orn",
+    ];
+
+    converter(&words);
 }
