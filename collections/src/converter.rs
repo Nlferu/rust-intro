@@ -3,24 +3,29 @@
 
 use std::collections::HashSet;
 
-pub fn converter(data: &[&str]) {
+pub fn converter(data: &[&str]) -> Vec<String> {
     let vowels: HashSet<char> = ['a', 'e', 'i', 'o', 'u'].iter().cloned().collect();
+    let mut converted_words = Vec::new();
 
     for word in data {
         let mut chars = word.chars();
 
-        match &chars.next() {
+        let converted_word = match &chars.next() {
             Some(char) => {
                 let lowercase_char = &char.to_ascii_lowercase();
+                let rest_of_word: String = chars.collect();
+
                 if vowels.contains(&lowercase_char) {
-                    println!("{}-ay", &word[1..]);
+                    format!("{}-hay", &word)
                 } else {
-                    println!("{}-hay", &word);
+                    format!("{}-{}ay", rest_of_word, char)
                 }
             }
-            None => println!("Empty word"),
-        }
-        //println!("Lama: {:?}", chars);
-        //println!("Data: {:?}", chars.next().unwrap().to_ascii_lowercase());
+            None => String::from("Empty word"),
+        };
+
+        converted_words.push(converted_word);
     }
+
+    converted_words
 }
