@@ -1,4 +1,4 @@
-use crate::median::median;
+use crate::median::median_and_mode;
 
 pub mod converter;
 pub mod interface;
@@ -238,9 +238,9 @@ fn main() {
 
     // Median Exercise
 
-    let even_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11];
-    let odd_data = vec![3, -5, 8, 66, 4, -777, -33, 7, 9, 0, 88, -11, 99];
+    let even_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11];
+    let odd_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11, 99];
 
-    median(even_data);
-    median(odd_data);
+    median_and_mode(even_data);
+    median_and_mode(odd_data);
 }
