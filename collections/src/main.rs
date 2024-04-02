@@ -256,8 +256,8 @@ fn main() {
 
     // Converter
     let words = [
-        "lord", "Alephium", "house", "umbra", "fast", "Morbius", "Orn",
+        "lord", "Alephium", "house", "umbra", "fast", "Morbius", "Orn", "first", "apple",
     ];
 
-    converter(&words);
+    println!("{:?}", converter(&words));
 }
