@@ -1,8 +1,8 @@
-use crate::median::median_and_mode;
+use crate::median_and_mode::median_and_mode;
 
 pub mod converter;
 pub mod interface;
-pub mod median;
+pub mod median_and_mode;
 
 fn main() {
     // --------------------------------------------------------------------- \\
@@ -241,6 +241,10 @@ fn main() {
     let even_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11];
     let odd_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11, 99];
 
-    median_and_mode(even_data);
-    median_and_mode(odd_data);
+    let (median, mode) = median_and_mode(even_data);
+    println!("Median Value Is: {:?} Mode Value Is: {}", median, mode);
+    let (median, mode) = median_and_mode(odd_data);
+    println!("Median Value Is: {:?} Mode Value Is: {}", median, mode);
+
+    //
 }
