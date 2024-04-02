@@ -236,7 +236,7 @@ fn main() {
 
     println!("{:?}", map);
 
-    // Median Exercise
+    // Median And Mode Exercise
 
     let even_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11];
     let odd_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11, 99];
