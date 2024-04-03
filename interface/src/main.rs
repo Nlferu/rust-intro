@@ -4,20 +4,33 @@
 
 use std::collections::HashMap;
 
+#[derive(Debug)]
+struct Department {
+    employees: Vec<String>,
+}
+
+#[derive(Debug)]
+struct Company {
+    departments: HashMap<String, Department>,
+}
+
 fn main() {
-    println!("Company Management Interface");
+    println!("\nCompany Management Interface");
     println!("\nType `help` for available commands");
 
-    let commands = ["add", "remove", "add dep", "department", "employees"];
+    let commands = [
+        "add",        // add new employee
+        "remove",     // remove employee
+        "create",     // create new department
+        "department", // shows all company employees for given department
+        "employees",  // shows all company employees and their departments
+        "help",       // gives all available commands
+        "exit",       // exits program
+    ];
     let departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
-    let mut structure: HashMap<&str, String> = HashMap::new();
-
-    add(structure, "Engineering", employee)
 }
 
-fn add(structure: &mut HashMap<&str, &str>, department: String, employee: String) {
-    structure.insert(department, employee);
-}
+fn add(department: String, employee: String) {}
 
 fn remove(department: &str, employee: &str) {}
 
