@@ -73,12 +73,6 @@ fn main() {
     }
 }
 
-fn add(department: String, employee: String) {}
-
-fn remove(department: &str, employee: &str) {}
-
-fn add_department(department: String) {}
-
 fn help() {
     println!("Company Management Interface - Helper");
 }
