@@ -8,7 +8,7 @@ pub fn converter(data: &[&str]) -> Vec<String> {
     let mut converted_words = Vec::new();
 
     for word in data {
-        let mut chars = word.chars();
+        let mut chars = word.trim().chars();
 
         let converted_word = match chars.next() {
             Some(char) => {
