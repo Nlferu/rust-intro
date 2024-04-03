@@ -256,10 +256,23 @@ fn main() {
 
     // Converter
     let words = [
-        "lord", "Alephium", "house", "umbra", "fast", "Morbius", "Orn", "first", "apple",
+        "lord",
+        "Alephium",
+        "house",
+        "umbra",
+        "fast",
+        "Morbius",
+        "Orn",
+        "first",
+        "apple",
+        " ",
+        "uüu",
+        "畫惡魔",
     ];
 
     println!("{:?}", converter(&words));
+
+    // @NOTE - implement fix for "uüu" example
 
     // Interface
 }
