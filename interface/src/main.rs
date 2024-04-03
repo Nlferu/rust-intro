@@ -7,13 +7,13 @@ use std::io;
 
 #[derive(Debug)]
 struct Department {
-    employees: Vec<String>,
+    _employees: Vec<String>,
 }
 
 impl Department {
-    fn _add_employee(&self, name: &str, department: &str) {}
+    fn _add_employee(&self, _name: &str, _department: &str) {}
 
-    fn _remove_employee(&self, department: &str, employee: &str) {}
+    fn _remove_employee(&self, _department: &str, _employee: &str) {}
 }
 
 #[derive(Debug)]
