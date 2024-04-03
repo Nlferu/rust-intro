@@ -11,30 +11,30 @@ struct Department {
 }
 
 impl Department {
-    fn add_employee(&self, name: &str, department: &str) {}
+    fn _add_employee(&self, name: &str, department: &str) {}
 
-    fn remove_employee(&self, department: &str, employee: &str) {}
+    fn _remove_employee(&self, department: &str, employee: &str) {}
 }
 
 #[derive(Debug)]
 struct Company {
-    departments: HashMap<String, Department>,
+    _departments: HashMap<String, Department>,
 }
 
 impl Company {
-    fn add_department(&self, department: String) {}
+    fn _add_department(&self, _department: String) {}
 
-    fn get_employees_in_department(department: &str) {}
+    fn _get_employees_in_department(_department: &str) {}
 
     // This should be returning self?
-    fn get_all_employees() {}
+    fn _get_all_employees() {}
 }
 
 fn main() {
     println!("\nCompany Management Interface");
     println!("\nType `help` for available commands");
 
-    let commands = [
+    let _commands = [
         "add",        // add new employee
         "remove",     // remove employee
         "create",     // create new department
@@ -44,7 +44,7 @@ fn main() {
         "help",       // gives all available commands
         "exit",       // exits program
     ];
-    let departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
+    let _departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
 
     loop {
         let mut user_command: String = String::new();
