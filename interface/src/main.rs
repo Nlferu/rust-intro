@@ -3,6 +3,7 @@
 // or all people in the company by department, sorted alphabetically.
 
 use std::collections::HashMap;
+use std::io;
 
 #[derive(Debug)]
 struct Department {
@@ -28,6 +29,31 @@ fn main() {
         "exit",       // exits program
     ];
     let departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
+
+    loop {
+        let mut user_command: String = String::new();
+
+        io::stdin()
+            .read_line(&mut user_command)
+            .expect("Failed to read line");
+
+        match user_command.trim().to_lowercase().as_str() {
+            "add" => println!("New Employee Added!"),
+            "remove" => println!("Employee Removed!"),
+            "create" => println!("New Department Created!"),
+            "department" => println!("All company employees for this department:"),
+            "employees" => println!("All employees:"),
+            "help" => help(),
+            "exit" => {
+                println!();
+                return;
+            }
+            _ => {
+                println!("Please type proper command, use `help` for all available options");
+                continue;
+            }
+        }
+    }
 }
 
 fn add(department: String, employee: String) {}
