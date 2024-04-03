@@ -10,9 +10,24 @@ struct Department {
     employees: Vec<String>,
 }
 
+impl Department {
+    fn add_employee(&self, name: &str, department: &str) {}
+
+    fn remove_employee(&self, department: &str, employee: &str) {}
+}
+
 #[derive(Debug)]
 struct Company {
     departments: HashMap<String, Department>,
+}
+
+impl Company {
+    fn add_department(&self, department: String) {}
+
+    fn get_employees_in_department(department: &str) {}
+
+    // This should be returning self?
+    fn get_all_employees() {}
 }
 
 fn main() {
@@ -23,6 +38,7 @@ fn main() {
         "add",        // add new employee
         "remove",     // remove employee
         "create",     // create new department
+        "update",     // updates department name
         "department", // shows all company employees for given department
         "employees",  // shows all company employees and their departments
         "help",       // gives all available commands
@@ -41,11 +57,12 @@ fn main() {
             "add" => println!("New Employee Added!"),
             "remove" => println!("Employee Removed!"),
             "create" => println!("New Department Created!"),
+            "update" => println!("Department Updated!"),
             "department" => println!("All company employees for this department:"),
             "employees" => println!("All employees:"),
             "help" => help(),
             "exit" => {
-                println!();
+                println!("Company Management Interface Closed!");
                 return;
             }
             _ => {
@@ -61,12 +78,6 @@ fn add(department: String, employee: String) {}
 fn remove(department: &str, employee: &str) {}
 
 fn add_department(department: String) {}
-
-fn get_employees_in_department(department: &str) {}
-
-fn get_all_employees(structure: &mut HashMap<&str, &str>) {
-    for (department, employee) in structure {}
-}
 
 fn help() {
     println!("Company Management Interface - Helper");
