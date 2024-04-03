@@ -1,9 +1,8 @@
+use crate::calculator::calculator;
 use crate::converter::converter;
-use crate::median_and_mode::median_and_mode;
 
+pub mod calculator;
 pub mod converter;
-pub mod interface;
-pub mod median_and_mode;
 
 fn main() {
     // --------------------------------------------------------------------- \\
@@ -241,17 +240,17 @@ fn main() {
     let even_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11];
     let odd_data = vec![3, -5, 88, 666, 666, -777, -33, 777, 666, 0, 88, -11, 99];
 
-    let (median, mode) = median_and_mode(even_data);
+    let (median, mode) = calculator(even_data);
     println!("Median Value Is: {:?} Mode Value Is: {}", median, mode);
-    let (median, mode) = median_and_mode(odd_data);
+    let (median, mode) = calculator(odd_data);
     println!("Median Value Is: {:?} Mode Value Is: {}", median, mode);
 
     let data = vec![3, 1, 7, 3, 3, 5, 6, 4];
 
-    let median = median_and_mode::median(data.clone());
+    let median = calculator::median(data.clone());
     println!("Median: {:?}", median);
 
-    let mode = median_and_mode::mode(&data);
+    let mode = calculator::mode(&data);
     println!("Mode: {:?}", mode);
 
     // Converter
@@ -273,6 +272,4 @@ fn main() {
     println!("{:?}", converter(&words));
 
     // @NOTE - implement fix for "uüu" example
-
-    // Interface
 }
