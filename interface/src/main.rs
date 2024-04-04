@@ -7,22 +7,28 @@ use std::io;
 
 #[derive(Debug)]
 struct Department {
-    _employees: Vec<String>,
+    employees: Vec<String>,
 }
 
 impl Department {
-    fn _add_employee(&self, _name: &str, _department: &str) {}
+    fn add_employee(&mut self, name: String, _department: &str) {
+        self.employees.push(name);
+    }
 
     fn _remove_employee(&self, _department: &str, _employee: &str) {}
 }
 
 #[derive(Debug)]
 struct Company {
-    _departments: HashMap<String, Department>,
+    departments: HashMap<String, Department>,
 }
 
 impl Company {
-    fn _add_department(&self, _department: String) {}
+    fn add_department(&mut self, department: String) {
+        self.departments
+            .insert(department.clone(), Department { employees: vec![] });
+        println!("Department '{}' created!", department);
+    }
 
     fn _get_employees_in_department(_department: &str) {}
 
@@ -49,6 +55,10 @@ fn main() {
     loop {
         let mut user_command: String = String::new();
 
+        let mut company: Company = Company {
+            departments: HashMap::new(),
+        };
+
         io::stdin()
             .read_line(&mut user_command)
             .expect("Failed to read line");
@@ -58,7 +68,10 @@ fn main() {
             "remove" => println!("Employee Removed!"),
             "create" => println!("New Department Created!"),
             "update" => println!("Department Updated!"),
-            "department" => println!("All company employees for this department:"),
+            "department" => {
+                //println!("All company employees for this department:");
+                company.add_department(String::from("LamaDep"));
+            }
             "employees" => println!("All employees:"),
             "help" => help(),
             "exit" => {
