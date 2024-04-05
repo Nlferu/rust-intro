@@ -11,8 +11,9 @@ struct Department {
 }
 
 impl Department {
-    fn add_employee(&mut self, name: String, _department: &str) {
-        self.employees.push(name);
+    fn add_employee(&mut self, name: String) {
+        self.employees.push(name.clone());
+        println!("Employee {} added!", name);
     }
 
     fn _remove_employee(&self, _department: &str, _employee: &str) {}
@@ -55,6 +56,10 @@ fn main() {
     loop {
         let mut user_command: String = String::new();
 
+        let mut department: Department = Department {
+            employees: Vec::new(),
+        };
+
         let mut company: Company = Company {
             departments: HashMap::new(),
         };
@@ -64,13 +69,24 @@ fn main() {
             .expect("Failed to read line");
 
         match user_command.trim().to_lowercase().as_str() {
-            "add" => println!("New Employee Added!"),
+            "add" => {
+                println!("Enter Employee Full Name: ");
+
+                let parameter = add_parameter();
+
+                department.add_employee(parameter);
+            }
             "remove" => println!("Employee Removed!"),
-            "create" => println!("New Department Created!"),
+            "create" => {
+                println!("Enter Department Name: ");
+
+                let parameter = add_parameter();
+
+                company.add_department(parameter);
+            }
             "update" => println!("Department Updated!"),
             "department" => {
-                //println!("All company employees for this department:");
-                company.add_department(String::from("LamaDep"));
+                println!("All company employees for this department:");
             }
             "employees" => println!("All employees:"),
             "help" => help(),
@@ -88,4 +104,14 @@ fn main() {
 
 fn help() {
     println!("Company Management Interface - Helper");
+}
+
+fn add_parameter() -> String {
+    let mut parameter: String = String::new();
+
+    io::stdin()
+        .read_line(&mut parameter)
+        .expect("Failed to read line");
+
+    parameter.trim().to_string()
 }
