@@ -81,6 +81,7 @@ fn main() {
     println!("\nCompany Management Interface");
     println!("\nType `help` for available commands");
 
+    // To be moved to initial departments
     let _departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
 
     let mut department: Department = Department {
