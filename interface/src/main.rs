@@ -51,10 +51,16 @@ impl Company {
         println!("Department '{}' created!", department);
     }
 
-    fn get_employees_in_department(&self) {
-        for (department, employees) in &self.departments {
-            println!("Department '{}': {:?}", department, employees);
-        }
+    fn get_employees_in_department(&self, department_name: &String) {
+        let employees = self
+            .departments
+            .get(department_name)
+            .map(|department| &department.employees);
+
+        println!(
+            "Employees for '{}' department: {:?}",
+            department_name, employees
+        )
     }
 
     fn get_all_company_data(&self) {
@@ -92,6 +98,7 @@ fn main() {
             .expect("Failed to read line");
 
         match user_command.trim().to_lowercase().as_str() {
+            // TO BE FIXED FOR LOWER CASE DEPARTMENT NAME
             "add" => {
                 println!("Enter Department Name: ");
                 let department_name = add_parameter();
@@ -118,7 +125,13 @@ fn main() {
                 }
             }
             "update" => println!("Department Updated!"),
-            "department" => company.get_employees_in_department(),
+            "department" => {
+                println!("Enter Department Name To Get Its Employees: ");
+
+                let department_name = add_parameter();
+
+                company.get_employees_in_department(&department_name)
+            }
             "employees" => department.get_employees(),
             "company" => company.get_all_company_data(),
             "help" => help(),
