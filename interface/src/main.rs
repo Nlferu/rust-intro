@@ -51,6 +51,7 @@ impl Company {
         println!("Department '{}' created!", department);
     }
 
+    // Case sensitivity to be corrected for all inputs matching key
     fn get_employees_in_department(&self, department_name: &String) {
         let employees = self
             .departments
