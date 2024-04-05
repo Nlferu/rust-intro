@@ -21,6 +21,7 @@ impl Department {
 
         if let Some(department) = company.departments.get_mut(department_name) {
             department.employees.push(employee_name.clone());
+
             println!(
                 "Employee '{}' added to '{}' department!",
                 employee_name, department_name
@@ -46,6 +47,7 @@ impl Company {
     fn add_department(&mut self, department: String) {
         self.departments
             .insert(department.clone(), Department { employees: vec![] });
+
         println!("Department '{}' created!", department);
     }
 
@@ -55,7 +57,6 @@ impl Company {
         }
     }
 
-    // This should be returning self?
     fn get_all_company_data(&self) {
         for (department, employees) in &self.departments {
             println!("Department '{}': {:?}", department, employees);
@@ -63,7 +64,9 @@ impl Company {
     }
 
     fn department_existance_checker(&self, department_name: &str) -> bool {
-        self.departments.contains_key(department_name)
+        self.departments
+            .keys()
+            .any(|key| key.to_lowercase() == department_name.to_lowercase())
     }
 }
 
@@ -106,9 +109,13 @@ fn main() {
             "create" => {
                 println!("Enter Department Name: ");
 
-                let parameter = add_parameter();
+                let department_name = add_parameter();
 
-                company.add_department(parameter);
+                if company.department_existance_checker(&department_name) {
+                    println!("Error: Department '{}' already exists!", department_name)
+                } else {
+                    company.add_department(department_name);
+                }
             }
             "update" => println!("Department Updated!"),
             "department" => company.get_employees_in_department(),
