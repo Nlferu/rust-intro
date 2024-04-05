@@ -17,7 +17,7 @@ impl Department {
         department_name: &str,
         employee_name: String,
     ) {
-        //self.employees.push(employee_name.clone());
+        self.employees.push(employee_name.clone());
 
         if let Some(department) = company.departments.get_mut(department_name) {
             department.employees.push(employee_name.clone());
@@ -31,6 +31,10 @@ impl Department {
     }
 
     fn _remove_employee(&self, _department: &str, _employee: &str) {}
+
+    fn get_employees(&self) {
+        println!("Employees: {:?}", self.employees)
+    }
 }
 
 #[derive(Debug)]
@@ -52,7 +56,7 @@ impl Company {
     }
 
     // This should be returning self?
-    fn get_all_employees(&self) {
+    fn get_all_company_data(&self) {
         for (department, employees) in &self.departments {
             println!("Department '{}': {:?}", department, employees);
         }
@@ -107,10 +111,9 @@ fn main() {
                 company.add_department(parameter);
             }
             "update" => println!("Department Updated!"),
-            "department" => {
-                company.get_employees_in_department();
-            }
-            "employees" => println!("All employees:"),
+            "department" => company.get_employees_in_department(),
+            "employees" => department.get_employees(),
+            "company" => company.get_all_company_data(),
             "help" => help(),
             "exit" => {
                 println!("Company Management Interface Closed!");
@@ -134,6 +137,7 @@ fn help() {
         "update - updates department name",
         "department - shows all company employees for given department",
         "employees - shows all company employees and their departments",
+        "company - shows whole company structure with employees and their departments",
         "help - gives all available commands",
         "exit - exits program",
     ];
