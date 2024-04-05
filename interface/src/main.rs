@@ -41,16 +41,6 @@ fn main() {
     println!("\nCompany Management Interface");
     println!("\nType `help` for available commands");
 
-    let _commands = [
-        "add",        // add new employee
-        "remove",     // remove employee
-        "create",     // create new department
-        "update",     // updates department name
-        "department", // shows all company employees for given department
-        "employees",  // shows all company employees and their departments
-        "help",       // gives all available commands
-        "exit",       // exits program
-    ];
     let _departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
 
     loop {
@@ -104,6 +94,21 @@ fn main() {
 
 fn help() {
     println!("Company Management Interface - Helper");
+
+    let commands = [
+        "add - adds new employee",
+        "remove - removes employee",
+        "create - creates new department",
+        "update - updates department name",
+        "department - shows all company employees for given department",
+        "employees - shows all company employees and their departments",
+        "help - gives all available commands",
+        "exit - exits program",
+    ];
+
+    for item in commands {
+        println!("{}", item)
+    }
 }
 
 fn add_parameter() -> String {
