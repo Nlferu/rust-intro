@@ -11,9 +11,26 @@ struct Department {
 }
 
 impl Department {
-    fn add_employee(&mut self, employee_name: String) {
-        self.employees.push(employee_name);
+    fn add_employee(
+        &mut self,
+        company: &mut Company,
+        department_name: &str,
+        employee_name: String,
+    ) {
+        //self.employees.push(employee_name.clone());
+
+        if let Some(department) = company.departments.get_mut(department_name) {
+            department.employees.push(employee_name.clone());
+            println!(
+                "Employee '{}' added to '{}' department!",
+                employee_name, department_name
+            )
+        } else {
+            println!("Error: Department '{}' does not exist!", department_name);
+        }
     }
+
+    fn _remove_employee(&self, _department: &str, _employee: &str) {}
 }
 
 #[derive(Debug)]
@@ -22,16 +39,6 @@ struct Company {
 }
 
 impl Company {
-    fn add_employee_to_department(&mut self, department_name: &str, employee_name: String) {
-        if let Some(department) = self.departments.get_mut(department_name) {
-            department.add_employee(employee_name);
-        } else {
-            println!("Department '{}' does not exist!", department_name);
-        }
-    }
-
-    fn _remove_employee(&self, _department: &str, _employee: &str) {}
-
     fn add_department(&mut self, department: String) {
         self.departments
             .insert(department.clone(), Department { employees: vec![] });
@@ -45,7 +52,15 @@ impl Company {
     }
 
     // This should be returning self?
-    fn _get_all_employees() {}
+    fn get_all_employees(&self) {
+        for (department, employees) in &self.departments {
+            println!("Department '{}': {:?}", department, employees);
+        }
+    }
+
+    fn department_existance_checker(&self, department_name: &str) -> bool {
+        self.departments.contains_key(department_name)
+    }
 }
 
 fn main() {
@@ -74,10 +89,14 @@ fn main() {
                 println!("Enter Department Name: ");
                 let department_name = add_parameter();
 
-                println!("Enter Employee Full Name: ");
-                let employee_name = add_parameter();
+                if company.department_existance_checker(&department_name) {
+                    println!("Enter Employee Full Name: ");
+                    let employee_name = add_parameter();
 
-                company.add_employee_to_department(&department_name, employee_name);
+                    department.add_employee(&mut company, &department_name, employee_name);
+                } else {
+                    println!("Department '{}' does not exist", department_name)
+                }
             }
             "remove" => println!("Employee Removed!"),
             "create" => {
