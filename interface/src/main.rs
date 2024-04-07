@@ -31,7 +31,9 @@ impl Department {
         }
     }
 
-    fn _remove_employee(&self, _department: &str, _employee: &str) {}
+    fn remove_employee(&self, employee_name: String) {
+        println!("Employee '{}' removed!", employee_name)
+    }
 
     fn get_employees(&self) {
         println!("Employees: {:?}", self.employees)
@@ -114,7 +116,12 @@ fn main() {
                     println!("Department '{}' does not exist", department_name)
                 }
             }
-            "remove" => println!("Employee Removed!"),
+            "remove" => {
+                println!("Enter Employee Full Name: ");
+                let employee_name = add_parameter();
+
+                department.remove_employee(employee_name)
+            }
             "create" => {
                 println!("Enter Department Name: ");
 
