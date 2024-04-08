@@ -193,7 +193,13 @@ fn add_parameter() -> String {
         .read_line(&mut parameter)
         .expect("Failed to read line");
 
-    parameter.trim().to_string()
+    match input_formatter(&parameter) {
+        Ok(formatted_parameter) => formatted_parameter,
+        Err(err) => {
+            println!("Error: {}", err);
+            parameter.trim().to_string()
+        }
+    }
 }
 
 fn input_formatter(input: &String) -> Result<String, &'static str> {
