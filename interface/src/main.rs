@@ -199,12 +199,29 @@ fn add_parameter() -> String {
 }
 
 fn input_formatter(input: &String) -> Result<String, &'static str> {
-    let input_lowercase = input.to_lowercase();
-
-    match input_lowercase.chars().next() {
-        Some(first_char) => {
-            Ok(first_char.to_uppercase().collect::<String>() + &input_lowercase[1..])
-        }
-        None => Err("Input Not Provided!"),
+    if input.is_empty() {
+        return Err("Input string is empty");
     }
+
+    // Split input by whitespace into words
+    let words: Vec<&str> = input.split_whitespace().collect();
+
+    // Capitalize the first letter of each word and collect into a new vector
+    let formatted_words: Vec<String> = words
+        .into_iter()
+        .map(|word| {
+            let mut chars = word.chars();
+            match chars.next() {
+                None => String::new(), // Empty word
+                Some(first_char) => {
+                    first_char.to_uppercase().collect::<String>() + &chars.collect::<String>()
+                }
+            }
+        })
+        .collect();
+
+    // Join the formatted words with spaces to get the final formatted string
+    let formatted_string = formatted_words.join(" ");
+
+    Ok(formatted_string)
 }
