@@ -73,12 +73,13 @@ impl Company {
         }
     }
 
-    fn get_all_company_data(&self) {
+    fn get_whole_company_data(&self) {
         for (department, employees) in &self.departments {
             println!("Department '{}': {:?}", department, employees);
         }
     }
 
+    // Improve below to return error message
     fn department_exists(&self, department_name: &str) -> bool {
         self.departments.contains_key(department_name)
     }
@@ -130,6 +131,7 @@ fn main() {
                     println!("Error: Failed to get department name!")
                 }
             }
+            // Change below as "add"
             "remove" => {
                 println!("Enter Employee Full Name: ");
                 let employee_name_result = add_parameter();
@@ -142,6 +144,7 @@ fn main() {
                     println!("Error: Failed to get employee name!");
                 }
             }
+            // Change below as "add"
             "create" => {
                 println!("Enter Department Name: ");
 
@@ -159,6 +162,7 @@ fn main() {
                 }
             }
             "update" => println!("Department Updated!"),
+            // Change below as "add"
             "department" => {
                 println!("Enter Department Name To Get Its Employees: ");
 
@@ -176,7 +180,7 @@ fn main() {
                 }
             }
             "employees" => department.get_employees(),
-            "company" => company.get_all_company_data(),
+            "company" => company.get_whole_company_data(),
             "help" => help(),
             "exit" => {
                 println!("Company Management Interface Closed!");
