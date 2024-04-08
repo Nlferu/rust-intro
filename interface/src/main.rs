@@ -52,21 +52,34 @@ impl Company {
         println!("Department '{}' created!", department_name);
     }
 
-    fn get_employees_in_department(&self, department_name: String) {
-        let employees = self
-            .departments
-            .get(&department_name)
-            .map(|department| &department.employees);
+    fn get_employees_in_department(&self, department_name: &str) {
+        // let employees = self
+        //     .departments
+        //     .get(&department_name)
+        //     .map(|department| &department.employees);
 
-        let employees = match employees {
-            Some(ref e) if e.is_empty() => None,
-            _ => employees,
-        };
+        // let employees = match employees {
+        //     Some(ref e) if e.is_empty() => None,
+        //     _ => employees,
+        // };
 
-        println!(
-            "Employees for '{}' department: {:?}",
-            department_name, employees
-        )
+        // println!(
+        //     "Employees for '{}' department: {:?}",
+        //     department_name, employees
+        // )
+
+        if let Some(department) = self.departments.get(department_name) {
+            if department.employees.is_empty() {
+                println!("No employees in '{}' department.", department_name);
+            } else {
+                println!(
+                    "Employees in '{}' department: {:?}",
+                    department_name, department.employees
+                );
+            }
+        } else {
+            println!("Error: Department '{}' does not exist!", department_name);
+        }
     }
 
     fn get_all_company_data(&self) {
@@ -165,7 +178,7 @@ fn main() {
                     let department_name = department_name_result.unwrap();
 
                     if company.department_existance_checker(&department_name) {
-                        company.get_employees_in_department(department_name)
+                        company.get_employees_in_department(&department_name)
                     } else {
                         println!("Error: Department '{}' does not exist!", department_name)
                     }
