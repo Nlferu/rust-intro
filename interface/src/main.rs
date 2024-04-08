@@ -31,7 +31,7 @@ impl Department {
         }
     }
 
-    fn remove_employee(&self, employee_name: String) {
+    fn remove_employee(&self, employee_name: &str) {
         println!("Employee '{}' removed!", employee_name)
     }
 
@@ -133,7 +133,7 @@ fn main() {
                 if employee_name_result.is_ok() {
                     let employee_name = employee_name_result.unwrap();
 
-                    department.remove_employee(employee_name);
+                    department.remove_employee(&employee_name);
                 } else {
                     println!("Error: Failed to get employee name!");
                 }
@@ -206,7 +206,7 @@ fn help() {
     }
 }
 
-fn add_parameter() -> Result<String, &'static str> {
+fn add_parameter() -> Result<String, String> {
     let mut parameter = String::new();
 
     io::stdin()
@@ -216,15 +216,15 @@ fn add_parameter() -> Result<String, &'static str> {
     let parameter = parameter.trim().to_string();
 
     if parameter.is_empty() {
-        return Err("Error: Parameter cannot be empty");
+        return Err(format!("Error: Parameter cannot be empty"));
     }
 
     input_formatter(&parameter)
 }
 
-fn input_formatter(input: &String) -> Result<String, &'static str> {
+fn input_formatter(input: &String) -> Result<String, String> {
     if input.is_empty() {
-        return Err("Error: Input string is empty!");
+        return Err(format!("Error: Input string is empty!"));
     }
 
     // Split input by whitespace into words
