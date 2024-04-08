@@ -103,7 +103,6 @@ fn main() {
             .expect("Failed to read line");
 
         match user_command.trim().to_lowercase().as_str() {
-            // TO BE FIXED FOR LOWER CASE DEPARTMENT NAME
             "add" => {
                 println!("Enter Department Name: ");
                 let department_name_result = add_parameter();
@@ -126,6 +125,7 @@ fn main() {
                         println!("Department '{}' does not exist", department_name)
                     }
                 } else {
+                    println!("Error: Failed to get department name!")
                 }
             }
             "remove" => {
