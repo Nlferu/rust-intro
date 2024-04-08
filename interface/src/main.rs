@@ -108,7 +108,7 @@ fn main() {
                 if department_name_result.is_ok() {
                     let department_name = department_name_result.unwrap();
 
-                    if company.department_existance_checker(&department_name) {
+                    if company.department_exists(&department_name) {
                         println!("Enter Employee Full Name: ");
                         let employee_name_result = add_parameter();
 
@@ -145,7 +145,7 @@ fn main() {
                 if department_name_result.is_ok() {
                     let department_name = department_name_result.unwrap();
 
-                    if company.department_existance_checker(&department_name) {
+                    if company.department_exists(&department_name) {
                         println!("Error: Department '{}' already exists!", department_name)
                     } else {
                         company.add_department(department_name);
