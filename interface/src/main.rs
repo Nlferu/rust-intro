@@ -85,9 +85,12 @@ impl Company {
     }
 
     fn department_existance_checker(&self, department_name: &str) -> bool {
-        self.departments
-            .keys()
-            .any(|key| key.to_lowercase() == department_name.to_lowercase())
+        // If input is not formatted we can use below:
+        // self.departments
+        //     .keys()
+        //     .any(|key| key.to_lowercase() == department_name.to_lowercase())
+
+        self.departments.contains_key(department_name)
     }
 }
 
