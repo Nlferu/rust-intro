@@ -240,9 +240,11 @@ fn input_formatter(input: &String) -> Result<String, String> {
         .map(|word| {
             let mut chars = word.chars();
             match chars.next() {
-                None => String::new(), // Empty word
+                // Empty word
+                None => String::new(),
                 Some(first_char) => {
-                    first_char.to_uppercase().collect::<String>() + &chars.collect::<String>()
+                    first_char.to_uppercase().collect::<String>()
+                        + &chars.collect::<String>().to_lowercase()
                 }
             }
         })
