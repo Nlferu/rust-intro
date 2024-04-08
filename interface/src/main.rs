@@ -162,7 +162,7 @@ fn main() {
                 if department_name_result.is_ok() {
                     let department_name = department_name_result.unwrap();
 
-                    if company.department_existance_checker(&department_name) {
+                    if company.department_exists(&department_name) {
                         company.get_employees_in_department(&department_name)
                     } else {
                         println!("Error: Department '{}' does not exist!", department_name)
