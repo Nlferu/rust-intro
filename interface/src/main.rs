@@ -11,7 +11,6 @@ struct Department {
 }
 
 impl Department {
-    // Change from Some into match
     fn add_employee(
         &mut self,
         company: &mut Company,
