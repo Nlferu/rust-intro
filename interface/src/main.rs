@@ -186,25 +186,28 @@ fn help() {
     }
 }
 
-fn add_parameter() -> String {
-    let mut parameter: String = String::new();
+fn add_parameter() -> Result<String, &'static str> {
+    let mut parameter = String::new();
 
     io::stdin()
         .read_line(&mut parameter)
         .expect("Failed to read line");
 
-    match input_formatter(&parameter) {
-        Ok(formatted_parameter) => formatted_parameter,
-        Err(err) => {
-            println!("Error: {}", err);
-            parameter.trim().to_string()
-        }
+    // Trim the parameter
+    let parameter = parameter.trim().to_string();
+
+    // Check if parameter is empty
+    if parameter.is_empty() {
+        return Err("Error: Parameter cannot be empty");
     }
+
+    // Call input_formatter to format the parameter
+    input_formatter(&parameter)
 }
 
 fn input_formatter(input: &String) -> Result<String, &'static str> {
     if input.is_empty() {
-        return Err("Input string is empty");
+        return Err("Error: Input string is empty!");
     }
 
     // Split input by whitespace into words
