@@ -47,6 +47,11 @@ struct Company {
 
 impl Company {
     fn add_department(&mut self, department_name: String) {
+        if self.department_exists(&department_name) {
+            println!("Error: Department '{}' already exists!", department_name);
+            return;
+        }
+
         self.departments
             .insert(department_name.clone(), Department { employees: vec![] });
         println!("Department '{}' created!", department_name);
