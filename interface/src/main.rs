@@ -46,25 +46,16 @@ struct Company {
 }
 
 impl Company {
-    fn add_department(&mut self, department: String) {
+    fn add_department(&mut self, department_name: String) {
         self.departments
-            .insert(department.clone(), Department { employees: vec![] });
-
-        println!("Department '{}' created!", department);
+            .insert(department_name.clone(), Department { employees: vec![] });
+        println!("Department '{}' created!", department_name);
     }
 
-    fn get_employees_in_department(&self, department_name: &String) {
-        let input_formatted = match input_formatter(department_name) {
-            Ok(name) => name,
-            Err(err) => {
-                println!("Error: {}", err);
-                return;
-            }
-        };
-
+    fn get_employees_in_department(&self, department_name: String) {
         let employees = self
             .departments
-            .get(&input_formatted)
+            .get(&department_name)
             .map(|department| &department.employees);
 
         let employees = match employees {
@@ -74,7 +65,7 @@ impl Company {
 
         println!(
             "Employees for '{}' department: {:?}",
-            input_formatted, employees
+            department_name, employees
         )
     }
 
@@ -115,41 +106,68 @@ fn main() {
             // TO BE FIXED FOR LOWER CASE DEPARTMENT NAME
             "add" => {
                 println!("Enter Department Name: ");
-                let department_name = add_parameter();
+                let department_name_result = add_parameter();
 
-                if company.department_existance_checker(&department_name) {
-                    println!("Enter Employee Full Name: ");
-                    let employee_name = add_parameter();
+                if department_name_result.is_ok() {
+                    let department_name = department_name_result.unwrap();
 
-                    department.add_employee(&mut company, &department_name, employee_name);
+                    if company.department_existance_checker(&department_name) {
+                        println!("Enter Employee Full Name: ");
+                        let employee_name_result = add_parameter();
+
+                        if employee_name_result.is_ok() {
+                            let employee_name = employee_name_result.unwrap();
+
+                            department.add_employee(&mut company, &department_name, employee_name);
+                        } else {
+                            println!("Error: Failed to get employee name!")
+                        }
+                    } else {
+                        println!("Department '{}' does not exist", department_name)
+                    }
                 } else {
-                    println!("Department '{}' does not exist", department_name)
                 }
             }
             "remove" => {
                 println!("Enter Employee Full Name: ");
-                let employee_name = add_parameter();
+                let employee_name_result = add_parameter();
 
-                department.remove_employee(employee_name)
+                if employee_name_result.is_ok() {
+                    let employee_name = employee_name_result.unwrap();
+
+                    department.remove_employee(employee_name);
+                } else {
+                    println!("Error: Failed to get employee name!");
+                }
             }
             "create" => {
                 println!("Enter Department Name: ");
 
-                let department_name = add_parameter();
+                let department_name_result = add_parameter();
+                if department_name_result.is_ok() {
+                    let department_name = department_name_result.unwrap();
 
-                if company.department_existance_checker(&department_name) {
-                    println!("Error: Department '{}' already exists!", department_name)
+                    if company.department_existance_checker(&department_name) {
+                        println!("Error: Department '{}' already exists!", department_name)
+                    } else {
+                        company.add_department(department_name);
+                    }
                 } else {
-                    company.add_department(department_name);
+                    println!("Error: Failed to get department name!");
                 }
             }
             "update" => println!("Department Updated!"),
             "department" => {
                 println!("Enter Department Name To Get Its Employees: ");
 
-                let department_name = add_parameter();
+                let department_name_result = add_parameter();
+                if department_name_result.is_ok() {
+                    let department_name = department_name_result.unwrap();
 
-                company.get_employees_in_department(&department_name)
+                    company.get_employees_in_department(department_name)
+                } else {
+                    println!("Error: Failed to get department name!")
+                }
             }
             "employees" => department.get_employees(),
             "company" => company.get_all_company_data(),
@@ -193,15 +211,12 @@ fn add_parameter() -> Result<String, &'static str> {
         .read_line(&mut parameter)
         .expect("Failed to read line");
 
-    // Trim the parameter
     let parameter = parameter.trim().to_string();
 
-    // Check if parameter is empty
     if parameter.is_empty() {
         return Err("Error: Parameter cannot be empty");
     }
 
-    // Call input_formatter to format the parameter
     input_formatter(&parameter)
 }
 
@@ -231,4 +246,14 @@ fn input_formatter(input: &String) -> Result<String, &'static str> {
     let formatted_string = formatted_words.join(" ");
 
     Ok(formatted_string)
+}
+
+fn handle_error<T>(result: Result<T, &'static str>) -> Option<T> {
+    match result {
+        Ok(value) => Some(value),
+        Err(err) => {
+            println!("Error: {}", err);
+            None
+        }
+    }
 }
