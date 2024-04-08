@@ -247,13 +247,3 @@ fn input_formatter(input: &String) -> Result<String, &'static str> {
 
     Ok(formatted_string)
 }
-
-fn handle_error<T>(result: Result<T, &'static str>) -> Option<T> {
-    match result {
-        Ok(value) => Some(value),
-        Err(err) => {
-            println!("Error: {}", err);
-            None
-        }
-    }
-}
