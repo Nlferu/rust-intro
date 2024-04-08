@@ -46,6 +46,7 @@ struct Company {
 }
 
 impl Company {
+    // Get rid of department_exists or consolidate it
     fn add_department(&mut self, department_name: String) {
         if self.department_exists(&department_name) {
             println!("Error: Department '{}' already exists!", department_name);
