@@ -53,21 +53,6 @@ impl Company {
     }
 
     fn get_employees_in_department(&self, department_name: &str) {
-        // let employees = self
-        //     .departments
-        //     .get(&department_name)
-        //     .map(|department| &department.employees);
-
-        // let employees = match employees {
-        //     Some(ref e) if e.is_empty() => None,
-        //     _ => employees,
-        // };
-
-        // println!(
-        //     "Employees for '{}' department: {:?}",
-        //     department_name, employees
-        // )
-
         if let Some(department) = self.departments.get(department_name) {
             if department.employees.is_empty() {
                 println!("No employees in '{}' department.", department_name);
