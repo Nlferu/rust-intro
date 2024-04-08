@@ -79,7 +79,7 @@ impl Company {
         }
     }
 
-    // Improve below to return error message
+    // Get rid of this checker, and check it as it is in get_employee_in_department fn
     fn department_exists(&self, department_name: &str) -> bool {
         self.departments.contains_key(department_name)
     }
@@ -108,6 +108,7 @@ fn main() {
             .expect("Failed to read line");
 
         match user_command.trim().to_lowercase().as_str() {
+            // Change below as "department"
             "add" => {
                 println!("Enter Department Name:");
 
@@ -131,7 +132,7 @@ fn main() {
                     println!("Error: Failed to get department name!")
                 }
             }
-            // Change below as "add"
+            // Change below as "department"
             "remove" => {
                 println!("Enter Employee Full Name: ");
                 let employee_name_result = add_parameter();
@@ -144,7 +145,7 @@ fn main() {
                     println!("Error: Failed to get employee name!");
                 }
             }
-            // Change below as "add"
+            // Change below as "department"
             "create" => {
                 println!("Enter Department Name: ");
 
@@ -162,19 +163,11 @@ fn main() {
                 }
             }
             "update" => println!("Department Updated!"),
-            // Change below as "add"
             "department" => {
                 println!("Enter Department Name To Get Its Employees: ");
 
-                let department_name_result = add_parameter();
-                if department_name_result.is_ok() {
-                    let department_name = department_name_result.unwrap();
-
-                    if company.department_exists(&department_name) {
-                        company.get_employees_in_department(&department_name)
-                    } else {
-                        println!("Error: Department '{}' does not exist!", department_name)
-                    }
+                if let Ok(department_name) = add_parameter() {
+                    company.get_employees_in_department(&department_name);
                 } else {
                     println!("Error: Failed to get department name!")
                 }
