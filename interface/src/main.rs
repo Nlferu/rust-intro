@@ -11,6 +11,7 @@ struct Department {
 }
 
 impl Department {
+    // Change from Some into match
     fn add_employee(
         &mut self,
         company: &mut Company,
@@ -108,25 +109,23 @@ fn main() {
 
         match user_command.trim().to_lowercase().as_str() {
             "add" => {
-                println!("Enter Department Name: ");
-                let department_name_result = add_parameter();
+                println!("Enter Department Name:");
 
-                if department_name_result.is_ok() {
-                    let department_name = department_name_result.unwrap();
-
-                    if company.department_exists(&department_name) {
-                        println!("Enter Employee Full Name: ");
-                        let employee_name_result = add_parameter();
-
-                        if employee_name_result.is_ok() {
-                            let employee_name = employee_name_result.unwrap();
-
-                            department.add_employee(&mut company, &department_name, employee_name);
-                        } else {
-                            println!("Error: Failed to get employee name!")
+                if let Ok(department_name) = add_parameter() {
+                    match company.departments.get(&department_name) {
+                        Some(_) => {
+                            println!("Enter Employee Full Name: ");
+                            if let Ok(employee_name) = add_parameter() {
+                                department.add_employee(
+                                    &mut company,
+                                    &department_name,
+                                    employee_name,
+                                );
+                            } else {
+                                println!("Error: Failed to get employee name!");
+                            }
                         }
-                    } else {
-                        println!("Error: Department '{}' does not exist!", department_name)
+                        None => println!("Error: Department '{}' does not exist!", department_name),
                     }
                 } else {
                     println!("Error: Failed to get department name!")
