@@ -53,17 +53,18 @@ impl Company {
     }
 
     fn get_employees_in_department(&self, department_name: &str) {
-        if let Some(department) = self.departments.get(department_name) {
-            if department.employees.is_empty() {
-                println!("No employees in '{}' department.", department_name);
-            } else {
-                println!(
-                    "Employees in '{}' department: {:?}",
-                    department_name, department.employees
-                );
+        match self.departments.get(department_name) {
+            Some(department) => {
+                if department.employees.is_empty() {
+                    println!("No employees in '{}' department.", department_name);
+                } else {
+                    println!(
+                        "Employees in '{}' department: {:?}",
+                        department_name, department.employees
+                    );
+                }
             }
-        } else {
-            println!("Error: Department '{}' does not exist!", department_name);
+            None => println!("Error: Department '{}' does not exist!", department_name),
         }
     }
 
