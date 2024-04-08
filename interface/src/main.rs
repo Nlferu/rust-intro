@@ -20,15 +20,15 @@ impl Department {
     ) {
         self.employees.push(employee_name.clone());
 
-        if let Some(department) = company.departments.get_mut(department_name) {
-            department.employees.push(employee_name.clone());
-
-            println!(
-                "Employee '{}' added to '{}' department!",
-                employee_name, department_name
-            )
-        } else {
-            println!("Error: Department '{}' does not exist!", department_name);
+        match company.departments.get_mut(department_name) {
+            Some(department) => {
+                department.employees.push(employee_name.clone());
+                println!(
+                    "Employee '{}' added to '{}' department!",
+                    employee_name, department_name
+                );
+            }
+            None => println!("Error: Department '{}' does not exist!", department_name),
         }
     }
 
