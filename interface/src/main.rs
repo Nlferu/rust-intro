@@ -122,7 +122,7 @@ fn main() {
                             println!("Error: Failed to get employee name!")
                         }
                     } else {
-                        println!("Department '{}' does not exist!", department_name)
+                        println!("Error: Department '{}' does not exist!", department_name)
                     }
                 } else {
                     println!("Error: Failed to get department name!")
