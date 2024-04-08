@@ -122,7 +122,7 @@ fn main() {
                             println!("Error: Failed to get employee name!")
                         }
                     } else {
-                        println!("Department '{}' does not exist", department_name)
+                        println!("Department '{}' does not exist!", department_name)
                     }
                 } else {
                     println!("Error: Failed to get department name!")
@@ -164,7 +164,11 @@ fn main() {
                 if department_name_result.is_ok() {
                     let department_name = department_name_result.unwrap();
 
-                    company.get_employees_in_department(department_name)
+                    if company.department_existance_checker(&department_name) {
+                        company.get_employees_in_department(department_name)
+                    } else {
+                        println!("Error: Department '{}' does not exist!", department_name)
+                    }
                 } else {
                     println!("Error: Failed to get department name!")
                 }
