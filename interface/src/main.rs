@@ -53,16 +53,28 @@ impl Company {
         println!("Department '{}' created!", department);
     }
 
-    // Case sensitivity to be corrected for all inputs matching key
     fn get_employees_in_department(&self, department_name: &String) {
+        let input_formatted = match input_formatter(department_name) {
+            Ok(name) => name,
+            Err(err) => {
+                println!("Error: {}", err);
+                return;
+            }
+        };
+
         let employees = self
             .departments
-            .get(department_name)
+            .get(&input_formatted)
             .map(|department| &department.employees);
+
+        let employees = match employees {
+            Some(ref e) if e.is_empty() => None,
+            _ => employees,
+        };
 
         println!(
             "Employees for '{}' department: {:?}",
-            department_name, employees
+            input_formatted, employees
         )
     }
 
@@ -184,4 +196,15 @@ fn add_parameter() -> String {
         .expect("Failed to read line");
 
     parameter.trim().to_string()
+}
+
+fn input_formatter(input: &String) -> Result<String, &'static str> {
+    let input_lowercase = input.to_lowercase();
+
+    match input_lowercase.chars().next() {
+        Some(first_char) => {
+            Ok(first_char.to_uppercase().collect::<String>() + &input_lowercase[1..])
+        }
+        None => Err("Input Not Provided!"),
+    }
 }
