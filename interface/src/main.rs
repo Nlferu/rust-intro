@@ -73,7 +73,7 @@ impl Company {
         }
     }
 
-    fn department_existance_checker(&self, department_name: &str) -> bool {
+    fn department_exists(&self, department_name: &str) -> bool {
         self.departments.contains_key(department_name)
     }
 }
