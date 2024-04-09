@@ -70,19 +70,25 @@ impl Company {
         }
     }
 
-    fn get_employees_in_department(&self, department_name: &str) {
-        match self.departments.get(department_name) {
-            Some(department) => {
-                if department.employees.is_empty() {
-                    println!("No employees in '{}' department.", department_name);
-                } else {
-                    println!(
-                        "Employees in '{}' department: {:?}",
-                        department_name, department.employees
-                    );
+    fn get_employees_in_department(&self) {
+        println!("Enter Department Name To Get Its Employees: ");
+
+        if let Ok(department_name) = add_parameter() {
+            match self.departments.get(&department_name) {
+                Some(department) => {
+                    if department.employees.is_empty() {
+                        println!("No employees in '{}' department.", department_name);
+                    } else {
+                        println!(
+                            "Employees in '{}' department: {:?}",
+                            department_name, department.employees
+                        );
+                    }
                 }
+                None => println!("Error: Department '{}' does not exist!", department_name),
             }
-            None => println!("Error: Department '{}' does not exist!", department_name),
+        } else {
+            println!("Error: Failed to get department name!")
         }
     }
 
@@ -143,15 +149,7 @@ fn main() {
             "remove" => department.remove_employee(),
             "create" => company.add_department(),
             "update" => println!("Department Updated!"),
-            "department" => {
-                println!("Enter Department Name To Get Its Employees: ");
-
-                if let Ok(department_name) = add_parameter() {
-                    company.get_employees_in_department(&department_name);
-                } else {
-                    println!("Error: Failed to get department name!")
-                }
-            }
+            "department" => company.get_employees_in_department(),
             "employees" => department.get_employees(),
             "company" => company.get_whole_company_data(),
             "help" => help(),
@@ -168,10 +166,10 @@ fn main() {
 }
 
 fn help() {
-    println!("Company Management Interface - Helper");
+    println!("Company Management Interface - Helper:");
 
     let commands = [
-        "add - adds new employee",
+        "\nadd - adds new employee",
         "remove - removes employee",
         "create - creates new department",
         "update - updates department name",
