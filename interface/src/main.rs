@@ -17,17 +17,44 @@ impl Department {
         department_name: &str,
         employee_name: String,
     ) {
-        self.employees.push(employee_name.clone());
+        // self.employees.push(employee_name.clone());
 
-        match company.departments.get_mut(department_name) {
-            Some(department) => {
-                department.employees.push(employee_name.clone());
-                println!(
-                    "Employee '{}' added to '{}' department!",
-                    employee_name, department_name
-                );
+        // match company.departments.get_mut(department_name) {
+        //     Some(department) => {
+        //         department.employees.push(employee_name.clone());
+        //         println!(
+        //             "Employee '{}' added to '{}' department!",
+        //             employee_name, department_name
+        //         );
+        //     }
+        //     None => println!("Error: Department '{}' does not exist!", department_name),
+        // }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        println!("Enter Department Name:");
+
+        if let Ok(department_name) = add_parameter() {
+            match company.departments.get(&department_name) {
+                Some(_) => {
+                    println!("Enter Employee Full Name: ");
+                    if let Ok(employee_name) = add_parameter() {
+                        self.employees.push(employee_name.clone());
+
+                        if let Some(department) = company.departments.get_mut(&department_name) {
+                            department.employees.push(employee_name.clone());
+                            println!(
+                                "Employee '{}' added to '{}' department!",
+                                employee_name, department_name
+                            );
+                        }
+                    } else {
+                        println!("Error: Failed to get employee name!");
+                    }
+                }
+                None => println!("Error: Department '{}' does not exist!", department_name),
             }
-            None => println!("Error: Department '{}' does not exist!", department_name),
+        } else {
+            println!("Error: Failed to get department name!")
         }
     }
 
