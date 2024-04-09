@@ -48,7 +48,7 @@ struct Company {
 impl Company {
     // Get rid of department_exists or consolidate it
     fn add_department(&mut self, department_name: String) {
-        if self.department_exists(&department_name) {
+        if self.departments.contains_key(&department_name) {
             println!("Error: Department '{}' already exists!", department_name);
             return;
         }
@@ -78,11 +78,6 @@ impl Company {
         for (department, employees) in &self.departments {
             println!("Department '{}': {:?}", department, employees);
         }
-    }
-
-    // Get rid of this checker, and check it as it is in get_employee_in_department fn
-    fn department_exists(&self, department_name: &str) -> bool {
-        self.departments.contains_key(department_name)
     }
 }
 
@@ -150,17 +145,10 @@ fn main() {
             "create" => {
                 println!("Enter Department Name: ");
 
-                let department_name_result = add_parameter();
-                if department_name_result.is_ok() {
-                    let department_name = department_name_result.unwrap();
-
-                    if company.department_exists(&department_name) {
-                        println!("Error: Department '{}' already exists!", department_name)
-                    } else {
-                        company.add_department(department_name);
-                    }
+                if let Ok(department_name) = add_parameter() {
+                    company.add_department(department_name);
                 } else {
-                    println!("Error: Failed to get department name!");
+                    println!("Error: Failed to get department name!")
                 }
             }
             "update" => println!("Department Updated!"),
