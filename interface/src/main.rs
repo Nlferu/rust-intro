@@ -31,8 +31,14 @@ impl Department {
         }
     }
 
-    fn remove_employee(&self, employee_name: &str) {
-        println!("Employee '{}' removed!", employee_name)
+    fn remove_employee(&self) {
+        println!("Enter Employee Full Name: ");
+
+        if let Ok(employee_name) = add_parameter() {
+            println!("Employee '{}' removed!", employee_name)
+        } else {
+            println!("Error: Failed to get employee name!");
+        }
     }
 
     fn get_employees(&self) {
@@ -47,15 +53,21 @@ struct Company {
 
 impl Company {
     // Get rid of department_exists or consolidate it
-    fn add_department(&mut self, department_name: String) {
-        if self.departments.contains_key(&department_name) {
-            println!("Error: Department '{}' already exists!", department_name);
-            return;
-        }
+    fn add_department(&mut self) {
+        println!("Enter Department Name: ");
 
-        self.departments
-            .insert(department_name.clone(), Department { employees: vec![] });
-        println!("Department '{}' created!", department_name);
+        if let Ok(department_name) = add_parameter() {
+            if self.departments.contains_key(&department_name) {
+                println!("Error: Department '{}' already exists!", department_name);
+                return;
+            }
+
+            self.departments
+                .insert(department_name.clone(), Department { employees: vec![] });
+            println!("Department '{}' created!", department_name);
+        } else {
+            println!("Error: Failed to get department name!")
+        }
     }
 
     fn get_employees_in_department(&self, department_name: &str) {
@@ -129,23 +141,16 @@ fn main() {
                 }
             }
             "remove" => {
-                println!("Enter Employee Full Name: ");
+                // println!("Enter Employee Full Name: ");
 
-                if let Ok(employee_name) = add_parameter() {
-                    department.remove_employee(&employee_name);
-                } else {
-                    println!("Error: Failed to get employee name!");
-                }
+                // if let Ok(employee_name) = add_parameter() {
+                department.remove_employee();
+                // } else {
+                //     println!("Error: Failed to get employee name!");
+                // }
             }
-            "create" => {
-                println!("Enter Department Name: ");
+            "create" => company.add_department(),
 
-                if let Ok(department_name) = add_parameter() {
-                    company.add_department(department_name);
-                } else {
-                    println!("Error: Failed to get department name!")
-                }
-            }
             "update" => println!("Department Updated!"),
             "department" => {
                 println!("Enter Department Name To Get Its Employees: ");
