@@ -39,6 +39,7 @@ impl Department {
         }
     }
 
+    // To be implemented
     fn remove_employee(&self) {
         println!("Enter Employee Full Name: ");
 
@@ -73,6 +74,19 @@ impl Company {
             self.departments
                 .insert(department_name.clone(), Department { employees: vec![] });
             println!("Department '{}' created!", department_name);
+        } else {
+            println!("Error: Failed to get department name!")
+        }
+    }
+
+    fn update_department(&self) {
+        println!("Enter Department Name To Update: ");
+
+        if let Ok(department_name) = add_parameter() {
+            if self.departments.contains_key(&department_name) {
+                println!("Error: Department '{}' already exists!", department_name);
+                return;
+            }
         } else {
             println!("Error: Failed to get department name!")
         }
@@ -133,7 +147,7 @@ fn main() {
             "add" => department.add_employee(&mut company),
             "remove" => department.remove_employee(),
             "create" => company.add_department(),
-            "update" => println!("Department Updated!"),
+            "update" => company.update_department(),
             "department" => company.get_employees_in_department(),
             "employees" => department.get_employees(),
             "company" => company.get_whole_company_data(),
