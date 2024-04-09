@@ -130,7 +130,6 @@ fn main() {
             .expect("Failed to read line");
 
         match user_command.trim().to_lowercase().as_str() {
-            // Change below as "department"
             "add" => department.add_employee(&mut company),
             "remove" => department.remove_employee(),
             "create" => company.add_department(),
