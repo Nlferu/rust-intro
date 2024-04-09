@@ -61,18 +61,20 @@ struct Company {
 }
 
 impl Company {
-    // Get rid of department_exists or consolidate it
     fn add_department(&mut self) {
         println!("Enter Department Name: ");
 
         if let Ok(department_name) = add_parameter() {
-            if let Some(_) = self
-                .departments
-                .insert(department_name.clone(), Department { employees: vec![] })
-            {
-                println!("Error: Department '{}' already exists!", department_name);
-            } else {
-                println!("Department '{}' created!", department_name);
+            match self.departments.get(&department_name) {
+                Some(_) => {
+                    println!("Error: Department '{}' already exists!", department_name);
+                }
+                None => {
+                    self.departments
+                        .insert(department_name.clone(), Department { employees: vec![] });
+
+                    println!("Department '{}' created!", department_name);
+                }
             }
         } else {
             println!("Error: Failed to get department name!")
@@ -83,27 +85,27 @@ impl Company {
         println!("Enter Department Name To Update: ");
 
         if let Ok(department_name) = add_parameter() {
-            if !self.departments.contains_key(&department_name) {
-                println!("Error: Department '{}' does not exists!", department_name);
-                return;
-            }
+            match self.departments.get(&department_name) {
+                Some(_) => {
+                    println!("Enter New Department Name: ");
 
-            println!("Enter New Department Name: ");
+                    if let Ok(new_department_name) = add_parameter() {
+                        if let Some(department) = self.departments.remove(&department_name) {
+                            self.departments
+                                .insert(new_department_name.clone(), department);
 
-            if let Ok(new_department_name) = add_parameter() {
-                if let Some(department) = self.departments.remove(&department_name) {
-                    self.departments
-                        .insert(new_department_name.clone(), department);
-
-                    println!(
-                        "Department '{}' updated to '{}'",
-                        department_name, new_department_name
-                    );
-                } else {
+                            println!(
+                                "Department '{}' updated to '{}'",
+                                department_name, new_department_name
+                            );
+                        }
+                    } else {
+                        println!("Error: Failed to get department name!")
+                    }
+                }
+                None => {
                     println!("Error: Department '{}' does not exist!", department_name);
                 }
-            } else {
-                println!("Error: Failed to get department name!")
             }
         } else {
             println!("Error: Failed to get department name!")
