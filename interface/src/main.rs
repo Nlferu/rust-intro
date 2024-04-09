@@ -128,20 +128,15 @@ fn main() {
                     println!("Error: Failed to get department name!")
                 }
             }
-            // Change below as "department"
             "remove" => {
                 println!("Enter Employee Full Name: ");
-                let employee_name_result = add_parameter();
 
-                if employee_name_result.is_ok() {
-                    let employee_name = employee_name_result.unwrap();
-
+                if let Ok(employee_name) = add_parameter() {
                     department.remove_employee(&employee_name);
                 } else {
                     println!("Error: Failed to get employee name!");
                 }
             }
-            // Change below as "department"
             "create" => {
                 println!("Enter Department Name: ");
 
