@@ -11,47 +11,26 @@ struct Department {
 }
 
 impl Department {
-    fn add_employee(
-        &mut self,
-        company: &mut Company,
-        department_name: &str,
-        employee_name: String,
-    ) {
-        // self.employees.push(employee_name.clone());
-
-        // match company.departments.get_mut(department_name) {
-        //     Some(department) => {
-        //         department.employees.push(employee_name.clone());
-        //         println!(
-        //             "Employee '{}' added to '{}' department!",
-        //             employee_name, department_name
-        //         );
-        //     }
-        //     None => println!("Error: Department '{}' does not exist!", department_name),
-        // }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////
+    fn add_employee(&mut self, company: &mut Company) {
         println!("Enter Department Name:");
 
         if let Ok(department_name) = add_parameter() {
-            match company.departments.get(&department_name) {
-                Some(_) => {
-                    println!("Enter Employee Full Name: ");
-                    if let Ok(employee_name) = add_parameter() {
-                        self.employees.push(employee_name.clone());
+            if let Some(department) = company.departments.get_mut(&department_name) {
+                println!("Enter Employee Full Name:");
 
-                        if let Some(department) = company.departments.get_mut(&department_name) {
-                            department.employees.push(employee_name.clone());
-                            println!(
-                                "Employee '{}' added to '{}' department!",
-                                employee_name, department_name
-                            );
-                        }
-                    } else {
-                        println!("Error: Failed to get employee name!");
-                    }
+                if let Ok(employee_name) = add_parameter() {
+                    self.employees.push(employee_name.clone());
+                    department.employees.push(employee_name.clone());
+
+                    println!(
+                        "Employee '{}' added to '{}' department!",
+                        employee_name, department_name
+                    );
+                } else {
+                    println!("Error: Failed to get employee name!")
                 }
-                None => println!("Error: Department '{}' does not exist!", department_name),
+            } else {
+                println!("Error: Department '{}' does not exist!", department_name);
             }
         } else {
             println!("Error: Failed to get department name!")
@@ -150,29 +129,7 @@ fn main() {
 
         match user_command.trim().to_lowercase().as_str() {
             // Change below as "department"
-            "add" => {
-                println!("Enter Department Name:");
-
-                if let Ok(department_name) = add_parameter() {
-                    match company.departments.get(&department_name) {
-                        Some(_) => {
-                            println!("Enter Employee Full Name: ");
-                            if let Ok(employee_name) = add_parameter() {
-                                department.add_employee(
-                                    &mut company,
-                                    &department_name,
-                                    employee_name,
-                                );
-                            } else {
-                                println!("Error: Failed to get employee name!");
-                            }
-                        }
-                        None => println!("Error: Department '{}' does not exist!", department_name),
-                    }
-                } else {
-                    println!("Error: Failed to get department name!")
-                }
-            }
+            "add" => department.add_employee(&mut company),
             "remove" => department.remove_employee(),
             "create" => company.add_department(),
             "update" => println!("Department Updated!"),
