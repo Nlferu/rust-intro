@@ -66,26 +66,44 @@ impl Company {
         println!("Enter Department Name: ");
 
         if let Ok(department_name) = add_parameter() {
-            if self.departments.contains_key(&department_name) {
+            if let Some(_) = self
+                .departments
+                .insert(department_name.clone(), Department { employees: vec![] })
+            {
                 println!("Error: Department '{}' already exists!", department_name);
-                return;
+            } else {
+                println!("Department '{}' created!", department_name);
             }
-
-            self.departments
-                .insert(department_name.clone(), Department { employees: vec![] });
-            println!("Department '{}' created!", department_name);
         } else {
             println!("Error: Failed to get department name!")
         }
     }
 
-    fn update_department(&self) {
+    fn update_department(&mut self) {
         println!("Enter Department Name To Update: ");
 
         if let Ok(department_name) = add_parameter() {
-            if self.departments.contains_key(&department_name) {
-                println!("Error: Department '{}' already exists!", department_name);
+            if !self.departments.contains_key(&department_name) {
+                println!("Error: Department '{}' does not exists!", department_name);
                 return;
+            }
+
+            println!("Enter New Department Name: ");
+
+            if let Ok(new_department_name) = add_parameter() {
+                if let Some(department) = self.departments.remove(&department_name) {
+                    self.departments
+                        .insert(new_department_name.clone(), department);
+
+                    println!(
+                        "Department '{}' updated to '{}'",
+                        department_name, new_department_name
+                    );
+                } else {
+                    println!("Error: Department '{}' does not exist!", department_name);
+                }
+            } else {
+                println!("Error: Failed to get department name!")
             }
         } else {
             println!("Error: Failed to get department name!")
