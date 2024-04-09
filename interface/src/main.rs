@@ -19,7 +19,9 @@ impl Department {
                 println!("Enter Employee Full Name:");
 
                 if let Ok(employee_name) = add_parameter() {
+                    // Adding new employee to Department.employees vector
                     self.employees.push(employee_name.clone());
+                    // Adding new employee to exact company department
                     department.employees.push(employee_name.clone());
 
                     println!(
