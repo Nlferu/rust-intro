@@ -81,6 +81,41 @@ impl Company {
         }
     }
 
+    // Purpose of changed code
+    // fn add_employee(&mut self, company: &mut Company) {
+    //     println!("Enter Department Name:");
+
+    //     if let Ok(department_name) = add_parameter() {
+    //         if let Some(department) = company.departments.get_mut(&department_name) {
+    //             println!("Enter Employee Full Name:");
+
+    //             if let Ok(employee_name) = add_parameter() {
+    //                 let employee_name_owned = employee_name; // Take ownership here, no cloning yet.
+
+    //                 // Adding new employee to Department.employees vector
+    //                 // This requires cloning because we need to keep the name in both places.
+    //                 department.employees.push(employee_name_owned.clone());
+
+    //                 // Since self is a mutable reference to the original struct, we can add without cloning
+    //                 // as employee_name_owned is owned within this scope now.
+    //                 self.employees.push(employee_name_owned);
+
+    //                 println!(
+    //                     "Employee '{}' added to '{}' department!",
+    //                     department.employees.last().unwrap(), // This avoids using the name directly
+    //                     department_name
+    //                 );
+    //             } else {
+    //                 println!("Error: Failed to get employee name!");
+    //             }
+    //         } else {
+    //             println!("Error: Department '{}' does not exist!", department_name);
+    //         }
+    //     } else {
+    //         println!("Error: Failed to get department name!");
+    //     }
+    // }
+
     fn update_department(&mut self) {
         println!("Enter Department Name To Update: ");
 
