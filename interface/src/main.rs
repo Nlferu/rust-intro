@@ -55,7 +55,7 @@ impl Department {
                 self.employees.remove(index);
             }
 
-            // Removing from struct
+            // Removing from company struct
             for department in company.departments.values_mut() {
                 if let Some(index) = department
                     .employees
