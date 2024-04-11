@@ -177,6 +177,7 @@ fn main() {
         employees: Vec::new(),
     };
 
+    // Creating initial setup -> comment out below fn to get empty Company Management Interface
     initial_setup(&mut company, &mut department);
 
     loop {
@@ -273,13 +274,13 @@ fn input_formatter(input: &String) -> Result<String, String> {
     Ok(formatted_string)
 }
 
-fn initial_setup(company: &mut Company) {
+fn initial_setup(company: &mut Company, department: &mut Department) {
     let initial_departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Hackers"];
 
     // Add initial departments with empty employee lists
-    for department in &initial_departments {
+    for department_name in &initial_departments {
         company.departments.insert(
-            (*department).to_string(),
+            (*department_name).to_string(),
             Department {
                 employees: Vec::new(),
             },
@@ -292,20 +293,28 @@ fn initial_setup(company: &mut Company) {
     for employee in initial_employees {
         match employee {
             "John Doe" | "Hestus Uriel" => {
+                // Adding employees to department hash map
                 company
                     .departments
                     .get_mut("Hackers")
                     .unwrap()
                     .employees
                     .push(employee.to_string());
+
+                // Adding employees to vector
+                department.employees.push(employee.to_string())
             }
             "Lam Hong" => {
+                // Adding employees to department hash map
                 company
                     .departments
                     .get_mut("Sales")
                     .unwrap()
                     .employees
                     .push(employee.to_string());
+
+                // Adding employees to vector
+                department.employees.push(employee.to_string())
             }
             _ => unreachable!(),
         }
