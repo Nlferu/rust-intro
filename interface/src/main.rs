@@ -19,6 +19,7 @@ impl Department {
                 println!("Enter Employee Full Name:");
 
                 if let Ok(employee_name) = add_parameter() {
+                    // Prevent adding multiple employees with same name
                     if self.employees.iter().any(|item| item == &employee_name) {
                         println!("Employee with name '{}' currently exists!", employee_name);
                         println!("Consider adding employee identifier to add this employee");
