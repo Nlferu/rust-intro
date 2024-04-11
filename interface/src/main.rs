@@ -105,8 +105,6 @@ impl Company {
         }
     }
 
-    // Purpose of changed code
-
     fn update_department(&mut self) {
         println!("Enter Department Name To Update: ");
 
