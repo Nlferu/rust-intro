@@ -170,7 +170,6 @@ fn main() {
     println!("\nType `help` for available commands");
 
     // To be moved to initial departments
-    let _departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Design"];
 
     let mut department: Department = Department {
         employees: Vec::new(),
@@ -272,4 +271,41 @@ fn input_formatter(input: &String) -> Result<String, String> {
     let formatted_string = formatted_words.join(" ");
 
     Ok(formatted_string)
+}
+
+fn initial_setup(company: &mut Company) {
+    let initial_departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Hackers"];
+
+    for department in &initial_departments {
+        company.departments.insert(
+            (*department).to_string(),
+            Department {
+                employees: Vec::new(),
+            },
+        );
+    }
+
+    let initial_employees: Vec<&str> = vec!["John Doe", "Lam Hong", "Hestus Uriel"];
+
+    for employee in initial_employees {
+        match employee {
+            "John Doe" | "Hestus Uriel" => {
+                company
+                    .departments
+                    .get_mut("Hackers")
+                    .unwrap()
+                    .employees
+                    .push(employee.to_string());
+            }
+            "Lam Hong" => {
+                company
+                    .departments
+                    .get_mut("Sales")
+                    .unwrap()
+                    .employees
+                    .push(employee.to_string());
+            }
+            _ => unreachable!(),
+        }
+    }
 }
