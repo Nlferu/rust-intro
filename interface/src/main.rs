@@ -46,7 +46,6 @@ impl Department {
         }
     }
 
-    // To be implemented
     fn remove_employee(&mut self, company: &mut Company) {
         println!("Enter Employee Full Name To Remove: ");
 
