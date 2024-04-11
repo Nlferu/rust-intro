@@ -73,12 +73,6 @@ impl Department {
         } else {
             println!("Error: Failed to get employee name!")
         }
-
-        // if let Ok(employee_name) = add_parameter() {
-        //     println!("Employee '{}' removed!", employee_name)
-        // } else {
-        //     println!("Error: Failed to get employee name!");
-        // }
     }
 
     fn get_employees(&self) {
