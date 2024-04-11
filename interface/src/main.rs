@@ -41,22 +41,27 @@ impl Department {
 
     // To be implemented
     fn remove_employee(&mut self, company: &mut Company) {
-        if let Some(department) = company.departments.get_mut(&department_name) {
-            println!("Enter Employee Full Name To Remove: ");
+        println!("Enter Employee Full Name To Remove: ");
 
-            if let Ok(employee_name) = add_parameter() {
-                // Removing from Department's employees vector
-                if let Some(index) = self.employees.iter().position(|e| e == &employee_name) {
-                    self.employees.remove(index);
+        if let Ok(employee_name) = add_parameter() {
+            // Removing from Department's employees vector
+            // if let Some(index) = self.employees.iter().position(|e| e == &employee_name) {
+            //     self.employees.remove(index);
+            // }
+
+            // Removing from struct
+            for department in company.departments.values_mut() {
+                if let Some(index) = department
+                    .employees
+                    .iter()
+                    .position(|e| e == &employee_name)
+                {
+                    department.employees.remove(index);
+                    println!("Employee '{}' removed!", employee_name);
                 }
-
-                // Removing from struct
-                company.departments.values_mut()
-            } else {
-                println!("Error: Failed to get employee name!")
             }
         } else {
-            println!("Error: Department '{}' does not exist!", department_name);
+            println!("Error: Failed to get employee name!")
         }
 
         if let Ok(employee_name) = add_parameter() {
@@ -216,7 +221,7 @@ fn main() {
 
         match user_command.trim().to_lowercase().as_str() {
             "add" => department.add_employee(&mut company),
-            "remove" => department.remove_employee(),
+            "remove" => department.remove_employee(&mut company),
             "create" => company.add_department(),
             "update" => company.update_department(),
             "department" => company.get_employees_in_department(),
