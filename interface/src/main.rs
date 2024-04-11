@@ -40,8 +40,13 @@ impl Department {
     }
 
     // To be implemented
-    fn remove_employee(&self) {
-        println!("Enter Employee Full Name: ");
+    fn remove_employee(&mut self, company: &mut Company) {
+        println!("Enter Employee Full Name To Remove: ");
+
+        if let Some(department) = company.departments.get_mut(&department_name) {
+        } else {
+            println!("Error: Department '{}' does not exist!", department_name);
+        }
 
         if let Ok(employee_name) = add_parameter() {
             println!("Employee '{}' removed!", employee_name)
