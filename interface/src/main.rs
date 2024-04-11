@@ -58,6 +58,8 @@ impl Department {
                 {
                     department.employees.remove(index);
                     println!("Employee '{}' removed!", employee_name);
+                    removed = true;
+                    break;
                 }
             }
             println!("Employee '{}' not found in any department.", employee_name);
