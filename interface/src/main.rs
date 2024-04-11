@@ -276,6 +276,7 @@ fn input_formatter(input: &String) -> Result<String, String> {
 fn initial_setup(company: &mut Company) {
     let initial_departments: Vec<&str> = vec!["Engineering", "Sales", "Programming", "Hackers"];
 
+    // Add initial departments with empty employee lists
     for department in &initial_departments {
         company.departments.insert(
             (*department).to_string(),
@@ -287,6 +288,7 @@ fn initial_setup(company: &mut Company) {
 
     let initial_employees: Vec<&str> = vec!["John Doe", "Lam Hong", "Hestus Uriel"];
 
+    // Add initial employees to specific departments
     for employee in initial_employees {
         match employee {
             "John Doe" | "Hestus Uriel" => {
