@@ -169,13 +169,15 @@ fn main() {
     println!("\nCompany Management Interface");
     println!("\nType `help` for available commands");
 
+    let mut company: Company = Company {
+        departments: HashMap::new(),
+    };
+
     let mut department: Department = Department {
         employees: Vec::new(),
     };
 
-    let mut company: Company = Company {
-        departments: HashMap::new(),
-    };
+    initial_setup(&mut company, &mut department);
 
     loop {
         let mut user_command: String = String::new();
