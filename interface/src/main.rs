@@ -41,9 +41,20 @@ impl Department {
 
     // To be implemented
     fn remove_employee(&mut self, company: &mut Company) {
-        println!("Enter Employee Full Name To Remove: ");
-
         if let Some(department) = company.departments.get_mut(&department_name) {
+            println!("Enter Employee Full Name To Remove: ");
+
+            if let Ok(employee_name) = add_parameter() {
+                // Removing from Department's employees vector
+                if let Some(index) = self.employees.iter().position(|e| e == &employee_name) {
+                    self.employees.remove(index);
+                }
+
+                // Removing from struct
+                company.departments.values_mut()
+            } else {
+                println!("Error: Failed to get employee name!")
+            }
         } else {
             println!("Error: Department '{}' does not exist!", department_name);
         }
