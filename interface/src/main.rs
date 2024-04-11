@@ -19,6 +19,12 @@ impl Department {
                 println!("Enter Employee Full Name:");
 
                 if let Ok(employee_name) = add_parameter() {
+                    if self.employees.iter().any(|item| item == &employee_name) {
+                        println!("Employee with name '{}' currently exists!", employee_name);
+                        println!("Consider adding employee identifier to add this employee");
+                        return;
+                    }
+
                     // Adding new employee to Department.employees vector
                     self.employees.push(employee_name.clone());
                     // Adding new employee to exact company department
@@ -45,9 +51,9 @@ impl Department {
 
         if let Ok(employee_name) = add_parameter() {
             // Removing from Department's employees vector
-            // if let Some(index) = self.employees.iter().position(|e| e == &employee_name) {
-            //     self.employees.remove(index);
-            // }
+            if let Some(index) = self.employees.iter().position(|e| e == &employee_name) {
+                self.employees.remove(index);
+            }
 
             // Removing from struct
             for department in company.departments.values_mut() {
@@ -58,20 +64,20 @@ impl Department {
                 {
                     department.employees.remove(index);
                     println!("Employee '{}' removed!", employee_name);
-                    break;
-                } else {
-                    println!("Employee '{}' not found in any department.", employee_name);
+                    return;
                 }
             }
+
+            println!("Employee '{}' not found in any department.", employee_name);
         } else {
             println!("Error: Failed to get employee name!")
         }
 
-        if let Ok(employee_name) = add_parameter() {
-            println!("Employee '{}' removed!", employee_name)
-        } else {
-            println!("Error: Failed to get employee name!");
-        }
+        // if let Ok(employee_name) = add_parameter() {
+        //     println!("Employee '{}' removed!", employee_name)
+        // } else {
+        //     println!("Error: Failed to get employee name!");
+        // }
     }
 
     fn get_employees(&self) {
