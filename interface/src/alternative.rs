@@ -5,6 +5,8 @@
 use std::{collections::HashMap, io};
 
 pub fn alternative() {
+    // This version needs to be improved
+
     println!("\nCompany Management Interface");
 
     let mut employee_directory = HashMap::new();
