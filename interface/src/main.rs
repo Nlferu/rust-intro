@@ -5,29 +5,39 @@
 use std::io;
 
 use alternative::alternative;
-use original::{input_formatter, original};
+use original::original;
 
 pub mod alternative;
 pub mod original;
 
 fn main() {
-    //
+    println!();
 
-    let mut command = String::new();
+    loop {
+        let mut command = String::new();
 
-    io::stdin()
-        .read_line(&mut command)
-        .expect("Failed to read command");
+        io::stdin()
+            .read_line(&mut command)
+            .expect("Failed to read command");
 
-    let command = input_formatter(&command);
+        let command = input_formatter(&command);
 
-    match command {
-        Some(p) => p,
-        None => {
-            println!("Please enter valid command");
-            continue;
-        }
-    };
-    alternative();
-    original();
+        match command {
+            Some(command) => match command.as_str() {
+                "original" => original(),
+                "alternative" => alternative(),
+                _ => unreachable!(),
+            },
+            None => println!("Please enter a valid command: 'original' or 'alternative' "),
+        };
+    }
+}
+
+fn input_formatter(input: &String) -> Option<String> {
+    let input = input.trim().to_lowercase();
+
+    match input.as_str() {
+        "original" | "alternative" => Some(input),
+        _ => None,
+    }
 }
