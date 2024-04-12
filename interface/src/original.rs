@@ -197,7 +197,8 @@ pub fn original() {
             "help" => help(),
             "exit" => {
                 println!("Company Management Interface Closed!");
-                return;
+                // This will terminate our program as 'return;' only exits function
+                std::process::exit(0);
             }
             _ => {
                 println!("Please type proper command, use `help` for all available options");
