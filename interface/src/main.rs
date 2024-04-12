@@ -2,8 +2,7 @@
 // For example, “Add Sally to Engineering” or “Add Amir to Sales.” Then let the user retrieve a list of all people in a department
 // or all people in the company by department, sorted alphabetically.
 
-use std::collections::HashMap;
-use std::io;
+use std::{collections::HashMap, io};
 
 #[derive(Debug)]
 struct Department {
