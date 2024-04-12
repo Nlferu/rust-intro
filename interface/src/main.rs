@@ -11,7 +11,7 @@ pub mod alternative;
 pub mod original;
 
 fn main() {
-    println!();
+    println!("Please pick program version by entering command: 'original' or 'alternative'");
 
     loop {
         let mut command = String::new();
