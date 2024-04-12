@@ -11,6 +11,8 @@ pub mod alternative;
 pub mod original;
 
 fn main() {
+    //
+
     let mut command = String::new();
 
     io::stdin()
