@@ -1,4 +1,4 @@
-// Fizz buzz is a group word game. Players take turns to count incrementally.
+// Write a program that prints the number from 1 to 100 and replace each number accordingly.
 
 // Rules:
 // Replacing any number divisible by three with the word "fizz" --- if the sum of all digits of that number is divisible by 3
@@ -6,15 +6,25 @@
 // Number divisible by both three and five with the word "fizzbuzz" --- apply both rules
 
 fn main() {
-    println!("Hello, world!");
+    for i in 1..=100 {
+        if fizzer(i) && buzzer(i) {
+            println!("fizzbuzz")
+        } else if fizzer(i) {
+            println!("fizz")
+        } else if buzzer(i) {
+            println!("buzz")
+        } else {
+            println!("{i}")
+        }
+    }
 }
 
-// It should return bool -> which tells if given number is divisible by 3
+// Return bool -> which tells if given number is divisible by 3
 fn fizzer(number: i32) -> bool {
-    true
+    number % 3 == 0
 }
 
-// It should return bool -> which tells if given number is divisible by 5
+// Return bool -> which tells if given number is divisible by 5
 fn buzzer(number: i32) -> bool {
-    false
+    number % 5 == 0
 }
