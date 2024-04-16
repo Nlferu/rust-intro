@@ -457,8 +457,9 @@ fn main() {
 
     println!("the memory address of x is {:p}", p); // One possible output: 0x16fa3ac84
 
-    // Problematic assertion
+    // Interesting Assertion Example
     {
+        // Problematic assertion
         assert!(9.6f64 / 3.2f64 == 3.0f64);
 
         // Correct asserion
