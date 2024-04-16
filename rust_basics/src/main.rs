@@ -460,10 +460,18 @@ fn main() {
     // Interesting Assertion Example
     {
         // Problematic assertion
-        assert!(9.6f64 / 3.2f64 == 3.0f64);
+        assert!(9.6f64 / 3.2f64 != 3.0f64);
+        let result = 9.6f64 / 3.2f64;
+        println!("f64: {}", result);
+
+        // It is better to check equality for f64 like this:
+        let result = (9.6f64 / 3.2f64).abs() < 3.0;
+        println!("Abs: {}", result);
 
         // Correct asserion
         assert!(9.6f32 / 3.2f32 == 3.0f32);
+        let result = 9.6f32 / 3.2f32;
+        println!("f32: {}", result);
     }
 }
 
