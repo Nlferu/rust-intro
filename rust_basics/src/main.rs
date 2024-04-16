@@ -420,6 +420,36 @@ fn main() {
         count += 1;
         println!("Counter from if let: {}", count);
     }
+
+    // Rust Exercises
+    {
+        #[derive(Debug)]
+        struct Person {
+            name: String,
+            age: Box<u8>,
+        }
+
+        let person = Person {
+            name: String::from("Alice"),
+            age: Box::new(20),
+        };
+
+        // `name` is moved out of person, but `age` is referenced
+        let Person { ref name, ref age } = person;
+
+        println!("The person's age is {}", age);
+        println!("The person's name is {}", name);
+
+        // Error! borrow of partially moved value: `person` partial move occurs
+        //println!("The person struct is {:?}", person);
+
+        // `person` cannot be used but `person.age` can be used as it is not moved
+        println!("The person's age from person struct is {}", person.age);
+
+        // We need to add ref to name here: let Person {ref name, ref age} = person; to get it working
+        // So now we are able to use it endlessly
+        println!("Person name: {}", person.name);
+    }
 }
 
 // ---------------------------------------------------------------------------------- \\
