@@ -451,6 +451,7 @@ fn main() {
         println!("Person name: {}", person.name);
     }
 
+    // Checking reference memory address
     let x = 5;
     let p = &x;
 
