@@ -462,6 +462,7 @@ fn main() {
         assert!(9.6f64 / 3.2f64 == 3.0f64);
 
         // Correct asserion
+        assert!(9.6f32 / 3.2f32 == 3.0f32);
     }
 }
 
