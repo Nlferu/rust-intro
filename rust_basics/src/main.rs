@@ -503,6 +503,15 @@ fn main() {
 
     // But indexing is not safe
     let _name1 = &names[1];
+
+    // Slices
+
+    // Slices are similar to arrays, but their length is not known at compile time, so we can't use slice directly.
+    // We need to use references of the slices instead.
+    let arr: [i32; 3] = [6, 6, 6];
+
+    let _s1: &[i32] = &arr[0..2];
+    let _s2: &str = "hello, world";
 }
 
 // ---------------------------------------------------------------------------------- \\
