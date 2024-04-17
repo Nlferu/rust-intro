@@ -473,6 +473,15 @@ fn main() {
         let result = 9.6f32 / 3.2f32;
         println!("f32: {}", result);
     }
+
+    // We cant use index to access a char in a string, but we can use slice
+
+    let s1 = String::from("hi,中国");
+    let h = &s1[0..1];
+    assert_eq!(h, "h");
+
+    let h1 = &s1[3..6];
+    assert_eq!(h1, "中");
 }
 
 // ---------------------------------------------------------------------------------- \\
