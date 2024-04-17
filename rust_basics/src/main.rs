@@ -512,6 +512,12 @@ fn main() {
 
     let _s1: &[i32] = &arr[0..2];
     let _s2: &str = "hello, world";
+
+    // Tuples
+
+    // Too long tuples cannot be printed:
+    let _too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Ok
+    let _too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13); // Error
 }
 
 // ---------------------------------------------------------------------------------- \\
