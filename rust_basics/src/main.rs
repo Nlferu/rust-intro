@@ -481,6 +481,13 @@ fn main() {
 
     let h1 = &s1[3..6];
     assert_eq!(h1, "中");
+
+    // We can use utf8_slice to slice UTF8 string, it can index chars instead of bytes.
+    let _s = "The 🚀 goes to the 🌑!";
+
+    // Below will equal "🚀"
+    // For below to work we need to import 'utf8_slice'
+    //let rocket = utf8_slice::slice(s, 4, 5);
 }
 
 // ---------------------------------------------------------------------------------- \\
