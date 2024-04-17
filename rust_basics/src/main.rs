@@ -475,7 +475,6 @@ fn main() {
     }
 
     // We cant use index to access a char in a string, but we can use slice
-
     let s1 = String::from("hi,中国");
     let h = &s1[0..1];
     assert_eq!(h, "h");
