@@ -488,6 +488,21 @@ fn main() {
     // Below will equal "🚀"
     // For below to work we need to import 'utf8_slice'
     //let rocket = utf8_slice::slice(s, 4, 5);
+
+    // Arrays
+
+    // We can do below in two ways
+    let _arr: [char; 3] = ['a', 'b', 'c'];
+    let _arr: [_; 3] = ['a', 'b', 'c'];
+
+    // Out of bounds indexing causing panic
+    let names = [String::from("Sunfei"), "Sunface".to_string()];
+
+    // `Get` returns an Option<T>, so it's safe to use
+    let _name0 = names.get(0).unwrap();
+
+    // But indexing is not safe
+    let _name1 = &names[1];
 }
 
 // ---------------------------------------------------------------------------------- \\
