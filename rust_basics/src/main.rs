@@ -520,13 +520,11 @@ fn main() {
     let _too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13); // Error
 
     // Labeled Loops
-
     let mut count = 0;
     'outer: loop {
         'inner1: loop {
             if count >= 20 {
                 // This would break only the inner1 loop
-
                 break 'inner1; // `break` is also works.
             }
 
