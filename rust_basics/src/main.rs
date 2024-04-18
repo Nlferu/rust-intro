@@ -518,6 +518,36 @@ fn main() {
     // Too long tuples cannot be printed:
     let _too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Ok
     let _too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13); // Error
+
+    // Labeled Loops
+
+    let mut count = 0;
+    'outer: loop {
+        'inner1: loop {
+            if count >= 20 {
+                // This would break only the inner1 loop
+
+                break 'inner1; // `break` is also works.
+            }
+
+            count += 2;
+        }
+
+        count += 5;
+
+        '_inner2: loop {
+            if count >= 30 {
+                // This breaks the outer loop
+                break 'outer;
+            }
+
+            // This will continue the outer loop
+            continue 'outer;
+        }
+    }
+
+    assert!(count == 30);
+    println!("Success!");
 }
 
 // ---------------------------------------------------------------------------------- \\
