@@ -84,6 +84,7 @@ fn main() {
 
     println!(
         "Check Can Hold: {} and {}",
+        // We can call it like this as can_hold() has '&self' argument:
         rectangle.can_hold(&rectangle_two),
         // We can also call it like this:
         Rectangle::can_hold(&rectangle, &rectangle_two)
@@ -92,6 +93,8 @@ fn main() {
     // Square -> it creates square instead of rectangle
 
     let sq: Rectangle = Rectangle::square(3);
+    // If square() doesnt have '&self' we cannot call it as below:
+    //let sq: Rectangle = rectangle.square(3);
 
     println!("Square: {:?}", sq);
 }
