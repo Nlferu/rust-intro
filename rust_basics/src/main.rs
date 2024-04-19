@@ -554,7 +554,6 @@ fn main() {
     }
 
     assert!(count == 30);
-    println!("Success!");
 
     // Matches Macro
     let alphabets = ['a', 'E', 'Z', '0', 'x', '9', 'Y'];
