@@ -1,5 +1,3 @@
-use unicode_segmentation::UnicodeSegmentation;
-
 use crate::calculator::calculator;
 use crate::converter::converter;
 
@@ -182,6 +180,8 @@ fn main() {
     }
 
     // Grapheme clusters -> we need 'unicode-segmentation' package imported
+    use unicode_segmentation::UnicodeSegmentation;
+
     for g in "ЗдЗдЗд".graphemes(true) {
         println!("Grapheme: {g}")
     }
