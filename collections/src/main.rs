@@ -107,16 +107,18 @@ fn main() {
 
     println!("Modified String: {}", modified);
 
-    // Using `push_str()`
+    // Using `push_str()` we can push some &str to our string
     let mut s = String::from("foo");
-    let s2 = "bar";
+    let s2 = "bar 惡";
     s.push_str(s2);
 
     println!("Pushed String: {}", s);
 
-    // We can also use `push()` to add one character at the end of string
+    // We can also use `push()` to add chars at the end of string
     let mut s = String::from("lo");
-    s.push('l');
+    s.push('!');
+
+    println!("Pushed Char: {}", s);
 
     // Adding two strings
     // We are using s1 and &s2 here as adding strings is using following fn `fn add(self, s: &str) -> String {}`
