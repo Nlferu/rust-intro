@@ -1,4 +1,5 @@
 use std::fs::File;
+use std::io::ErrorKind;
 
 fn main() {
     // Rust Backtracer example
@@ -12,12 +13,42 @@ fn main() {
         Err(E),
     }
 
-    let f = File::open("hello.txt");
+    let f = File::open("file.txt");
 
-    match f {
-        Ok(f) => println!("Success! {f:?}"),
-        Err(error) => println!("Error: {error}"),
-    }
+    let f = match f {
+        Ok(file) => {
+            println!("Success! {file:?}");
+            file
+        }
+        // We can here either use 'println!' macro or 'panic!'
+        // Err(error) => panic!("Error: {error:?}") || Err(error) => println!("Error: {error:?}")
+
+        // Instead of panicking we can handle things on error like below:
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("file.txt") {
+                Ok(file_created) => file_created,
+                Err(e) => panic!("Problem while creating the file: {:?}", e),
+            },
+            other_error => {
+                panic!("Problem while opening the file: {:?}", other_error)
+            }
+        },
+    };
+
+    println!("File Creation Handled {:?}", f);
+
+    // Another way to write above code using 'CLOSURES'
+    let f = File::open("file.txt").unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("file.txt").unwrap_or_else(|error| {
+                panic!("Problem while creating the file: {error:?}");
+            })
+        } else {
+            panic!("Problem while opening the file: {:?}", error)
+        }
+    });
+
+    println!("File Creation Handled {:?}", f);
 }
 
 // To check which exact function caused error we can run below: RUST_BACKTRACE=1 cargo run
