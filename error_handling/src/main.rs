@@ -1,3 +1,4 @@
+use std::error::Error;
 use std::fs::{self, File};
 use std::io;
 use std::io::{ErrorKind, Read};
@@ -115,4 +116,11 @@ fn _simple_reader() -> Result<String, io::Error> {
 
 fn _simplest_reader() -> Result<String, io::Error> {
     fs::read_to_string("hell.txt")
+}
+
+// Instead of '?' we can do below for 'main()' fn
+fn _other_main() -> Result<(), Box<dyn Error>> {
+    let _f = File::open("hell.txt")?;
+
+    Ok(())
 }
