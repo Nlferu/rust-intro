@@ -24,11 +24,11 @@ fn main() {
 
     // ------------------------------ Reading Vector ------------------------------ \\
 
-    // Indexing
+    // Indexing -> calling vector element like this can crash our program as vector are unknown size like Strings
     let third: &i32 = &v[2];
     println!("The third element is: {third}");
 
-    // Get
+    // Get -> preventing program from crash
     let third: Option<&i32> = v.get(2);
     match third {
         Some(third) => println!("The third element is: {third}"),
