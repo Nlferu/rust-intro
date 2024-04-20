@@ -30,6 +30,7 @@ fn main() {
 
     // Get -> preventing program from crash
     let third: Option<&i32> = v.get(2);
+
     match third {
         Some(third) => println!("The third element is: {third}"),
         None => println!("There is no third element."),
