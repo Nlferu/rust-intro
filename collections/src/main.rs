@@ -170,13 +170,13 @@ fn main() {
     // ------------------------------ Iterating Strings ------------------------------ \\
 
     // For individual Unicode scalar values
-    for c in "Зд".chars() {
-        println!("{c}");
+    for c in "ЗдЗдЗд".chars() {
+        println!("Char: {c}");
     }
 
     // For bytes method
-    for b in "Зд".bytes() {
-        println!("{b}");
+    for b in "ЗдЗдЗд".bytes() {
+        println!("Byte: {b}");
     }
 
     // ------------------------------ Hash Map ------------------------------ \\
