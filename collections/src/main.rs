@@ -179,6 +179,8 @@ fn main() {
         println!("Byte: {b}");
     }
 
+    // Grapheme clusters -> we need 'unicode-segmentation' package imported
+
     // ------------------------------ Hash Map ------------------------------ \\
 
     // Hash Maps Data is stored on HEAP
