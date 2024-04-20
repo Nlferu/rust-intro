@@ -80,7 +80,7 @@ fn main() {
 
     println!("Enum Type Vactor: {row:?}");
 
-    // This will print "Not a integer"
+    // This will print "Not a integer", if we change row[0] then we would receive "Element i: 3"
     match &row[1] {
         SpreadsheetCell::Int(i) => println!("Element i: {}", i),
         _ => println!("Not a integer!"),
