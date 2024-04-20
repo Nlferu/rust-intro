@@ -1,5 +1,6 @@
-use std::fs::File;
-use std::io::ErrorKind;
+use std::fs::{self, File};
+use std::io;
+use std::io::{ErrorKind, Read};
 
 fn main() {
     // Rust Backtracer example
@@ -85,4 +86,32 @@ fn c(num: i32) {
         // Unrecoverable error
         panic!("Don't pass in 22!")
     }
+}
+
+fn _read_username_from_file() -> Result<String, io::Error> {
+    // Instead of doing match commented below we can use '?' mark at the end of below -> example in 'simple_reader()'
+    let f = File::open("hell.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+
+fn _simple_reader() -> Result<String, io::Error> {
+    let mut s = String::new();
+    File::open("hell.txt")?.read_to_string(&mut s)?;
+
+    Ok(s)
+}
+
+fn _simplest_reader() -> Result<String, io::Error> {
+    fs::read_to_string("hell")
 }
