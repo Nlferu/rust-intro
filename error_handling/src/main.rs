@@ -13,10 +13,16 @@ fn main() {
     }
 
     let f = File::open("hello.txt");
+
+    match f {
+        Ok(f) => println!("Success! {f:?}"),
+        Err(error) => println!("Error: {error}"),
+    }
 }
 
 // To check which exact function caused error we can run below: RUST_BACKTRACE=1 cargo run
-fn _backtracer() {
+#[allow(dead_code)]
+fn backtracer() {
     a();
 }
 
