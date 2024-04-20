@@ -2,6 +2,7 @@ use std::error::Error;
 use std::fs::{self, File};
 use std::io;
 use std::io::{ErrorKind, Read};
+use std::net::IpAddr;
 
 fn main() {
     // Rust Backtracer example
@@ -65,6 +66,9 @@ fn main() {
     //     Ok(file) => file,
     //     Err(err) => panic!("Program crashed: {err:?}"),
     // };
+
+    // If we are sure that code will not fail we can use '.unwrap()' always
+    let _home: IpAddr = "127.0.0.1".parse().unwrap();
 }
 
 // To check which exact function caused error we can run below: RUST_BACKTRACE=1 cargo run
@@ -124,3 +128,5 @@ fn _other_main() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
+
+// Custom types of validation:
