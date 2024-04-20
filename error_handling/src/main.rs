@@ -1,12 +1,18 @@
+use std::fs::File;
+
 fn main() {
     // Rust Backtracer example
     // backtracer();
 
     // Proper way of handling recoverable errors
-    enum Result<T, E> {
+    // This has 2 cases: 'success' and 'error'
+    // Similar to Option<T>: 'value' and 'none'
+    enum _Result<T, E> {
         Ok(T),
         Err(E),
     }
+
+    let f = File::open("hello.txt");
 }
 
 // To check which exact function caused error we can run below: RUST_BACKTRACE=1 cargo run
