@@ -49,6 +49,20 @@ fn main() {
     });
 
     println!("File Creation Handled {:?}", f);
+
+    // Instead of using 'panic!' we can use 'unwrap()'
+    let f = File::open("non_existent_file.txt").unwrap();
+
+    println!("Message from f: {f:?}");
+
+    // We can specify error message by adding '.expect()'
+    let _f = File::open("non_existent_file.txt").expect("Failed to open non_existent_file.txt");
+
+    // Instead of using below match we can add '.unwrap()' to above
+    // let f = match f {
+    //     Ok(file) => file,
+    //     Err(err) => panic!("Program crashed: {err:?}"),
+    // };
 }
 
 // To check which exact function caused error we can run below: RUST_BACKTRACE=1 cargo run
