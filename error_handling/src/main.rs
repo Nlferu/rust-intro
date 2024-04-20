@@ -105,6 +105,7 @@ fn _read_username_from_file() -> Result<String, io::Error> {
     }
 }
 
+// We cannot use '?' in 'main()' function
 fn _simple_reader() -> Result<String, io::Error> {
     let mut s = String::new();
     File::open("hell.txt")?.read_to_string(&mut s)?;
@@ -113,5 +114,5 @@ fn _simple_reader() -> Result<String, io::Error> {
 }
 
 fn _simplest_reader() -> Result<String, io::Error> {
-    fs::read_to_string("hell")
+    fs::read_to_string("hell.txt")
 }
