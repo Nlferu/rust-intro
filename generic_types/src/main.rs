@@ -1,10 +1,39 @@
 use std::fmt::Debug;
 
+#[allow(dead_code)]
+struct Color<T> {
+    first: T,
+    secondary: T,
+}
+
+// This doesnt need to be same as original 'struct', so <T>
+#[allow(dead_code)]
+impl<U> Color<U> {
+    fn first(&self) -> &U {
+        &self.first
+    }
+}
+
+#[allow(dead_code)]
+impl Color<f64> {
+    fn secondary(&self) -> f64 {
+        self.secondary
+    }
+}
+
+// **************************** Multi Generic Types ****************************
+
 #[derive(Debug)]
 #[allow(dead_code)]
 struct Point<T, U> {
     x: T,
     y: U,
+}
+
+impl<T> Point<T, T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
 }
 
 #[allow(dead_code)]
