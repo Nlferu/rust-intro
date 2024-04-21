@@ -22,7 +22,6 @@ impl Color<f64> {
 }
 
 // **************************** Multi Generic Types ****************************
-
 #[derive(Debug)]
 #[allow(dead_code)]
 struct Point<T, U> {
@@ -30,9 +29,12 @@ struct Point<T, U> {
     y: U,
 }
 
-impl<T> Point<T, T> {
-    fn x(&self) -> &T {
-        &self.x
+impl<T, U> Point<T, U> {
+    fn mixup<V, W>(self, other: Point<V, W>) -> Point<T, W> {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
     }
 }
 
@@ -60,6 +62,14 @@ fn main() {
     let p3 = Point { x: 5, y: 6.6 };
 
     println!("p1: {:?} p2: {:?} p3: {:?}", p1, p2, p3);
+
+    // Mixup
+    let p1 = Point { x: 5, y: 10.4 };
+    let p2 = Point { x: "Hello", y: 'c' };
+
+    let p3 = p1.mixup(p2);
+    println!("Mixup: {:?}", p3);
+    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
 }
 
 // Universal Function With Generic Types
