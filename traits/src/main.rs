@@ -24,7 +24,9 @@ impl Summary for Tweet {
 }
 
 pub trait Summary {
-    fn summarize(&self) -> String;
+    fn summarize(&self) -> String {
+        String::from("Default Text -> we dont need to use it as we still override it in impl")
+    }
 }
 
 fn main() {
