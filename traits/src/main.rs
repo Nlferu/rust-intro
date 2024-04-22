@@ -5,6 +5,12 @@ pub struct NewsArticle {
 }
 
 impl Summary for NewsArticle {
+    // We need to specify it as it doesnt have default implementation
+    fn summarize_author(&self) -> String {
+        format!("{}", self.author)
+    }
+
+    // We dont need to specify below, so we can safely remove it as summarize has default implementation
     fn summarize(&self) -> String {
         format!("{}, by {}", self.headline, self.author)
     }
@@ -18,14 +24,21 @@ pub struct Tweet {
 }
 
 impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+
     fn summarize(&self) -> String {
         format!("{}: {}", self.username, self.content)
     }
 }
 
 pub trait Summary {
+    fn summarize_author(&self) -> String;
+
     fn summarize(&self) -> String {
-        String::from("Default Text -> we dont need to use it as we still override it in impl")
+        // Default Text -> we dont need to use it as we still override it in impl
+        format!("Read more from {} ...", self.summarize_author())
     }
 }
 
