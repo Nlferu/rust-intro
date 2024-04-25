@@ -1,4 +1,15 @@
 fn main() {
+    // fn main() {
+    //     let r;                // ---------+-- 'a -> lifetime of 'a
+    //                           //          |
+    //     {                     //          |
+    //         let x = 5;        // -+-- 'b  | -> lifetime of 'b
+    //         r = &x;           //  |       |
+    //     }                     // -+       |
+    //                           //          |
+    //     println!("r: {}", r); //          |
+    // }                         // ---------+
+
     let x = 5;
 
     let r = &x;
@@ -6,11 +17,15 @@ fn main() {
     println!("r: {r}");
 
     let string1 = String::from("absc");
-    let string2 = String::from("xyz");
 
-    // We tell to borrow checker that whatever gets returned from longest() will have a lifetime that is equal to the smallest lifetime being passed in
-    let result = longest(string1.as_str(), string2.as_str());
-    println!("The longest string is: {}", result);
+    // Now lifetime of 'string1' is longer than lifetime of 'string2'
+    {
+        let string2 = String::from("xyz");
+
+        // We tell to borrow checker that whatever gets returned from longest() will have a lifetime that is equal to the smallest lifetime being passed in
+        let result = longest(string1.as_str(), string2.as_str());
+        println!("The longest string is: {}", result);
+    }
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
