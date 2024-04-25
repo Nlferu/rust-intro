@@ -58,3 +58,29 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 // &i32         // a reference
 // &'a i32      // a reference with an explicit lifetime
 // &'a mut i32  // a mutable reference with an explicit lifetime
+
+// In this case compiler automatically added 'a lifetimes to our function below, so we do not need to specify it
+fn _first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+
+// But actually it looks like see below -> ...
+fn _first_word_a<'a>(s: &'a str) -> &'a str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
