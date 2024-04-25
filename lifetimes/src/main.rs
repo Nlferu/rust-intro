@@ -13,7 +13,8 @@ fn main() {
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
-fn longest(x: &str, y: &str) -> &str {
+// To fix it we need to specify lifetime by adding <'a> -> a here is optional as we can use whatever we what for our lifetime name
+fn longest<'a>(x: &str, y: &str) -> &str {
     if x.len() > y.len() {
         x
     } else {
