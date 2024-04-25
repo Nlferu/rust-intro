@@ -36,12 +36,16 @@ fn main() {
 
     // Look at RULES to see why we do not need to specify 'a in below
     impl<'a> ImportExcerpt<'a> {
-        fn return_part(&self, announcement: &str) -> &str {
+        fn _return_part(&self, announcement: &str) -> &str {
             println!("Attention please: {}", announcement);
             self.part
         }
 
         // With 'a it would liike like (actually looks)
+        fn __return_part(&'a self, announcement: &str) -> &'a str {
+            println!("Attention please: {}", announcement);
+            self.part
+        }
     }
 
     let novel = String::from("Call me Devil. Some years ago...");
@@ -50,6 +54,12 @@ fn main() {
     let _i = ImportExcerpt {
         part: first_sentence,
     };
+
+    ///////////////////////////
+    //    STATIC LIFETIME    //
+    ///////////////////////////
+
+    // This is special lifetime means that reference can live as long as the duration of the program
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
