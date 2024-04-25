@@ -28,6 +28,18 @@ fn main() {
         // because it just ends in this scope
         println!("The longest string is: {}", result);
     }
+
+    #[allow(dead_code)]
+    struct ImportExcerpt<'a> {
+        part: &'a str,
+    }
+
+    let novel = String::from("Call me Devil. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+
+    let _i = ImportExcerpt {
+        part: first_sentence,
+    };
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
