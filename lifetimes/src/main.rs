@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 fn main() {
     // fn main() {
     //     let r;                // ---------+-- 'a -> lifetime of 'a
