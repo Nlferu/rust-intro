@@ -121,6 +121,7 @@ fn _first_word_a<'a>(s: &'a str) -> &'a str {
 
 fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
 where
+    // Display -> types that can be printed to the screen
     T: Display,
 {
     println!("Announcement: {}", ann);
