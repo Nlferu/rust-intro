@@ -62,7 +62,10 @@ fn main() {
     ///////////////////////////
 
     // This is special lifetime means that reference can live as long as the duration of the program
-    let _s: &'static str = "I have a static lifetime";
+    let s: &'static str = "I have a static lifetime";
+
+    let output = longest_with_an_announcement(s, &novel, "This is announement do not ignore it!");
+    println!("Our output from announcement: {}", output);
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
@@ -114,4 +117,17 @@ fn _first_word_a<'a>(s: &'a str) -> &'a str {
     }
 
     &s[..]
+}
+
+fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement: {}", ann);
+
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
 }
