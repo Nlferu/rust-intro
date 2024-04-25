@@ -60,6 +60,7 @@ fn main() {
     ///////////////////////////
 
     // This is special lifetime means that reference can live as long as the duration of the program
+    let s: &'static str = "I have a static lifetime";
 }
 
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
