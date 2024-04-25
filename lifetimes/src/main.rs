@@ -15,10 +15,14 @@ fn main() {
 // This function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `x` or `y
 // To fix it we need to specify lifetime by adding <'a> -> a here is optional as we can use whatever we what for our lifetime name
 // Adding {&'a} -> we just say that x will use our lifetime and y will use our lifetime
-fn longest<'a>(x: &'a str, y: &'a str) -> &str {
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
     } else {
         y
     }
 }
+
+// &i32         // a reference
+// &'a i32      // a reference with an explicit lifetime
+// &'a mut i32  // a mutable reference with an explicit lifetime
