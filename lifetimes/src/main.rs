@@ -17,13 +17,15 @@ fn main() {
     println!("r: {r}");
 
     let string1 = String::from("absc");
-
+    let result: &str;
     // Now lifetime of 'string1' is longer than lifetime of 'string2'
     {
         let string2 = String::from("xyz");
 
         // We tell to borrow checker that whatever gets returned from longest() will have a lifetime that is equal to the smallest lifetime being passed in
-        let result = longest(string1.as_str(), string2.as_str());
+        result = longest(string1.as_str(), string2.as_str());
+        // If we try to print below out of this scope we will get error saying that lifetime of borrowed 'string2' value does not live long enough,
+        // because it just ends in this scope
         println!("The longest string is: {}", result);
     }
 }
