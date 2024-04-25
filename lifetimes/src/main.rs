@@ -34,6 +34,14 @@ fn main() {
         part: &'a str,
     }
 
+    // Look at RULES to see why we do not need to specify 'a in below
+    impl<'a> ImportExcerpt<'a> {
+        fn return_part(&self, announcement: &str) -> &str {
+            println!("Attention please: {}", announcement);
+            self.part
+        }
+    }
+
     let novel = String::from("Call me Devil. Some years ago...");
     let first_sentence = novel.split('.').next().expect("Could not find a '.'");
 
@@ -64,6 +72,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 /////////////////
 // 1. Each parameter that is a reference gets its own lifetime parameter.
 // 2. If there is exactly one input lifetime parameter, that lifetime is assigned to all output lifetime parameters.
+// Rule 3 only applies for methods
 // 3. If there are multiple input lifetime parameters, but one of them is &self or &mut self the lifetime of self is assigned to all output lifetime parameters.
 
 // In this case compiler automatically added 'a lifetimes to our function below, so we do not need to specify it
