@@ -40,6 +40,8 @@ fn main() {
             println!("Attention please: {}", announcement);
             self.part
         }
+
+        // With 'a it would liike like (actually looks)
     }
 
     let novel = String::from("Call me Devil. Some years ago...");
