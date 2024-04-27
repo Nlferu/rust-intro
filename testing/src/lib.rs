@@ -51,7 +51,9 @@ mod tests {
 
     #[test]
     fn it_adds_two() {
+        // Equal
         assert_eq!(4, add_two(2));
+        // Not Equal
         assert_ne!(4, add_two(3));
     }
 }
