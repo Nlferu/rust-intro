@@ -15,8 +15,8 @@ pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
-pub fn greeting(name: &str) -> String {
-    format!("Hello {}!", name)
+pub fn greeting(_name: &str) -> String {
+    format!("Hello!")
 }
 
 #[cfg(test)]
@@ -65,6 +65,11 @@ mod tests {
     fn greeting_contains_name() {
         let result = greeting("Niferu");
 
-        assert!(result.contains("Niferu"));
+        // Adding custom message on failed test
+        assert!(
+            result.contains("Niferu"),
+            "Greeting did not contain name, value was `{}`",
+            result
+        );
     }
 }
