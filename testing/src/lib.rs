@@ -19,6 +19,21 @@ pub fn greeting(_name: &str) -> String {
     format!("Hello!")
 }
 
+pub struct Guess {
+    #[allow(dead_code)]
+    value: i32,
+}
+
+impl Guess {
+    pub fn new(value: i32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100")
+        }
+
+        Guess { value }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -68,7 +83,7 @@ mod tests {
         // Adding custom message on failed test
         assert!(
             result.contains("Niferu"),
-            "Greeting did not contain name, value was `{}`",
+            "Greeting did not contain name, value was '{}'",
             result
         );
     }
