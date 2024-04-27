@@ -15,6 +15,10 @@ pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
+pub fn greeting(name: &str) -> String {
+    format!("Hello {}!", name)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -55,5 +59,12 @@ mod tests {
         assert_eq!(4, add_two(2));
         // Not Equal
         assert_ne!(4, add_two(3));
+    }
+
+    #[test]
+    fn greeting_contains_name() {
+        let result = greeting("Niferu");
+
+        assert!(result.contains("Niferu"));
     }
 }
