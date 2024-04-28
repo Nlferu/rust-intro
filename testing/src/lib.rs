@@ -42,6 +42,11 @@ impl Guess {
     }
 }
 
+pub fn prints_and_returns(a: i32) -> i32 {
+    println!("I got value {}", a);
+    a
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -116,5 +121,12 @@ mod tests {
         } else {
             Err(String::from("Two plus two does not equal four"))
         }
+    }
+
+    #[test]
+    fn it_prints() {
+        let value = prints_and_returns(777);
+
+        assert_eq!(777, value);
     }
 }
