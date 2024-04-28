@@ -123,6 +123,7 @@ mod tests {
         }
     }
 
+    // To get this working we need to run test with following command: 'cargo test -- --show-output'
     #[test]
     fn it_prints() {
         let value = prints_and_returns(777);
