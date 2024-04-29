@@ -47,6 +47,14 @@ pub fn prints_and_returns(a: i32) -> i32 {
     a
 }
 
+pub fn unit_adder(a: i32) -> i32 {
+    internal_adder(a, 2)
+}
+
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -90,6 +98,8 @@ mod tests {
     }
 
     #[test]
+    // Delete #[ignore] to run this test as it is test fail example
+    #[ignore]
     fn greeting_contains_name() {
         let result = greeting("Niferu");
 
@@ -135,5 +145,11 @@ mod tests {
     #[ignore]
     fn expensive_test() {
         // code that takes an hour to run...
+    }
+
+    #[test]
+    fn internal() {
+        // Even if internal adder is private we can still call it here
+        assert_eq!(4, internal_adder(2, 2))
     }
 }
