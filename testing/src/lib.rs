@@ -130,4 +130,10 @@ mod tests {
 
         assert_eq!(777, value);
     }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // code that takes an hour to run...
+    }
 }
