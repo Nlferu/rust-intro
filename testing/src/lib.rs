@@ -150,6 +150,6 @@ mod tests {
     #[test]
     fn internal() {
         // Even if internal adder is private we can still call it here
-        assert_eq!(4, internal_adder(2, 2))
+        assert_eq!(4, internal_adder(2, 2));
     }
 }
