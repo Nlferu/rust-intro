@@ -1,3 +1,5 @@
 # Rust Language Intro
 
-Niferu is in progress of learning Rust from https://doc.rust-lang.org/book/title-page.html
+Learning Rust from: https://doc.rust-lang.org/book/title-page.html
+
+Next step: diving into <u>**Anchor**</u> framework
