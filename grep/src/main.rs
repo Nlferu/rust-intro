@@ -6,12 +6,13 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    let (query, filename) = parse_config(&args);
+    let config = parse_config(&args);
 
-    println!("Searching for {}", query);
-    println!("In file {}", filename);
+    println!("Searching for {}", config.query);
+    println!("In file {}", config.filename);
 
-    let contents = fs::read_to_string(filename).expect("Something went wrong reading the file...");
+    let contents =
+        fs::read_to_string(config.filename).expect("Something went wrong reading the file...");
 
     println!("Content {}", contents);
 }
@@ -21,11 +22,12 @@ struct Config {
     filename: String,
 }
 
-fn parse_config(args: &[String]) -> (&str, &str) {
+// We are currently cloning to avoid taking ownership of args. We can refactor this using 'lifetimes' to handle this more efficient
+fn parse_config(args: &[String]) -> Config {
     // Index "0" is binary basics -> "target/debug/grep"
     // Command: `cargo run bog poem.txt`
-    let query = &args[1]; // Something
-    let filename = &args[2]; // poem.txt
+    let query = args[1].clone(); // Something
+    let filename = args[2].clone(); // poem.txt
 
-    (query, filename)
+    Config { query, filename }
 }
