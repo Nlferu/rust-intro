@@ -1,5 +1,5 @@
 // Iterators in Rust comes from standard library and looks like below:
-pub trait Iterator {
+pub trait IteratorExample {
     type Item;
 
     // Associated type
@@ -109,7 +109,57 @@ mod tests {
 }
 
 struct Counter {
-    count: i32,
+    count: u32,
+}
+
+impl Counter {
+    #[allow(dead_code)]
+    fn new() -> Counter {
+        Counter { count: 0 }
+    }
+}
+
+// Own Iterator
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < 5 {
+            self.count += 1;
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+
+#[test]
+fn calling_next_directly() {
+    let mut counter = Counter::new();
+
+    assert_eq!(counter.next(), Some(1));
+    assert_eq!(counter.next(), Some(2));
+    assert_eq!(counter.next(), Some(3));
+    assert_eq!(counter.next(), Some(4));
+    assert_eq!(counter.next(), Some(5));
+    assert_eq!(counter.next(), None);
+}
+
+#[test]
+fn using_one_iterator_trait_methods() {
+    let sum: u32 = Counter::new()
+        // 'zip' method takes 2 iterators and zips them into one iterator containing pair of values
+        // (First Iterator: iterator on which zip is called, Second Iterator: iterator passed in zip() method)
+        // Second iterator skips 1st element
+        .zip(Counter::new().skip(1))
+        // Closure, which will call each element from each iterator
+        .map(|(a, b)| a * b)
+        // Now we filter for items divisible by 3 only
+        .filter(|x| x % 3 == 0)
+        // Consumer 'sum()' method to sum all results
+        .sum();
+
+    assert_eq!(18, sum);
 }
 
 fn main() {
