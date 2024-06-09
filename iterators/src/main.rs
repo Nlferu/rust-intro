@@ -57,6 +57,61 @@ fn iterator_sum() {
     assert_eq!(total, 6);
 }
 
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+#[allow(dead_code)]
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    // Filter returns bool and if it is true item will be included in results and if false item will not be included in results
+    shoes.into_iter().filter(|s| s.size == shoe_size).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn filters_by_size() {
+        let shoes = vec![
+            Shoe {
+                size: 10,
+                style: String::from("sneaker"),
+            },
+            Shoe {
+                size: 13,
+                style: String::from("sandal"),
+            },
+            Shoe {
+                size: 10,
+                style: String::from("boot"),
+            },
+        ];
+
+        let in_my_size = shoes_in_my_size(shoes, 10);
+
+        assert_eq!(
+            in_my_size,
+            vec![
+                Shoe {
+                    size: 10,
+                    style: String::from("sneaker"),
+                },
+                Shoe {
+                    size: 10,
+                    style: String::from("boot"),
+                },
+            ]
+        )
+    }
+}
+
+struct Counter {
+    count: i32,
+}
+
 fn main() {
     let v = vec![1, 2, 3];
 
@@ -66,7 +121,7 @@ fn main() {
         println!("Current Value: {}", value);
     }
 
-    // Adapter Methods
+    // Adapter & Consumer Methods
 
     // Map is Adapter Method
     let v: Vec<i32> = vec![1, 2, 3];
