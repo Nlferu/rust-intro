@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::hash::Hash;
 use std::thread;
 use std::time::Duration;
 
@@ -51,21 +52,60 @@ fn main() {
     assert!(equal_to(y));
 }
 
-struct Cacher<T>
+// Previous version of Cacher without generic type:
+#[allow(dead_code)]
+struct SingleTypeCacher<T>
 where
     T: Fn(u32) -> u32,
 {
     calculation: T,
-    // Using HashMap instead of below:
-    // value: Option<u32>,
-    value: HashMap<u32, u32>,
+    values: HashMap<u32, u32>,
 }
 
-impl<T> Cacher<T>
+impl<T> SingleTypeCacher<T>
 where
     T: Fn(u32) -> u32,
 {
-    fn new(calculation: T) -> Cacher<T> {
+    #[allow(dead_code)]
+    fn new(calculation: T) -> SingleTypeCacher<T> {
+        SingleTypeCacher {
+            calculation,
+            values: HashMap::new(),
+        }
+    }
+
+    #[allow(dead_code)]
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.values.get(&arg) {
+            Some(&v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.values.insert(arg, v);
+                v
+            }
+        }
+    }
+}
+
+struct Cacher<T, A, R>
+where
+    T: Fn(A) -> R,
+    A: Eq + Hash + Copy,
+    R: Copy,
+{
+    calculation: T,
+    // Using HashMap instead of below:
+    // value: Option<u32>,
+    value: HashMap<A, R>,
+}
+
+impl<T, A, R> Cacher<T, A, R>
+where
+    T: Fn(A) -> R,
+    A: Eq + Hash + Copy,
+    R: Copy,
+{
+    fn new(calculation: T) -> Cacher<T, A, R> {
         Cacher {
             calculation,
             // Using HashMap instead of below:
@@ -74,7 +114,7 @@ where
         }
     }
 
-    fn value(&mut self, arg: u32) -> u32 {
+    fn value(&mut self, arg: A) -> R {
         match self.value.get(&arg) {
             Some(&v) => v,
             None => {
