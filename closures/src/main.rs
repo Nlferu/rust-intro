@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::thread;
 use std::time::Duration;
 
@@ -13,7 +14,7 @@ fn main() {
 
     generate_workout(simulated_intensity, simulated_random_number);
 
-    // Cacher
+    // Testing refactored Cacher
     let mut cacher = Cacher::new(|x| x + 1);
     println!("{}", cacher.value(1)); // 2
     println!("{}", cacher.value(2)); // 3
@@ -55,7 +56,9 @@ where
     T: Fn(u32) -> u32,
 {
     calculation: T,
-    value: Option<u32>,
+    // Using HashMap instead of below:
+    // value: Option<u32>,
+    value: HashMap<u32, u32>,
 }
 
 impl<T> Cacher<T>
@@ -65,16 +68,20 @@ where
     fn new(calculation: T) -> Cacher<T> {
         Cacher {
             calculation,
-            value: None,
+            // Using HashMap instead of below:
+            // value: None,
+            value: HashMap::new(),
         }
     }
 
     fn value(&mut self, arg: u32) -> u32 {
-        match self.value {
-            Some(v) => v,
+        match self.value.get(&arg) {
+            Some(&v) => v,
             None => {
                 let v = (self.calculation)(arg);
-                self.value = Some(v);
+                // Using HashMap instead of below:
+                // self.value = Some(v);
+                self.value.insert(arg, v);
                 v
             }
         }
