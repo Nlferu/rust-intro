@@ -12,6 +12,42 @@ fn main() {
     let simulated_random_number = 7;
 
     generate_workout(simulated_intensity, simulated_random_number);
+
+    // Cacher
+    let mut cacher = Cacher::new(|x| x + 1);
+    println!("{}", cacher.value(1)); // 2
+    println!("{}", cacher.value(2)); // 3
+    println!("{}", cacher.value(1)); // 2, cached result
+
+    // Anonymous vs Normal fn
+    let x = 4;
+
+    let equal_to = |z| z == x;
+    // We cannot do below because normal fn can't capture dynamic environment in a fn item
+    // fn equal_to_x(z: i32) -> bool {
+    //     z == x
+    // }
+
+    let y = 4;
+
+    assert!(equal_to(y));
+
+    // Capturing environtment is encoded in functions traits: FnOnce, FnMut, Fn
+    // FnOnce -> closures can't take ownership of the same variables more than once (these closures can only be called once)
+    // FnMut -> mutably borrows values
+    // Fn -> immutably borrows values
+
+    let x = vec![1, 2, 3];
+
+    // In case we would like our 'equal_to' anon function to take ownership of 'x' we do below:
+    // let equal_to = move |z| z == x;
+    let equal_to = |z| z == x;
+
+    println!("Can't use x here: {:?}", x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(equal_to(y));
 }
 
 struct Cacher<T>
