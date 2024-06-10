@@ -27,15 +27,29 @@ pub struct Config {
 impl Config {
     // We are currently cloning to avoid taking ownership of args. We can refactor this using 'lifetimes' to handle this more efficient
     // It is 'new' = 'constructor'
-    pub fn new(args: &[String]) -> Result<Config, &str> {
-        if args.len() < 3 {
-            return Err("Not enough arguments");
-        }
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+        // Old Code -> Refactored: .clone() = inefficient
+        // if args.len() < 3 {
+        //     return Err("Not enough arguments");
+        // }
 
-        // Index "0" is binary basics -> "target/debug/grep"
-        // Command: `cargo run bog poem.txt`
-        let query = args[1].clone(); // Something
-        let filename = args[2].clone(); // poem.txt
+        // // Index "0" is binary basics -> "target/debug/grep"
+        // // Command: `cargo run bog poem.txt`
+        // let query = args[1].clone(); // Something
+        // let filename = args[2].clone(); // poem.txt
+
+        // First command line argument
+        args.next();
+
+        let query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a query string"),
+        };
+
+        let filename = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a file name"),
+        };
 
         // In console assign 'CASE_INSENSITIVE' variable as: export CASE_INSENSITIVE=true | unset CASE_INSENSITIVE
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
@@ -49,15 +63,21 @@ impl Config {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
+    // Old Code -> Refactored
+    // let mut results = Vec::new();
 
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push(line);
-        }
-    }
+    // for line in contents.lines() {
+    //     if line.contains(query) {
+    //         results.push(line);
+    //     }
+    // }
 
-    results
+    // results
+
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
