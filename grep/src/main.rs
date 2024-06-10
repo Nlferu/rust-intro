@@ -4,8 +4,6 @@ use std::process;
 use grep::Config;
 
 fn main() {
-    println!("Hello, grep!");
-
     let args: Vec<String> = env::args().collect();
 
     let config = Config::new(&args).unwrap_or_else(|err| {
