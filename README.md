@@ -13,3 +13,5 @@ Next step: diving into <u>**Anchor**</u> framework
 
 - 18 -> FINISHED
 - 19 -> WORKING ON
+
+https://www.youtube.com/watch?v=rb63xJEjaZU&list=PLai5B987bZ9CoVR-QEIN9foz4QCJ0H2Y8&index=19&ab_channel=Let%27sGetRusty
