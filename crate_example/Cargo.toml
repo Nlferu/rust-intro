@@ -1,8 +1,25 @@
 [package]
 name = "crate_example"
 version = "0.1.0"
+author = ["Niferu"]
 edition = "2021"
+description = "A library for publish example"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+
+# opt-level -> It is level of optimisation and can be:
+# 0 -> no optimisation
+# 1 -> lesser optimisation
+# 1 -> major optimisation
+# 3 -> full optimisation
+
+# Default optimisation is 0 for 'dev' and 3 to 'release'
