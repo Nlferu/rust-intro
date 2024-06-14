@@ -1,3 +1,4 @@
+use smart_pointers;
 use std::ops::Deref;
 use List::{Cons, Nil};
 
@@ -95,6 +96,10 @@ fn main() {
     // We cannot do: c.drop()
     drop(c);
     println!("CustomSmartPointer dropped before the end of main");
+
+    // ----------------------------------- Reference Counting -----------------------------------
+
+    smart_pointers::sep_main();
 }
 
 fn hello(name: &str) {
