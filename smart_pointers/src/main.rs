@@ -48,6 +48,9 @@ fn main() {
     // Below are the same as MyBox contain Deref trait
     assert_eq!(5, *y);
     assert_eq!(5, *(y.deref()));
+
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
 }
 
 fn hello(name: &str) {
