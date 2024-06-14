@@ -50,7 +50,20 @@ fn main() {
     assert_eq!(5, *(y.deref()));
 
     let m = MyBox::new(String::from("Rust"));
+    // Even if this function takes &str it works because:
+    // &MyBox<String> ('MyBox' has Deref trait) -> &String ('String' also has Deref trait) -> &str
     hello(&m);
+
+    // Rust doing above type match automatically, if it would not do this we would need to call this fn like below:
+    hello(&(*m)[..]);
+
+    // Rust does deref coercion for below:
+    // From '&T' to '&U' when 'T': Deref<Target=U>
+    // From '&mut T' to '&mut U' when 'T': DerefMut<Target=U>
+    // From '&mut T' to '&U' when 'T': Deref<Target=U>
+
+    // Rust cannot perform deref coercion:
+    // From '&T' to '&mut U'
 }
 
 fn hello(name: &str) {
