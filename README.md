@@ -11,5 +11,5 @@ Next step: diving into <u>**Anchor**</u> framework
 
 ### Rusty:
 
-- 24 -> FINISHED
-- 25 -> WORKING ON
+- 25 -> FINISHED
+- 26 -> WORKING ON
