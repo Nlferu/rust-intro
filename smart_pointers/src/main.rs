@@ -24,6 +24,17 @@ impl<T> Deref for MyBox<T> {
     }
 }
 
+#[derive(Debug)]
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data '{}'!", self.data);
+    }
+}
+
 fn main() {
     // Value '5' is stored on heap and 'b' is pointer for that value stored on stack
     let b = Box::new(5);
@@ -44,6 +55,8 @@ fn main() {
     let y = Box::new(x);
     assert_eq!(5, *y);
 
+    // Deref Trait
+
     let y = MyBox::new(x);
     // Below are the same as MyBox contain Deref trait
     assert_eq!(5, *y);
@@ -62,8 +75,26 @@ fn main() {
     // From '&mut T' to '&mut U' when 'T': DerefMut<Target=U>
     // From '&mut T' to '&U' when 'T': Deref<Target=U>
 
-    // Rust cannot perform deref coercion:
+    // Rust cannot perform deref coercion always for below:
     // From '&T' to '&mut U'
+
+    // Drop Trait
+
+    // Drop is performed in reversed order, so first we drop 'd' then 'c' -> Look prints log order after 'cargo run'
+    let c = CustomSmartPointer {
+        data: String::from("My Stuff"),
+    };
+
+    let d = CustomSmartPointer {
+        data: String::from("Other Stuff"),
+    };
+
+    println!("CustomSmartPointers created!");
+    println!("D: {:?}", d);
+
+    // We cannot do: c.drop()
+    drop(c);
+    println!("CustomSmartPointer dropped before the end of main");
 }
 
 fn hello(name: &str) {
