@@ -55,7 +55,7 @@ fn main() {
     let y = Box::new(x);
     assert_eq!(5, *y);
 
-    // Deref Trait
+    // ----------------------------------- Deref Trait -----------------------------------
 
     let y = MyBox::new(x);
     // Below are the same as MyBox contain Deref trait
@@ -78,7 +78,7 @@ fn main() {
     // Rust cannot perform deref coercion always for below:
     // From '&T' to '&mut U'
 
-    // Drop Trait
+    // ----------------------------------- Drop Trait -----------------------------------
 
     // Drop is performed in reversed order, so first we drop 'd' then 'c' -> Look prints log order after 'cargo run'
     let c = CustomSmartPointer {
