@@ -107,8 +107,39 @@ fn main() {
     // ----------------------------------- Reference Counting -----------------------------------
 
     smart_pointers::sep_main();
+
+    // ----------------------------------- Interior Mutability -----------------------------------
+
+    ref_example();
 }
 
 fn hello(name: &str) {
     println!("Hello, {}!", name);
+}
+
+// ----------------------------------- Interior Mutability -----------------------------------
+
+use crate::RefList::{OtherCons, OtherNil};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+#[derive(Debug)]
+enum RefList {
+    OtherCons(Rc<RefCell<i32>>, Rc<RefList>),
+    OtherNil,
+}
+
+fn ref_example() {
+    let value = Rc::new(RefCell::new(5));
+
+    let a = Rc::new(OtherCons(Rc::clone(&value), Rc::new(OtherNil)));
+
+    let b = OtherCons(Rc::new(RefCell::new(3)), Rc::clone(&a));
+    let c = OtherCons(Rc::new(RefCell::new(4)), Rc::clone(&a));
+
+    *value.borrow_mut() += 10;
+
+    println!("a after = {a:?}");
+    println!("b after = {b:?}");
+    println!("c after = {c:?}");
 }
