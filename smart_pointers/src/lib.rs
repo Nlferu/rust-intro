@@ -69,20 +69,20 @@ mod tests {
     use std::cell::RefCell;
 
     struct MockMessenger {
-        sent_messages: Vec<String>,
+        sent_messages: RefCell<Vec<String>>,
     }
 
     impl MockMessenger {
         fn new() -> MockMessenger {
             MockMessenger {
-                sent_messages: vec![],
+                sent_messages: RefCell::new(vec![]),
             }
         }
     }
 
     impl Messenger for MockMessenger {
         fn send(&self, message: &str) {
-            self.sent_messages.push(String::from(message));
+            self.sent_messages.borrow_mut().push(String::from(message));
         }
     }
 
@@ -93,6 +93,11 @@ mod tests {
 
         limit_tracker.set_value(80);
 
-        assert_eq!(mock_messenger.sent_messages.len(), 1);
+        let sent_messages = mock_messenger.sent_messages.borrow();
+        assert_eq!(sent_messages.len(), 1);
+        assert_eq!(
+            sent_messages[0],
+            "Warning: You've used up over 75% of your quota"
+        )
     }
 }
