@@ -107,15 +107,6 @@ fn main() {
     // ----------------------------------- Reference Counting -----------------------------------
 
     smart_pointers::sep_main();
-
-    // ----------------------------------- Interior Mutability -----------------------------------
-
-    let a = 5;
-    let b = &mut a;
-
-    let mut c = 10;
-    let d = &c;
-    *d = 20;
 }
 
 fn hello(name: &str) {
