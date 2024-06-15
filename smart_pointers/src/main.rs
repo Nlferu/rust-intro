@@ -2,6 +2,13 @@ use smart_pointers;
 use std::ops::Deref;
 use List::{Cons, Nil};
 
+// Rc<T> enables multiple owners of the same data;
+// Box<T> and RefCell<T> have single owners.
+// Box<T> allows immutable or mutable borrows checked at compile time;
+// Rc<T> allows only immutable borrows checked at compile time;
+// RefCell<T> allows immutable or mutable borrows checked at runtime.
+// Because RefCell<T> allows mutable borrows checked at runtime, you can mutate the value inside the RefCell<T> even when the RefCell<T> is immutable.
+
 #[derive(Debug)]
 enum List {
     Cons(i32, Box<List>),
@@ -100,6 +107,15 @@ fn main() {
     // ----------------------------------- Reference Counting -----------------------------------
 
     smart_pointers::sep_main();
+
+    // ----------------------------------- Interior Mutability -----------------------------------
+
+    let a = 5;
+    let b = &mut a;
+
+    let mut c = 10;
+    let d = &c;
+    *d = 20;
 }
 
 fn hello(name: &str) {
