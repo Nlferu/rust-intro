@@ -143,3 +143,11 @@ fn ref_example() {
     println!("b after = {b:?}");
     println!("c after = {c:?}");
 }
+
+// ----------------------------------- Reference Cycle -----------------------------------
+
+#[derive(Debug)]
+enum RefCycleList {
+    RefCons(i32, RefCell<Rc<RefCycleList>>),
+    RefNil,
+}
