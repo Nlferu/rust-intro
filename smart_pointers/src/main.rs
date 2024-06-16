@@ -111,6 +111,64 @@ fn main() {
     // ----------------------------------- Interior Mutability -----------------------------------
 
     ref_example();
+
+    // ----------------------------------- Reference Cycle -----------------------------------
+
+    cycle_example();
+
+    // ----------------------------------- Weak Pointers -----------------------------------
+
+    #[derive(Debug)]
+    #[allow(dead_code)]
+    struct Node {
+        value: i32,
+        parent: RefCell<Weak<Node>>, // We are using 'Weak' here to avoid situation where children owns parent
+        children: RefCell<Vec<Rc<Node>>>,
+    }
+
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    // To see proper value we need to turn 'Weak' into 'Rc', so we use 'upgrade' to do so
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    println!(
+        "leaf strong count = {}, leaf weak count = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf)
+    );
+
+    {
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+
+        // 'downgrade' turns 'Rc' into 'Weak'
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+        println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+        println!(
+            "branch strong count = {}, branch weak count = {}",
+            Rc::strong_count(&branch),
+            Rc::weak_count(&branch)
+        );
+        println!(
+            "leaf strong count = {}, leaf weak count = {}",
+            Rc::strong_count(&leaf),
+            Rc::weak_count(&leaf)
+        );
+    }
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    println!(
+        "leaf strong count = {}, leaf weak count = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf)
+    );
 }
 
 fn hello(name: &str) {
@@ -121,7 +179,7 @@ fn hello(name: &str) {
 
 use crate::RefList::{OtherCons, OtherNil};
 use std::cell::RefCell;
-use std::rc::Rc;
+use std::rc::{Rc, Weak};
 
 #[derive(Debug)]
 enum RefList {
@@ -146,8 +204,42 @@ fn ref_example() {
 
 // ----------------------------------- Reference Cycle -----------------------------------
 
+use crate::RefCycleList::{RefCons, RefNil};
+
 #[derive(Debug)]
 enum RefCycleList {
     RefCons(i32, RefCell<Rc<RefCycleList>>),
     RefNil,
+}
+
+impl RefCycleList {
+    fn tail(&self) -> Option<&RefCell<Rc<RefCycleList>>> {
+        match self {
+            RefCons(_, item) => Some(item),
+            RefNil => None,
+        }
+    }
+}
+
+fn cycle_example() {
+    let a = Rc::new(RefCons(5, RefCell::new(Rc::new(RefNil))));
+
+    println!("a initial rc count = {}", Rc::strong_count(&a));
+    println!("a next item = {:?}", a.tail());
+
+    let b = Rc::new(RefCons(10, RefCell::new(Rc::clone(&a))));
+
+    println!("a rc count after b creation = {}", Rc::strong_count(&a));
+    println!("b initial rc count = {}", Rc::strong_count(&b));
+    println!("b next item = {:?}", b.tail());
+
+    if let Some(link) = a.tail() {
+        *link.borrow_mut() = Rc::clone(&b);
+    }
+
+    println!("b rc count after changing a = {}", Rc::strong_count(&b));
+    println!("a rc count after changing a = {}", Rc::strong_count(&a));
+
+    // Uncomment the next line to see that we have a cycle it will overflow the stack
+    // println!("a next item = {:?}", a.tail());
 }
