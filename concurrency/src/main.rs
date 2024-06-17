@@ -1,6 +1,8 @@
 use std::{thread, time::Duration};
 
 fn main() {
+    // ----------------------------------- Creating Threads -----------------------------------
+
     let handle = thread::spawn(|| {
         for i in 1..10 {
             println!("Number {} from the spawned thread!", i);
@@ -28,4 +30,19 @@ fn main() {
     });
 
     handle.join().unwrap();
+
+    // ----------------------------------- Message Passing -----------------------------------
+
+    use std::sync::mpsc;
+
+    // Creating channel
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let msg = String::from("Devil");
+        tx.send(msg).unwrap();
+    });
+
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
 }
