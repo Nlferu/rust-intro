@@ -35,14 +35,42 @@ fn main() {
 
     use std::sync::mpsc;
 
-    // Creating channel
+    // Creating channels
     let (tx, rx) = mpsc::channel();
+    let tx2 = tx.clone();
 
     thread::spawn(move || {
-        let msg = String::from("Devil");
-        tx.send(msg).unwrap();
+        let vals = vec![
+            String::from("Devil"),
+            String::from("does"),
+            String::from("not"),
+            String::from("sleep"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
     });
 
-    let received = rx.recv().unwrap();
-    println!("Got: {}", received);
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("his"),
+            String::from("name"),
+            String::from("is"),
+            String::from("Semyazza"),
+        ];
+
+        for val in vals {
+            tx2.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    // let received = rx.recv().unwrap();
+    // println!("Got: {}", received);
+
+    for received in rx {
+        println!("Got: {}", received);
+    }
 }
