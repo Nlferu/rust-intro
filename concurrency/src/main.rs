@@ -73,4 +73,6 @@ fn main() {
     for received in rx {
         println!("Got: {}", received);
     }
+
+    // ----------------------------------- Sharing State -----------------------------------
 }
