@@ -1,5 +1,6 @@
 use trait_object::{Button, Draw, Screen};
 
+#[allow(dead_code)]
 struct SelectBox {
     width: u32,
     height: u32,
@@ -13,5 +14,24 @@ impl Draw for SelectBox {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let screen = Screen {
+        components: vec![
+            Box::new(SelectBox {
+                width: 100,
+                height: 100,
+                options: vec![
+                    String::from("yes"),
+                    String::from("no"),
+                    String::from("maybe"),
+                ],
+            }),
+            Box::new(Button {
+                width: 10,
+                height: 10,
+                label: String::from("ok"),
+            }),
+        ],
+    };
+
+    screen.run();
 }
