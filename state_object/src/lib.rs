@@ -10,10 +10,24 @@ impl Post {
             content: String::new(),
         }
     }
+
+    pub fn add_text(&mut self, text: &str) {
+        self.content.push_str(text);
+    }
+
+    pub fn content(&self) -> &str {
+        ""
+    }
 }
 
-trait State {}
+trait State {
+    pub fn request_review(self: Box<Self>) -> Box<dyn State>;
+}
 
 struct Draft {}
 
 impl State for Draft {}
+
+struct PendingReview {}
+
+impl State for PendingReview {}
