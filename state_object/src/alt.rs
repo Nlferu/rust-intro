@@ -1,4 +1,4 @@
-pub struct Post {
+pub struct AltPost {
     content: String,
 }
 
@@ -6,7 +6,7 @@ pub struct DraftPost {
     content: String,
 }
 
-impl Post {
+impl AltPost {
     pub fn new() -> DraftPost {
         DraftPost {
             content: String::new(),
@@ -22,6 +22,12 @@ impl DraftPost {
     pub fn add_text(&mut self, text: &str) {
         self.content.push_str(text);
     }
+
+    pub fn request_review(self) -> PendingReviewPost {
+        PendingReviewPost {
+            content: self.content,
+        }
+    }
 }
 
 pub struct PendingReviewPost {
@@ -29,8 +35,8 @@ pub struct PendingReviewPost {
 }
 
 impl PendingReviewPost {
-    pub fn approve(self) -> Post {
-        Post {
+    pub fn approve(self) -> AltPost {
+        AltPost {
             content: self.content,
         }
     }
