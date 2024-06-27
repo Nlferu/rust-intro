@@ -3,6 +3,8 @@
 // 2. Make that two approvals are required to publish post
 // 3. Make restriction that you can add text to post only if it is in Draft mode
 
+pub mod alt;
+
 pub struct Post {
     state: Option<Box<dyn State>>,
     content: String,
