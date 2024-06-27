@@ -1,3 +1,8 @@
+// EXERCISES
+// 1. Add method named 'reject' (taking post that is under review back to Draft state)
+// 2. Make that two approvals are required to publish post
+// 3. Make restriction that you can add text to post only if it is in Draft mode
+
 pub struct Post {
     state: Option<Box<dyn State>>,
     content: String,
