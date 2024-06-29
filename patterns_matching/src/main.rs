@@ -4,6 +4,7 @@ fn main() {
     // =====================================
 
     #[derive(Debug)]
+    #[allow(dead_code)]
     enum Language {
         English,
         Japanese,
@@ -42,5 +43,7 @@ fn main() {
         } else {
             println!("Authorization status: basic")
         }
+    } else {
+        println!("Authorization status: guest")
     }
 }
