@@ -13,7 +13,7 @@ fn main() {
         Chinese,
     }
 
-    let language = Language::English;
+    let language = Language::Japanese;
 
     match language {
         Language::English => println!("Hello World!"),
@@ -64,6 +64,12 @@ fn main() {
     // =====================================
     //               For Loops
     // =====================================
+
+    let v = vec!['a', 'b', 'c'];
+
+    for (index, value) in v.iter().enumerate() {
+        println!("{} is at index {}", value, index);
+    }
 
     // ======================================
     //             Let Statements
