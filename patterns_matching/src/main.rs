@@ -67,6 +67,7 @@ fn main() {
 
     let v = vec!['a', 'b', 'c'];
 
+    // Enumerate returns 'tuple' with 'index' and 'value'
     for (index, value) in v.iter().enumerate() {
         println!("{} is at index {}", value, index);
     }
@@ -74,4 +75,51 @@ fn main() {
     // ======================================
     //             Let Statements
     // ======================================
+
+    let _x = 5;
+
+    // let PATTERN = EXPRESSION;
+
+    let (_x, _y, _) = (1, 2, 3);
+
+    // ===========================================
+    //             Function Parameters
+    // ===========================================
+
+    let points = (3, 5);
+    print_coordinates(&points);
+
+    fn print_coordinates(&(x, y): &(i32, i32)) {
+        println!("Current Location: ({}, {})", x, y);
+    }
+
+    // ==================================================
+    //           Irrefutable Refutable Patterns
+    // ==================================================
+
+    // Irrefutable (Pattern that will always match)
+    let _x = 5;
+
+    // Refutable (Pattern that will NOT always match)
+    let x: Option<&str> = None;
+    if let Some(x) = x {
+        println!("{}", x);
+    };
+
+    // Can only accept irrefutable patterns:
+    // function parameters
+    // let statements
+    // for loops
+
+    // Errors Examples
+
+    let _x: Option<&str> = None;
+    // Refutable pattern in local binding
+    // let Some(x) = x;
+
+    // Irrefutable `if let` pattern
+    #[allow(irrefutable_let_patterns)]
+    if let x = 5 {
+        println!("{}", x);
+    }
 }
