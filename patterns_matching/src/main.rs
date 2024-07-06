@@ -186,4 +186,67 @@ fn main() {
             println!("On neither axis: ({}, {})", x, y)
         }
     }
+
+    //====================
+    // Destructuring Enums
+    //====================
+
+    #[allow(dead_code)]
+    enum Message {
+        Quit,
+        Move { x: i32, y: i32 },
+        Write(String),
+        ChangeColor(i32, i32, i32),
+    }
+
+    let msg = Message::ChangeColor(0, 160, 255);
+
+    match msg {
+        Message::Quit => {
+            println!("Quit")
+        }
+        Message::Move { x, y } => {
+            println!("Move to x: {} y: {}", x, y);
+        }
+        Message::Write(text) => {
+            println!("Text message: {}", text);
+        }
+        Message::ChangeColor(r, g, b) => {
+            println!("Change color: red {}, green {}, blue {}", r, g, b);
+        }
+    }
+
+    //===========================
+    // Destructuring Nested Enums
+    //===========================
+
+    #[allow(dead_code)]
+    enum Color {
+        Rgb(i32, i32, i32),
+        Hsv(i32, i32, i32),
+    }
+
+    #[allow(dead_code)]
+    enum Msg {
+        Quit,
+        Move { x: i32, y: i32 },
+        Write(String),
+        ChangeColor(Color),
+    }
+
+    let msg = Msg::ChangeColor(Color::Hsv(0, 160, 255));
+
+    match msg {
+        Msg::ChangeColor(Color::Rgb(r, g, b)) => {
+            println!("Change color: red {}, green {}, blue {}", r, g, b);
+        }
+        Msg::ChangeColor(Color::Hsv(h, s, v)) => {
+            println!("Change color: hue {}, saturation {}, value {}", h, s, v);
+        }
+        _ => (),
+    }
+
+    //===============================
+    // More Complicated Destructuring
+    //===============================
 }
