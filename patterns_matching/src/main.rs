@@ -249,4 +249,15 @@ fn main() {
     //===============================
     // More Complicated Destructuring
     //===============================
+
+    #[allow(dead_code)]
+    struct Points {
+        x: i32,
+        y: i32,
+    }
+
+    let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+
+    println!("Feet: {}, Inches: {}", feet, inches);
+    println!("X: {}, Y: {}", x, y);
 }
