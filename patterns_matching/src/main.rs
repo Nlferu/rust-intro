@@ -288,6 +288,15 @@ fn main() {
             println!("Some numbers: {}, {}, {}", first, third, fifth);
         }
     }
+
+    let s = Some(String::from("value"));
+
+    // Try putting in '_s'
+    if let Some(_) = s {
+        println!("Found a string");
+    }
+
+    println!("{:?}", s);
 }
 
 fn foo(_: i32, y: i32) {
