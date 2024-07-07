@@ -318,6 +318,26 @@ fn main() {
             println!("Some numbers: {}, {}", first, last);
         }
     }
+
+    //=============
+    // Match Guards
+    //=============
+
+    let num = Some(4);
+
+    match num {
+        Some(x) if x < 5 => println!("Less than five: {}", x),
+        Some(x) => println!("Any condition: {}", x),
+        None => (),
+    }
+
+    let x = Some(5);
+    let y = 10;
+
+    match x {
+        Some(n) if n == y => println!("Matched, n = {}", n),
+        _ => println!("Default case, x = {:?}", x),
+    }
 }
 
 fn foo(_: i32, y: i32) {
