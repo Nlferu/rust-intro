@@ -346,6 +346,30 @@ fn main() {
         4 | 5 | 6 if y => println!("Yes"),
         _ => println!("No"),
     }
+
+    //================
+    //  '@' Operator
+    //================
+
+    // '@' operator let's us create variable that holds a value at the same time we are testing that value to see whether it matches a pattern
+
+    enum Messages {
+        Hello { id: i32 },
+    }
+
+    let msg = Messages::Hello { id: 5 };
+
+    match msg {
+        Messages::Hello {
+            id: id_variable @ 3..=7,
+        } => println!("Found an id in range: {}", id_variable),
+        Messages::Hello { id: 10..=12 } => {
+            println!("Found an id in another range");
+        }
+        Messages::Hello { id } => {
+            println!("Found some other id: {}", id);
+        }
+    }
 }
 
 fn foo(_: i32, y: i32) {
