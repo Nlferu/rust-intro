@@ -310,6 +310,14 @@ fn main() {
     match origin {
         Po { x, .. } => println!("x is {} and we do not care for rest of the values..", x),
     }
+
+    let numbers = (2, 4, 8, 16, 32);
+
+    match numbers {
+        (first, .., last) => {
+            println!("Some numbers: {}, {}", first, last);
+        }
+    }
 }
 
 fn foo(_: i32, y: i32) {
