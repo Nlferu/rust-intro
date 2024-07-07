@@ -297,6 +297,19 @@ fn main() {
     }
 
     println!("{:?}", s);
+
+    #[allow(dead_code)]
+    struct Po {
+        x: i32,
+        y: i32,
+        z: i32,
+    }
+
+    let origin = Po { x: 0, y: 0, z: 0 };
+
+    match origin {
+        Po { x, .. } => println!("x is {} and we do not care for rest of the values..", x),
+    }
 }
 
 fn foo(_: i32, y: i32) {
