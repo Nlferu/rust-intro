@@ -260,4 +260,14 @@ fn main() {
 
     println!("Feet: {}, Inches: {}", feet, inches);
     println!("X: {}, Y: {}", x, y);
+
+    //============================
+    // Ignoring Values In Patterns
+    //============================
+
+    foo(3, 4);
+}
+
+fn foo(_: i32, y: i32) {
+    println!("This code only uses the y parameter: {}", y);
 }
