@@ -1,5 +1,5 @@
 [package]
-name = "crate_example"
+name = "crate-example"
 version = "0.1.0"
 author = ["Niferu"]
 edition = "2021"

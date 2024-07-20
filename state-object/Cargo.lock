@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "state_object"
+name = "state-object"
 version = "0.1.0"

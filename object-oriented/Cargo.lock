@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "object_oriented"
+name = "object-oriented"
 version = "0.1.0"
