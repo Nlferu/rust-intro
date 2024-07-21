@@ -89,6 +89,18 @@ fn main() {
     // =====================================
     //        Access Fields Of Unions
     // =====================================
+
+    // A 'union' is similar to 'struct', but only one field is used for each instance
+    // 'unions' are primarily used to interface 'C' 'unions' and it's unsafe to access fields of a union
+    // because Rust can't guarantee what the type of data stored in the union is for a given instance
+
+    // =====================
+    //        Summary
+    // =====================
+
+    // Using 'unsafe' isn't wrong or frowned upon
+    // when we have use case we can just use it
+    // we just need to make sure that we are safe with memory
 }
 
 // Interaction with external code in different language
