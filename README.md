@@ -6,10 +6,10 @@ Next step: diving into <u>**Anchor**</u> framework
 
 ### Chapter:
 
-- 18.2 -> FINISHED
-- 18.3 -> WORKING ON
+- 19.1 -> FINISHED
+- 19.2 -> WORKING ON
 
 ### Rusty:
 
-- 35 -> FINISHED
-- 36 -> WORKING ON
+- 36 -> FINISHED
+- 37 -> WORKING ON
