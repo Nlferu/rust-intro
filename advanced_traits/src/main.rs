@@ -1,3 +1,7 @@
+// ==============================
+//        Associated Types
+// ==============================
+
 pub trait Iterator<T> {
     fn next(&mut self) -> Option<T>;
 }
@@ -16,6 +20,103 @@ impl Iterator<u32> for Counter {
     }
 }
 
+// =============================================
+//        Default Generic Type Parameters
+// =============================================
+
+use std::ops::Add;
+
+#[derive(Debug, PartialEq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Add for Point {
+    type Output = Point;
+
+    fn add(self, other: Point) -> Point {
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+// Add trait looks like below:
+// trait Add<Rhs = Self> {
+//     type Output;
+
+//     fn add(self, rhs: Rhs) -> Self::Output;
+// }
+
+#[derive(Debug, PartialEq)]
+struct Millimeters(u32);
+struct Meters(u32);
+
+impl Add<Meters> for Millimeters {
+    type Output = Millimeters;
+
+    fn add(self, other: Meters) -> Millimeters {
+        Millimeters(self.0 + (other.0 * 1000))
+    }
+}
+
+// ================================================
+//        Calling Methods With The Same Name
+// ================================================
+
+trait Pilot {
+    fn fly(&self);
+}
+
+trait Wizard {
+    fn fly(&self);
+}
+
+struct Human;
+
+impl Human {
+    fn fly(&self) {
+        println!("*waving arms furiously*");
+    }
+}
+
+impl Pilot for Human {
+    fn fly(&self) {
+        println!("This is your captain speaking...");
+    }
+}
+
+impl Wizard for Human {
+    fn fly(&self) {
+        println!("Up!");
+    }
+}
+
 fn main() {
-    println!("asd");
+    // =============================================
+    //        Default Generic Type Parameters
+    // =============================================
+
+    assert_eq!(
+        Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
+        Point { x: 3, y: 3 }
+    );
+    assert_eq!(Millimeters(1000) + Meters(1), Millimeters(2000));
+
+    // ================================================
+    //        Calling Methods With The Same Name
+    // ================================================
+
+    let person = Human;
+
+    // Below comes from Human struct
+    person.fly();
+
+    // Below comes from Pilot trait for Human
+    Pilot::fly(&person);
+
+    // Below comes from Wizard trait for Human
+    Wizard::fly(&person);
 }
