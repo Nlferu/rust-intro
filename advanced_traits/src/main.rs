@@ -1,7 +1,21 @@
-pub trait Iterator {
-    type Item;
-
-    fn next(&mut self) -> Option<Self::Item>;
+pub trait Iterator<T> {
+    fn next(&mut self) -> Option<T>;
 }
 
-fn main() {}
+struct Counter {}
+
+impl Iterator<u16> for Counter {
+    fn next(&mut self) -> Option<u16> {
+        Some(0)
+    }
+}
+
+impl Iterator<u32> for Counter {
+    fn next(&mut self) -> Option<u32> {
+        Some(0)
+    }
+}
+
+fn main() {
+    println!("asd");
+}
