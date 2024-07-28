@@ -70,14 +70,29 @@ trait Pilot {
     fn fly(&self);
 }
 
+trait AssociatedPilot {
+    fn fly();
+}
+
 trait Wizard {
     fn fly(&self);
 }
 
+trait AssociatedWizard {
+    fn fly();
+}
+
 struct Human;
+struct AssociatedHuman;
 
 impl Human {
     fn fly(&self) {
+        println!("*waving arms furiously*");
+    }
+}
+
+impl AssociatedHuman {
+    fn fly() {
         println!("*waving arms furiously*");
     }
 }
@@ -88,9 +103,40 @@ impl Pilot for Human {
     }
 }
 
+impl AssociatedPilot for AssociatedHuman {
+    fn fly() {
+        println!("This is your captain speaking...");
+    }
+}
+
 impl Wizard for Human {
     fn fly(&self) {
         println!("Up!");
+    }
+}
+
+impl AssociatedWizard for AssociatedHuman {
+    fn fly() {
+        println!("Up!");
+    }
+}
+
+// =========================
+//        Supertraits
+// =========================
+
+use std::fmt;
+
+trait OutlinePrint: fmt::Display {
+    fn outline_print(&self) {
+        let output = self.to_string();
+        let len = output.len();
+
+        println!("{}", "*".repeat(len + 4));
+        println!("{}*", "".repeat(len + 2));
+        println!("{} *", output);
+        println!("{}*", "".repeat(len + 2));
+        println!("{}", "*".repeat(len + 4));
     }
 }
 
@@ -103,6 +149,7 @@ fn main() {
         Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
         Point { x: 3, y: 3 }
     );
+
     assert_eq!(Millimeters(1000) + Meters(1), Millimeters(2000));
 
     // ================================================
@@ -119,4 +166,21 @@ fn main() {
 
     // Below comes from Wizard trait for Human
     Wizard::fly(&person);
+
+    //////////////////////////
+    // ASSOCIATED FUNCTIONS //
+    //////////////////////////
+
+    // Below comes from Human struct
+    AssociatedHuman::fly();
+
+    // Below comes from Pilot trait for Human
+    <Human as Pilot>::fly(&person);
+
+    // Below comes from Wizard trait for Human
+    <Human as Wizard>::fly(&person);
+
+    // =========================
+    //        Supertraits
+    // =========================
 }
