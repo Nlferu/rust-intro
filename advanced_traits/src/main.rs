@@ -152,6 +152,18 @@ impl fmt::Display for Coordinates {
     }
 }
 
+// ============================
+//        Newtype Patter
+// ============================
+
+struct Wrapper(Vec<String>);
+
+impl fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+
 fn main() {
     // =============================================
     //        Default Generic Type Parameters
@@ -197,4 +209,12 @@ fn main() {
     // =========================
 
     OutlinePrint::outline_print(&Coordinates { x: 666, y: 666 });
+
+    // ============================
+    //        Newtype Patter
+    // ============================
+
+    let w = Wrapper(vec![String::from("Hello"), String::from("Vampire")]);
+
+    println!("Wrapper = {}", w);
 }
