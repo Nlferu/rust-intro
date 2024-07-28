@@ -129,14 +129,26 @@ use std::fmt;
 
 trait OutlinePrint: fmt::Display {
     fn outline_print(&self) {
+        // To use 'to_string()' fn we need to point that OutlinePrint depends on Display trait -> 'OutlinePrint: fmt::Display'
         let output = self.to_string();
         let len = output.len();
 
         println!("{}", "*".repeat(len + 4));
-        println!("{}*", "".repeat(len + 2));
-        println!("{} *", output);
-        println!("{}*", "".repeat(len + 2));
+        println!("* {} *", output);
         println!("{}", "*".repeat(len + 4));
+    }
+}
+
+struct Coordinates {
+    x: i32,
+    y: i32,
+}
+
+impl OutlinePrint for Coordinates {}
+
+impl fmt::Display for Coordinates {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
     }
 }
 
@@ -183,4 +195,6 @@ fn main() {
     // =========================
     //        Supertraits
     // =========================
+
+    OutlinePrint::outline_print(&Coordinates { x: 666, y: 666 });
 }
