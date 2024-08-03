@@ -47,4 +47,37 @@ fn main() {
     fn returns_long_type() -> Thunk {
         Box::new(|| println!("hi"))
     }
+
+    // ========================
+    //        Never Type
+    // ========================
+
+    // It means that this function will never return
+    #[allow(dead_code)]
+    fn bar() -> ! {
+        panic!("This function will never return!");
+    }
+
+    let game_in_progress: bool = false;
+
+    while game_in_progress {
+        let guess = "5";
+
+        let _guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            // continue has never type
+            Err(_) => continue,
+        };
+    }
+
+    // panic! also returns never type
+
+    // impl<T> Option<T> {
+    //     pub fn unwrap(self) -> T {
+    //         match self {
+    //             Some(val) => val,
+    //             None => panic!("called `Option::unwrap()` on a `None` value"),
+    //         }
+    //     }
+    // }
 }
