@@ -80,4 +80,21 @@ fn main() {
     //         }
     //     }
     // }
+
+    // =====================================
+    //        Dynamically Sized Types
+    // =====================================
+
+    // Error
+    //let s1: str = "Hello there!";
+
+    // Solution
+    let _s2: &str = "How's it goind dev?";
+
+    // Rust automatically add :Sized trait bound
+    // By default generic functions will only work on types which size is known at compile time
+    // We can use special syntax to lift this restriction
+    fn _generic<T: ?Sized>(_t: &T) {
+        // --snip--
+    }
 }
