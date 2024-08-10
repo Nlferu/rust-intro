@@ -53,7 +53,17 @@ fn main() {
         |x| x + 1
     }
 
+    fn alt_returns_closure(a: i32) -> Box<dyn Fn(i32) -> i32> {
+        if a > 0 {
+            Box::new(move |b| a + b)
+        } else {
+            Box::new(move |b| a - b)
+        }
+    }
+
     let closure = returns_closure();
+    let alt_closure = alt_returns_closure(665);
 
     println!("Closure: {}", closure(10));
+    println!("Alternative Closure: {}", alt_closure(1))
 }
